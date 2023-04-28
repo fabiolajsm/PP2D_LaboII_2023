@@ -11,7 +11,8 @@ namespace Suarez_Fabiola_2D_2023
         public enum TipoUsuario
         {
             Cliente,
-            Vendedor
+            Vendedor,
+            SinAsignar
         }
     }
 }

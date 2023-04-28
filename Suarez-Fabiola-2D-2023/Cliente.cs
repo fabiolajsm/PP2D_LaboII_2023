@@ -9,8 +9,8 @@ namespace Suarez_Fabiola_2D_2023
 {
     public class Cliente : Usuario
     {
-        public Cliente(string email, string contrasena, TipoUsuario tipoDeUsuario)
-           : base(email, contrasena, tipoDeUsuario)
+        public Cliente(string nombre, string apellido, string email, string contrasena, TipoUsuario tipoDeUsuario)
+           : base(nombre, apellido, email, contrasena, tipoDeUsuario)
         {
         }
     }

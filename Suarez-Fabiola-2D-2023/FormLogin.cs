@@ -44,7 +44,7 @@ namespace Suarez_Fabiola_2D_2023
             }
             else if (!regex.IsMatch(email))
             {
-                error_email.Text = $"⚠ Email no existente. Por favor ingresar email válido (Ej: lola@gmail.com)";
+                error_email.Text = $"⚠ Email no existente. Por favor ingresar un Email válido (Ej: lola@gmail.com)";
                 error_email.Visible = true;
                 return false;
             }
@@ -73,20 +73,37 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
 
+        /// <summary>
+        /// Valida el ingreso de un usuario y si este es válido abre una nueva página segun el TipoUsuario que sea.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Login_Click(object sender, EventArgs e)
         {
             string email = Tb_Email.Text.Trim();
-            string contrasena = Tb_Contrasena.Text.Trim();
+            string contrasena = Tb_Contrasena.Text.Trim();                
+            Usuario usuarioIngresado = new Usuario(email, contrasena);
+
             if (ValidarEmail(email) & ValidarContraseña(contrasena))
             {
-                Usuario usuarioIngresado = new Usuario(email, contrasena);
                 if (!Usuario.ValidarExistenciaDeUsuario(usuarioIngresado))
                 {
                     MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Entraste!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    eTipoUsuario.TipoUsuario tipoUsuario = Usuario.ObtenerTipoDeUsuario(usuarioIngresado);                    
+                    this.Hide();
+                    
+                    if(tipoUsuario == eTipoUsuario.TipoUsuario.Cliente)
+                    {
+                        FormVenta formVenta = new FormVenta();
+                        formVenta.Show();
+                    } else
+                    {
+                        FormHeladera formHeladera = new FormHeladera();
+                        formHeladera.Show();
+                    }
                 }
             }
         }
