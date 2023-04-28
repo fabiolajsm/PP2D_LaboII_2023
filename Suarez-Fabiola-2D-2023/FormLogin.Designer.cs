@@ -99,9 +99,9 @@
             tituloLogin.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point);
             tituloLogin.Location = new Point(255, 76);
             tituloLogin.Name = "tituloLogin";
-            tituloLogin.Size = new Size(60, 23);
+            tituloLogin.Size = new Size(132, 23);
             tituloLogin.TabIndex = 4;
-            tituloLogin.Text = "Login";
+            tituloLogin.Text = "Iniciar sesión";
             // 
             // Cb_mostrarContrasena
             // 
@@ -161,7 +161,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Login";
+            Text = "Inicio";
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogin).EndInit();
             ResumeLayout(false);
             PerformLayout();

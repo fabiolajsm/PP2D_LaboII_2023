@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -73,9 +75,19 @@ namespace Suarez_Fabiola_2D_2023
 
         private void Btn_Login_Click(object sender, EventArgs e)
         {
-            if (ValidarEmail(Tb_Email.Text) & ValidarContraseña(Tb_Contrasena.Text))
+            string email = Tb_Email.Text.Trim();
+            string contrasena = Tb_Contrasena.Text.Trim();
+            if (ValidarEmail(email) & ValidarContraseña(contrasena))
             {
-                // Ejecutar login
+                Usuario usuarioIngresado = new Usuario(email, contrasena);
+                if (!Usuario.ValidarExistenciaDeUsuario(usuarioIngresado))
+                {
+                    MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Entraste!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
             }
         }
     }
