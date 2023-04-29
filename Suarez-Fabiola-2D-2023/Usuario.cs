@@ -30,6 +30,7 @@ namespace Suarez_Fabiola_2D_2023
             this.Contrasena = contrasena;
             this.TipoDeUsuario = tipo;
         }
+
         /// <summary>
         /// Capitaliza la palabra ingresada. Ej: flor => Flor
         /// </summary>
@@ -57,21 +58,22 @@ namespace Suarez_Fabiola_2D_2023
         }
 
         /// <summary>
-        /// Obtiene el tipo de usuario de un Usuario indicado
+        /// Obtiene todos los datos del usuario ingresado
         /// </summary>
-        /// <param name="usuarioIngresado">Usuario a buscar el tipo</param>
-        /// <returns>Retorna el tipo de usuario, puede ser Cliente, Vendedor o SinAsignar</returns>
-        public static TipoUsuario ObtenerTipoDeUsuario(Usuario usuarioIngresado)
+        /// <param name="usuarioIngresado">Usuario a obtener</param>
+        /// <returns>Retorna el Usuario desde la lista de usuarios si lo encuentra y el usuario ingresado si no</returns>
+        public static Usuario ObtenerUsuario(Usuario usuarioIngresado)
         {
             foreach (Usuario usuario in DatosEnMemoria.listaUsuarios)
             {
                 if (usuario == usuarioIngresado)
                 {
-                    return usuario.TipoDeUsuario;
+
+                    return usuario;
                 }
             }
 
-            return TipoUsuario.SinAsignar;
+            return usuarioIngresado;
         }
 
         /// <summary>

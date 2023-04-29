@@ -147,7 +147,7 @@
             AccessibleName = "FormLogin";
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.AppWorkspace;
+            BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
             Controls.Add(error_contraseña);
             Controls.Add(error_email);

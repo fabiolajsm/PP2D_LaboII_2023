@@ -81,7 +81,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Login_Click(object sender, EventArgs e)
         {
             string email = Tb_Email.Text.Trim();
-            string contrasena = Tb_Contrasena.Text.Trim();                
+            string contrasena = Tb_Contrasena.Text.Trim();
             Usuario usuarioIngresado = new Usuario(email, contrasena);
 
             if (ValidarEmail(email) & ValidarContraseña(contrasena))
@@ -92,14 +92,15 @@ namespace Suarez_Fabiola_2D_2023
                 }
                 else
                 {
-                    eTipoUsuario.TipoUsuario tipoUsuario = Usuario.ObtenerTipoDeUsuario(usuarioIngresado);                    
+                    Usuario usuario = Usuario.ObtenerUsuario(usuarioIngresado);
                     this.Hide();
-                    
-                    if(tipoUsuario == eTipoUsuario.TipoUsuario.Cliente)
+                    if(usuario.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
                     {
-                        FormVenta formVenta = new FormVenta();
+                        FormVenta formVenta = new FormVenta(usuario.NombreCompleto);
                         formVenta.Show();
-                    } else
+
+                    }
+                    else
                     {
                         FormHeladera formHeladera = new FormHeladera();
                         formHeladera.Show();

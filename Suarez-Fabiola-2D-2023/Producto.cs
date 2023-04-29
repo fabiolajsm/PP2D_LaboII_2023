@@ -11,10 +11,10 @@ namespace Suarez_Fabiola_2D_2023
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string TipoCorte { get; set; }
-        public decimal PrecioPorKilo { get; set; }
-        public decimal StockDisponible { get; set; }
+        public double PrecioPorKilo { get; set; }
+        public double StockDisponible { get; set; }
 
-        public Producto(string nombre, string descripcion, string tipoCorte, decimal precioPorKilo, decimal stockDisponible)
+        public Producto(string nombre, string descripcion, string tipoCorte, double precioPorKilo, double stockDisponible)
         {
             Nombre = nombre;
             Descripcion = descripcion;
