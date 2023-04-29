@@ -102,7 +102,7 @@
             Controls.Add(Tb_MontoMaximoCompra);
             Controls.Add(Lb_DescripcionBienvenida);
             Controls.Add(Lb_BienvenidaCliente);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "FormVenta";

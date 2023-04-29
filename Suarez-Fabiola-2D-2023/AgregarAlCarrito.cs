@@ -16,16 +16,21 @@ namespace Suarez_Fabiola_2D_2023
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
+            Lb_Productos.Items.Clear();
             foreach (Producto producto in DatosEnMemoria.listaProductos)
             {
-                Lb_Productos.Items.Add(producto);
+                if (producto.StockDisponible > 0)
+                {
+                    Lb_Productos.Items.Add(producto);
+                }
             }
+            // Habilitaremos Gb_MetodoDePago cuando ya haya elegido un producto/cantidad
+            Gb_MetodoDePago.Enabled = false;
+            // Habilitaremos el botón Continuar cuando haya método de pago
+            Btn_Continuar.Enabled = false;
         }
-
         private void Lb_Productos_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) return;
-
             e.DrawBackground();
 
             string nombreProducto = DatosEnMemoria.listaProductos[e.Index].Nombre;
@@ -56,5 +61,63 @@ namespace Suarez_Fabiola_2D_2023
             e.DrawFocusRectangle();
         }
 
+        private void Btn_CerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormLogin formLogin = new FormLogin();
+            formLogin.Show();
+        }
+
+        private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
+        {
+            int indexProducto = Lb_Productos.SelectedIndex;
+            int cantidadIngresada = int.Parse(Tb_Cantidad.Text);
+            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada);
+
+            if (indexProducto < 0 && cantidadIngresada < 1)
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (cantidadIngresada < 1)
+            {
+                MessageBox.Show($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            else if (stockDisponible < cantidadIngresada)
+            {
+                MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                Btn_Comprar.Enabled = true;
+                double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto);
+                double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
+                double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
+                Lb_Total.Text = $"Total: {precioFinal}";
+                Producto productoSeleccionado = DatosEnMemoria.listaProductos[indexProducto];
+                Producto productoConCantidad = new Producto
+                {
+                    Nombre = productoSeleccionado.Nombre,
+                    Descripcion = productoSeleccionado.Descripcion,
+                    TipoCorte = productoSeleccionado.TipoCorte,
+                    PrecioPorKilo = productoSeleccionado.PrecioPorKilo,
+                    StockDisponible = productoSeleccionado.StockDisponible,
+                    CantidadDeseada = cantidadIngresada
+                };
+                DatosEnMemoria.AgregarProductoAlCarrito(productoConCantidad);
+                MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+        }
+
+        private void Btn_Comprar_Click(object sender, EventArgs e)
+        {
+            Gb_ListaDeProductos.Enabled = false;
+            Lb_Productos.BackColor = SystemColors.Info;
+            Gb_MetodoDePago.Enabled = true;
+        }
     }
 }

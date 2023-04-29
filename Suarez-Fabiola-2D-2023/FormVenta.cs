@@ -23,11 +23,7 @@ namespace Suarez_Fabiola_2D_2023
 
         private void Tb_MontoMaximoCompra_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsWhiteSpace(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            else if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
             }
