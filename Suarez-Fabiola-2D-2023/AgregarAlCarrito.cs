@@ -70,7 +70,7 @@ namespace Suarez_Fabiola_2D_2023
             formLogin.Show();
         }
 
-        public bool ValidarCampos(int indexProducto, int cantidadIngresada)
+        public bool ValidarCampos(int indexProducto, int cantidadIngresada, bool esAgregarAlCarrito)
         {
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
             double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
@@ -89,7 +89,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (stockDisponible < cantidadIngresada)
+            else if (stockDisponible < cantidadIngresada & esAgregarAlCarrito)
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
@@ -116,12 +116,11 @@ namespace Suarez_Fabiola_2D_2023
             }
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
-            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
-
-            if(ValidarCampos(indexProducto, cantidadIngresada))
+            
+            if(ValidarCampos(indexProducto, cantidadIngresada, true))
             {
                 Producto productoSeleccionado = productos[indexProducto];
-                // le restamos el stock disponible al producto seleccionado:
+                // le restamos al stock disponible la cantidad ingresada:
                 productoSeleccionado.StockDisponible -= cantidadIngresada;
                 // Recargamos la lista de productos segun el stock disponible:
                 CargarItemsProductos();
@@ -145,14 +144,53 @@ namespace Suarez_Fabiola_2D_2023
                     double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
                     double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
 
-                    Lb_Total.Text = $"Total: {precioFinal.ToString("F2")}";
+                    Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
                 }
             }
         }
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
+            int indexProducto = Lb_Productos.SelectedIndex;
+            int cantidadIngresada = 0;
+            try
+            {
+                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
+                {
+                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Debe ingresar una cantidad válida");
+            }
 
-            MessageBox.Show("aja borrare");    
+            if(ValidarCampos(indexProducto, cantidadIngresada, false))
+            {
+                List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
+                Producto productoSeleccionado = productos[indexProducto];
+
+                // borramos el producto del carrito
+                if (DatosEnMemoria.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada))
+                {
+                    // le restamos al stock disponible la cantidad ingresada:
+                    productoSeleccionado.StockDisponible += cantidadIngresada;
+                    // recargamos la lista de productos segun el stock disponible:
+                    CargarItemsProductos();
+                    MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Actualizar precio final:
+                    double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto, productos);
+                    double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
+                    // le restamos el precio de lo ingresado
+                    MessageBox.Show($"{precioProducto}");
+
+                    MessageBox.Show($"{double.Parse(Lb_Total.Text.Split(':')[1].Trim())}");
+                    double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) - precioProducto;
+                    Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
+                }
+                else { 
+                    MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void Btn_Comprar_Click(object sender, EventArgs e)

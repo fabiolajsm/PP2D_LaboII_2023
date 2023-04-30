@@ -46,5 +46,21 @@ namespace Suarez_Fabiola_2D_2023
             }
             return false;
         }
+        public static bool EliminarProductoDelCarrito(Producto producto, int cantidad)
+        {
+            if (producto != null & cantidad > 0)
+            {
+                for (int i = 0; i < listaProductosDelCarrito.Count; i++)
+                {
+                    if (listaProductosDelCarrito[i].Nombre == producto.Nombre)
+                    {
+                        listaProductosDelCarrito[i].StockDisponible += cantidad;
+                        return true;
+                    }
+                }
+                
+            }
+            return false;
+        }
     }     
 }
