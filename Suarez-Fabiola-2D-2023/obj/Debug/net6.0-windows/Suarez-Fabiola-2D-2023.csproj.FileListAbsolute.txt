@@ -36,3 +36,4 @@ C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fab
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.AgregarAlCarrito.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.MetodoDePago.resources

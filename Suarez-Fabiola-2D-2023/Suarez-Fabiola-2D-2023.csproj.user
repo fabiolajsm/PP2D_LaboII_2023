@@ -13,5 +13,8 @@
     <Compile Update="FormVenta.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MetodoDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

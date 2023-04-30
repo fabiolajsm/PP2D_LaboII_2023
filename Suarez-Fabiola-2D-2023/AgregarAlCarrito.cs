@@ -17,8 +17,6 @@ namespace Suarez_Fabiola_2D_2023
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
             CargarItemsProductos();
-            // Habilitaremos Gb_MetodoDePago cuando ya haya elegido un producto/cantidad
-            Gb_MetodoDePago.Enabled = false;
             // Habilitaremos el botón Continuar cuando haya método de pago
             Btn_Continuar.Enabled = false;
         }
@@ -72,25 +70,12 @@ namespace Suarez_Fabiola_2D_2023
             formLogin.Show();
         }
 
-
-        private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
+        public bool ValidarCampos(int indexProducto, int cantidadIngresada)
         {
-            int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada = 0;
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
             double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
 
-            try
-            {
-                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
-                {
-                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Debe ingresar una cantidad válida");
-            }
+            bool esValido = false;
 
             if (indexProducto < 0 && cantidadIngresada < 1)
             {
@@ -108,7 +93,32 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            else
+            else {              
+                esValido = true;
+            }
+
+            return esValido;
+        }
+        private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
+        {
+            int indexProducto = Lb_Productos.SelectedIndex;
+            int cantidadIngresada = 0;
+            try
+            {
+                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
+                {
+                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Debe ingresar una cantidad válida");
+            }
+
+            List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
+            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
+
+            if(ValidarCampos(indexProducto, cantidadIngresada))
             {
                 Producto productoSeleccionado = productos[indexProducto];
                 // le restamos el stock disponible al producto seleccionado:
@@ -117,7 +127,8 @@ namespace Suarez_Fabiola_2D_2023
                 CargarItemsProductos();
 
                 // Agregamos el producto a la lista de listaProductosDelCarrito
-                Producto productoAgregar = new Producto {
+                Producto productoAgregar = new Producto
+                {
                     Nombre = productoSeleccionado.Nombre,
                     Descripcion = productoSeleccionado.Descripcion,
                     TipoCorte = productoSeleccionado.TipoCorte,
@@ -138,14 +149,16 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+        private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
+        {
 
+            MessageBox.Show("aja borrare");    
+        }
 
-         
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             Gb_ListaDeProductos.Enabled = false;
-            Lb_Productos.BackColor = SystemColors.Info;
-            Gb_MetodoDePago.Enabled = true;
         }
+
     }
 }
