@@ -16,6 +16,15 @@ namespace Suarez_Fabiola_2D_2023
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
+            CargarItemsProductos();
+            // Habilitaremos Gb_MetodoDePago cuando ya haya elegido un producto/cantidad
+            Gb_MetodoDePago.Enabled = false;
+            // Habilitaremos el botón Continuar cuando haya método de pago
+            Btn_Continuar.Enabled = false;
+        }
+
+        private void CargarItemsProductos()
+        {
             Lb_Productos.Items.Clear();
             foreach (Producto producto in DatosEnMemoria.listaProductos)
             {
@@ -24,17 +33,12 @@ namespace Suarez_Fabiola_2D_2023
                     Lb_Productos.Items.Add(producto);
                 }
             }
-            // Habilitaremos Gb_MetodoDePago cuando ya haya elegido un producto/cantidad
-            Gb_MetodoDePago.Enabled = false;
-            // Habilitaremos el botón Continuar cuando haya método de pago
-            Btn_Continuar.Enabled = false;
         }
         private void Lb_Productos_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
-
-            string nombreProducto = DatosEnMemoria.listaProductos[e.Index].Nombre;
-            double precioPorKiloProducto = DatosEnMemoria.listaProductos[e.Index].PrecioPorKilo;
+            string nombreProducto = ((Producto)Lb_Productos.Items[e.Index]).Nombre;
+            double precioPorKiloProducto = ((Producto)Lb_Productos.Items[e.Index]).PrecioPorKilo;
 
             Brush brush = SystemBrushes.WindowText;
 
@@ -68,11 +72,25 @@ namespace Suarez_Fabiola_2D_2023
             formLogin.Show();
         }
 
+
         private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada = int.Parse(Tb_Cantidad.Text);
-            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada);
+            int cantidadIngresada = 0;
+            List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
+            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
+
+            try
+            {
+                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
+                {
+                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Debe ingresar una cantidad válida");
+            }
 
             if (indexProducto < 0 && cantidadIngresada < 1)
             {
@@ -86,21 +104,20 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             else if (stockDisponible < cantidadIngresada)
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             else
             {
-                Btn_Comprar.Enabled = true;
-                double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto);
-                double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
-                double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
-                Lb_Total.Text = $"Total: {precioFinal}";
-                Producto productoSeleccionado = DatosEnMemoria.listaProductos[indexProducto];
-                Producto productoConCantidad = new Producto
-                {
+                Producto productoSeleccionado = productos[indexProducto];
+                // le restamos el stock disponible al producto seleccionado:
+                productoSeleccionado.StockDisponible -= cantidadIngresada;
+                // Recargamos la lista de productos segun el stock disponible:
+                CargarItemsProductos();
+
+                // Agregamos el producto a la lista de listaProductosDelCarrito
+                Producto productoAgregar = new Producto {
                     Nombre = productoSeleccionado.Nombre,
                     Descripcion = productoSeleccionado.Descripcion,
                     TipoCorte = productoSeleccionado.TipoCorte,
@@ -108,11 +125,22 @@ namespace Suarez_Fabiola_2D_2023
                     StockDisponible = productoSeleccionado.StockDisponible,
                     CantidadDeseada = cantidadIngresada
                 };
-                DatosEnMemoria.AgregarProductoAlCarrito(productoConCantidad);
-                MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                if (DatosEnMemoria.AgregarProductoAlCarrito(productoAgregar))
+                {
+                    MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Actualizar precio final:
+                    double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto, productos);
+                    double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
+                    double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
+
+                    Lb_Total.Text = $"Total: {precioFinal.ToString("F2")}";
+                }
             }
         }
 
+
+         
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             Gb_ListaDeProductos.Enabled = false;

@@ -33,7 +33,7 @@ namespace Suarez_Fabiola_2D_2023
             StockDisponible = stockDisponible;
             CantidadDeseada = 0;
         }
-        public Producto(string nombre, string descripcion, string tipoCorte, double precioPorKilo, double stockDisponible, int cantidadDeseada):this()
+        public Producto(string nombre, string descripcion, string tipoCorte, double precioPorKilo, double stockDisponible, int cantidadDeseada) : this()
         {
             Nombre = nombre;
             Descripcion = descripcion;
@@ -43,26 +43,26 @@ namespace Suarez_Fabiola_2D_2023
             CantidadDeseada = cantidadDeseada;
         }
 
-        public static double ObtenerStockDisponible(int indexProducto, int cantidad)
+        public static double ObtenerStockDisponible(int indexProducto, int cantidad, List<Producto> listaProductos)
         {
             if (indexProducto >= 0 & cantidad >= 0)
             {
-                for (int i = 0; i < DatosEnMemoria.listaProductos.Count; i++)
+                for (int i = 0; i < listaProductos.Count; i++)
                 {
-                    Producto productoSeleccionado = DatosEnMemoria.listaProductos[indexProducto];
+                    Producto productoSeleccionado = listaProductos[indexProducto];
                     return productoSeleccionado.StockDisponible;
                 }
             }
             return 0;
         }
 
-        public static double ObtenerPrecioProducto(int indexProducto)
+        public static double ObtenerPrecioProducto(int indexProducto, List<Producto> listaProductos)
         {
             if(indexProducto >= 0)
             {
-                for(int i = 0; i < DatosEnMemoria.listaProductos.Count; i++)
+                for(int i = 0; i < listaProductos.Count; i++)
                 {                   
-                    return DatosEnMemoria.listaProductos[i].PrecioPorKilo;
+                    return listaProductos[indexProducto].PrecioPorKilo;
                 }
             }
             return 0;
