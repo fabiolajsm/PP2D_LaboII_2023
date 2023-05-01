@@ -17,10 +17,10 @@ namespace Suarez_Fabiola_2D_2023
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
             CargarItemsProductos();
+            CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
             // Habilitaremos el botón Continuar cuando haya método de pago
             Btn_Continuar.Enabled = false;
         }
-
         private void CargarItemsProductos()
         {
             Lb_Productos.Items.Clear();
@@ -32,6 +32,23 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+        private void CargarDatosDelCarrito(DataGridView dataGridView, List<Producto> listaProductos)
+        {
+            dataGridView.Rows.Clear();
+            foreach (Producto producto in listaProductos)
+            {
+                double precioProducto = Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
+                if(precioProducto > 0 & producto.CantidadDeseada > 0)
+                {               
+                    int rowIndex = dataGridView.Rows.Add();                
+                    DataGridViewRow row = dataGridView.Rows[rowIndex];               
+                    row.Cells["Nombre"].Value = producto.Nombre;                
+                    row.Cells["Precio"].Value = $"${precioProducto.ToString("0")}";                
+                    row.Cells["Cantidad"].Value = producto.CantidadDeseada;
+                }
+            }
+        }
+
         private void Lb_Productos_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -93,7 +110,8 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            else {              
+            else
+            {
                 esValido = true;
             }
 
@@ -116,8 +134,8 @@ namespace Suarez_Fabiola_2D_2023
             }
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
-            
-            if(ValidarCampos(indexProducto, cantidadIngresada, true))
+
+            if (ValidarCampos(indexProducto, cantidadIngresada, true))
             {
                 Producto productoSeleccionado = productos[indexProducto];
                 // le restamos al stock disponible la cantidad ingresada:
@@ -145,6 +163,8 @@ namespace Suarez_Fabiola_2D_2023
                     double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
 
                     Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
+                    // Actualizar el detalle del carrito
+                    CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
                 }
             }
         }
@@ -164,7 +184,7 @@ namespace Suarez_Fabiola_2D_2023
                 throw new FormatException("Debe ingresar una cantidad válida");
             }
 
-            if(ValidarCampos(indexProducto, cantidadIngresada, false))
+            if (ValidarCampos(indexProducto, cantidadIngresada, false))
             {
                 List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
                 Producto productoSeleccionado = productos[indexProducto];
@@ -181,13 +201,14 @@ namespace Suarez_Fabiola_2D_2023
                     double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto, productos);
                     double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
                     // le restamos el precio de lo ingresado
-                    MessageBox.Show($"{precioProducto}");
-
-                    MessageBox.Show($"{double.Parse(Lb_Total.Text.Split(':')[1].Trim())}");
                     double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) - precioProducto;
                     Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
+
+                    // Actualizar el detalle del carrito
+                    CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
                 }
-                else { 
+                else
+                {
                     MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -197,6 +218,5 @@ namespace Suarez_Fabiola_2D_2023
         {
             Gb_ListaDeProductos.Enabled = false;
         }
-
     }
 }

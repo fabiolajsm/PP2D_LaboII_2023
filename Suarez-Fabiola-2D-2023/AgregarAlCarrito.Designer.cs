@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Lb_Productos = new ListBox();
             Lb_NombreProducto = new Label();
             Btn_CerrarSesion = new Button();
@@ -36,16 +38,22 @@
             Btn_Continuar = new Button();
             Lb_Total = new Label();
             Gb_ListaDeProductos = new GroupBox();
+            Btn_EliminarDelCarrito = new Button();
             Lb_Recordatorio = new Label();
             Btn_Comprar = new Button();
             Tb_Cantidad = new TextBox();
-            Btn_EliminarDelCarrito = new Button();
+            dataGridView = new DataGridView();
+            Nombre = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Precio = new DataGridViewTextBoxColumn();
             Gb_ListaDeProductos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
             // Lb_Productos
             // 
             Lb_Productos.AccessibleName = "Lb_Productos";
+            Lb_Productos.BackColor = SystemColors.ScrollBar;
             Lb_Productos.DisplayMember = "Nombre:";
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
             Lb_Productos.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -72,11 +80,11 @@
             // 
             Btn_CerrarSesion.AccessibleName = "Btn_CerrarSesion";
             Btn_CerrarSesion.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_CerrarSesion.Location = new Point(494, 373);
+            Btn_CerrarSesion.Location = new Point(557, 375);
             Btn_CerrarSesion.Name = "Btn_CerrarSesion";
-            Btn_CerrarSesion.Size = new Size(94, 29);
+            Btn_CerrarSesion.Size = new Size(107, 29);
             Btn_CerrarSesion.TabIndex = 4;
-            Btn_CerrarSesion.Text = "Salir";
+            Btn_CerrarSesion.Text = "Cerrar sesión";
             Btn_CerrarSesion.UseVisualStyleBackColor = true;
             Btn_CerrarSesion.Click += Btn_CerrarSesion_Click;
             // 
@@ -107,7 +115,7 @@
             // 
             Btn_Continuar.AccessibleName = "Btn_Continuar";
             Btn_Continuar.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Continuar.Location = new Point(603, 373);
+            Btn_Continuar.Location = new Point(679, 375);
             Btn_Continuar.Name = "Btn_Continuar";
             Btn_Continuar.Size = new Size(94, 29);
             Btn_Continuar.TabIndex = 8;
@@ -128,7 +136,7 @@
             // Gb_ListaDeProductos
             // 
             Gb_ListaDeProductos.AccessibleName = "Gb_ListaDeProductos";
-            Gb_ListaDeProductos.BackColor = Color.FromArgb(254, 250, 224);
+            Gb_ListaDeProductos.BackColor = Color.FromArgb(241, 247, 238);
             Gb_ListaDeProductos.Controls.Add(Btn_EliminarDelCarrito);
             Gb_ListaDeProductos.Controls.Add(Lb_Recordatorio);
             Gb_ListaDeProductos.Controls.Add(Btn_Comprar);
@@ -146,6 +154,18 @@
             Gb_ListaDeProductos.TabStop = false;
             Gb_ListaDeProductos.Text = "Lista de productos";
             // 
+            // Btn_EliminarDelCarrito
+            // 
+            Btn_EliminarDelCarrito.AccessibleName = "Btn_EliminarDelCarrito";
+            Btn_EliminarDelCarrito.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_EliminarDelCarrito.Location = new Point(27, 265);
+            Btn_EliminarDelCarrito.Name = "Btn_EliminarDelCarrito";
+            Btn_EliminarDelCarrito.Size = new Size(132, 29);
+            Btn_EliminarDelCarrito.TabIndex = 13;
+            Btn_EliminarDelCarrito.Text = "Eliminar ";
+            Btn_EliminarDelCarrito.UseVisualStyleBackColor = true;
+            Btn_EliminarDelCarrito.Click += Btn_EliminarDelCarrito_Click;
+            // 
             // Lb_Recordatorio
             // 
             Lb_Recordatorio.AccessibleName = "Lb_Recordatorio";
@@ -159,7 +179,6 @@
             // Btn_Comprar
             // 
             Btn_Comprar.AccessibleName = "Btn_Comprar";
-            Btn_Comprar.Enabled = false;
             Btn_Comprar.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Btn_Comprar.Location = new Point(228, 346);
             Btn_Comprar.Name = "Btn_Comprar";
@@ -181,17 +200,58 @@
             Tb_Cantidad.Text = "0";
             Tb_Cantidad.TextAlign = HorizontalAlignment.Center;
             // 
-            // Btn_EliminarDelCarrito
+            // dataGridView
             // 
-            Btn_EliminarDelCarrito.AccessibleName = "Btn_EliminarDelCarrito";
-            Btn_EliminarDelCarrito.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_EliminarDelCarrito.Location = new Point(27, 265);
-            Btn_EliminarDelCarrito.Name = "Btn_EliminarDelCarrito";
-            Btn_EliminarDelCarrito.Size = new Size(132, 29);
-            Btn_EliminarDelCarrito.TabIndex = 13;
-            Btn_EliminarDelCarrito.Text = "Eliminar ";
-            Btn_EliminarDelCarrito.UseVisualStyleBackColor = true;
-            Btn_EliminarDelCarrito.Click += Btn_EliminarDelCarrito_Click;
+            dataGridView.BackgroundColor = SystemColors.ScrollBar;
+            dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(241, 247, 238);
+            dataGridViewCellStyle3.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(233, 237, 201);
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView.ColumnHeadersHeight = 29;
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { Nombre, Cantidad, Precio });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(241, 247, 238);
+            dataGridViewCellStyle4.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(241, 247, 238);
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView.GridColor = Color.FromArgb(241, 247, 238);
+            dataGridView.Location = new Point(401, 89);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.RowTemplate.Height = 29;
+            dataGridView.ScrollBars = ScrollBars.None;
+            dataGridView.Size = new Size(372, 232);
+            dataGridView.TabIndex = 11;
+            // 
+            // Nombre
+            // 
+            Nombre.HeaderText = "Nombre";
+            Nombre.MinimumWidth = 6;
+            Nombre.Name = "Nombre";
+            Nombre.Width = 125;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.Width = 125;
+            // 
+            // Precio
+            // 
+            Precio.HeaderText = "Precio";
+            Precio.MinimumWidth = 6;
+            Precio.Name = "Precio";
+            Precio.Width = 125;
             // 
             // AgregarAlCarrito
             // 
@@ -200,6 +260,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(52, 78, 65);
             ClientSize = new Size(800, 450);
+            Controls.Add(dataGridView);
             Controls.Add(Gb_ListaDeProductos);
             Controls.Add(Btn_Continuar);
             Controls.Add(Btn_CerrarSesion);
@@ -210,6 +271,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Gb_ListaDeProductos.ResumeLayout(false);
             Gb_ListaDeProductos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
 
@@ -226,5 +288,9 @@
         private Button Btn_Comprar;
         private Label Lb_Recordatorio;
         private Button Btn_EliminarDelCarrito;
+        private DataGridView dataGridView;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Precio;
     }
 }
