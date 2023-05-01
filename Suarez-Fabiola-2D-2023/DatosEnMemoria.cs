@@ -30,7 +30,7 @@ namespace Suarez_Fabiola_2D_2023
         public static List<Producto> listaProductos = new List<Producto>()
         {
             new Producto("Bistec de soja", "Corte de proteína de soja con sabor a carne", "Bistec", 12, 0),
-            new Producto("Seitan", "Corte de proteína de trigo con textura similar a la carne", "Seitan", 10.99, 15),
+            new Producto("Filete", "Corte de proteína de trigo con textura similar a la carne", "Filete", 10.99, 15),
             new Producto("Filete de tempeh", "Corte de proteína de soja fermentada con sabor a nuez", "Filete", 99.9, 12),
             new Producto("Chorizo vegano", "Corte de proteína vegetal con sabor a chorizo", "Chorizo", 799, 30),
             new Producto("Carne de lentejas", "Corte de lentejas cocidas y condimentadas con sabor a carne", "Lentejas", 300, 25),
@@ -39,29 +39,60 @@ namespace Suarez_Fabiola_2D_2023
 
         public static bool AgregarProductoAlCarrito(Producto producto)
         {
-            if(producto != null)
+            if (producto != null)
             {
-                listaProductosDelCarrito.Add(producto);
+                Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
+
+                if (productoEnCarrito != null)
+                {
+                    productoEnCarrito.CantidadDeseada += producto.CantidadDeseada;
+                }
+                else
+                {
+                    listaProductosDelCarrito.Add(producto);
+                }
+
                 return true;
             }
+
             return false;
         }
+
         public static bool EliminarProductoDelCarrito(Producto producto, int cantidad)
         {
             if (producto == null || cantidad <= 0)  return false;
 
-            foreach (Producto productoCarrito in listaProductosDelCarrito)
+              
+            Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
+
+            if(productoEnCarrito != null)
             {
-                if (productoCarrito.Nombre == producto.Nombre)
-                {
-                    productoCarrito.StockDisponible += cantidad;
-                    productoCarrito.CantidadDeseada -= cantidad;
-                    producto.CantidadDeseada -= cantidad;
-                    return true;
-                }
+                producto.StockDisponible += cantidad;
+                productoEnCarrito.StockDisponible += cantidad;
+                productoEnCarrito.CantidadDeseada -= cantidad;
+                return true;
             }
 
             return false;
+        }
+
+        public static bool ExisteProductoEnELCarrito(Producto producto)
+        {
+            if(producto == null) return false;
+            return listaProductosDelCarrito.Any(p => p.Nombre == producto.Nombre);
+        }
+        public static int ObtenerCantidadProductoDelCarrito(Producto producto)
+        {
+            if(producto == null) return 0;
+
+            foreach (Producto item in listaProductosDelCarrito)
+            {
+                if(item.Nombre == producto.Nombre)
+                {
+                    return item.CantidadDeseada;
+                }
+            }
+            return 0;
         }
     }
 }

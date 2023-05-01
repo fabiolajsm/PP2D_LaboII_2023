@@ -95,7 +95,7 @@
             AccessibleName = "FormVenta";
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(254, 250, 224);
+            BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
             Controls.Add(Btn_CerrarSesion);
             Controls.Add(Btn_Continuar);

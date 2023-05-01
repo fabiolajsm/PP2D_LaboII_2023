@@ -34,22 +34,25 @@
             Rb_MercadoPago = new RadioButton();
             Rb_Credito = new RadioButton();
             Rb_Debito = new RadioButton();
+            Btn_ModificarMonto = new Button();
+            Btn_Cancelar = new Button();
+            Btn_Comprar = new Button();
             Gb_MetodoDePago.SuspendLayout();
             SuspendLayout();
             // 
             // Gb_MetodoDePago
             // 
             Gb_MetodoDePago.AccessibleName = "Gb_MetodoDePago";
-            Gb_MetodoDePago.BackColor = Color.FromArgb(254, 250, 224);
+            Gb_MetodoDePago.BackColor = Color.FromArgb(176, 190, 169);
             Gb_MetodoDePago.Controls.Add(Lb_PrecioFinal);
             Gb_MetodoDePago.Controls.Add(Lb_Recargo);
             Gb_MetodoDePago.Controls.Add(Rb_MercadoPago);
             Gb_MetodoDePago.Controls.Add(Rb_Credito);
             Gb_MetodoDePago.Controls.Add(Rb_Debito);
             Gb_MetodoDePago.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Gb_MetodoDePago.Location = new Point(233, 126);
+            Gb_MetodoDePago.Location = new Point(188, 74);
             Gb_MetodoDePago.Name = "Gb_MetodoDePago";
-            Gb_MetodoDePago.Size = new Size(334, 198);
+            Gb_MetodoDePago.Size = new Size(328, 209);
             Gb_MetodoDePago.TabIndex = 12;
             Gb_MetodoDePago.TabStop = false;
             Gb_MetodoDePago.Text = "Seleccione su método de pago";
@@ -88,6 +91,7 @@
             Rb_MercadoPago.TabStop = true;
             Rb_MercadoPago.Text = "Mercado Pago";
             Rb_MercadoPago.UseVisualStyleBackColor = true;
+            Rb_MercadoPago.CheckedChanged += Rb_MercadoPago_CheckedChanged;
             // 
             // Rb_Credito
             // 
@@ -101,6 +105,7 @@
             Rb_Credito.TabStop = true;
             Rb_Credito.Text = "Tarjeta de Crédito (Recargo del 5%)";
             Rb_Credito.UseVisualStyleBackColor = true;
+            Rb_Credito.CheckedChanged += Rb_Credito_CheckedChanged;
             // 
             // Rb_Debito
             // 
@@ -114,14 +119,56 @@
             Rb_Debito.TabStop = true;
             Rb_Debito.Text = "Tarjeta de Débito";
             Rb_Debito.UseVisualStyleBackColor = true;
+            Rb_Debito.CheckedChanged += Rb_Debito_CheckedChanged;
+            // 
+            // Btn_ModificarMonto
+            // 
+            Btn_ModificarMonto.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_ModificarMonto.Location = new Point(222, 325);
+            Btn_ModificarMonto.Name = "Btn_ModificarMonto";
+            Btn_ModificarMonto.Size = new Size(246, 29);
+            Btn_ModificarMonto.TabIndex = 14;
+            Btn_ModificarMonto.Text = "Modificar monto máximo a gastar";
+            Btn_ModificarMonto.UseVisualStyleBackColor = true;
+            Btn_ModificarMonto.Click += Btn_ModificarMonto_Click;
+            // 
+            // Btn_Cancelar
+            // 
+            Btn_Cancelar.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_Cancelar.Location = new Point(256, 290);
+            Btn_Cancelar.Name = "Btn_Cancelar";
+            Btn_Cancelar.Size = new Size(92, 29);
+            Btn_Cancelar.TabIndex = 15;
+            Btn_Cancelar.Text = "Cancelar";
+            Btn_Cancelar.UseVisualStyleBackColor = true;
+            Btn_Cancelar.Click += Btn_Cancelar_Click;
+            // 
+            // Btn_Comprar
+            // 
+            Btn_Comprar.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Comprar.Location = new Point(354, 290);
+            Btn_Comprar.Name = "Btn_Comprar";
+            Btn_Comprar.Size = new Size(96, 29);
+            Btn_Comprar.TabIndex = 16;
+            Btn_Comprar.Text = "Comprar";
+            Btn_Comprar.UseVisualStyleBackColor = true;
             // 
             // MetodoDePago
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(241, 247, 238);
+            ClientSize = new Size(707, 435);
+            Controls.Add(Btn_Comprar);
+            Controls.Add(Btn_Cancelar);
+            Controls.Add(Btn_ModificarMonto);
             Controls.Add(Gb_MetodoDePago);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "MetodoDePago";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MetodoDePago";
             Gb_MetodoDePago.ResumeLayout(false);
             Gb_MetodoDePago.PerformLayout();
@@ -136,5 +183,8 @@
         private RadioButton Rb_MercadoPago;
         private RadioButton Rb_Credito;
         private RadioButton Rb_Debito;
+        private Button Btn_ModificarMonto;
+        private Button Btn_Cancelar;
+        private Button Btn_Comprar;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Suarez_Fabiola_2D_2023.eTipoUsuario;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -16,12 +17,25 @@ namespace Suarez_Fabiola_2D_2023
         public string Contrasena { get; }
         public TipoUsuario TipoDeUsuario { get; }
 
-        public Usuario(string email, string contrasena)
+        public float MontoMaximoDeCompra { get; set; }
+
+        public Usuario()
+        {
+            this.Nombre = string.Empty;
+            this.Apellido = string.Empty;
+            this.NombreCompleto = string.Empty;
+            this.Email = string.Empty;
+            this.Contrasena = string.Empty;
+            this.TipoDeUsuario = eTipoUsuario.TipoUsuario.SinAsignar;
+            this.MontoMaximoDeCompra = 0;
+        }
+
+        public Usuario(string email, string contrasena) :this()
         {
             this.Email = email;
             this.Contrasena = contrasena;
         }
-        public Usuario(string nombre, string apellido, string email, string contrasena, TipoUsuario tipo)
+        public Usuario(string nombre, string apellido, string email, string contrasena, TipoUsuario tipo):this()
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
@@ -29,6 +43,7 @@ namespace Suarez_Fabiola_2D_2023
             this.Email = email;
             this.Contrasena = contrasena;
             this.TipoDeUsuario = tipo;
+            this.MontoMaximoDeCompra = 0;
         }
 
         /// <summary>
@@ -68,12 +83,25 @@ namespace Suarez_Fabiola_2D_2023
             {
                 if (usuario == usuarioIngresado)
                 {
-
                     return usuario;
                 }
             }
 
             return usuarioIngresado;
+        }
+
+        public static Usuario ObtenerUsuarioPorNombre(string nombreCompleto)
+        {
+            Usuario usuarioAux = new Usuario();
+            foreach (Usuario usuario in DatosEnMemoria.listaUsuarios)
+            {
+                if (usuario.NombreCompleto == nombreCompleto)
+                {
+                    return usuario;
+                }
+            }
+
+            return usuarioAux;
         }
 
         /// <summary>

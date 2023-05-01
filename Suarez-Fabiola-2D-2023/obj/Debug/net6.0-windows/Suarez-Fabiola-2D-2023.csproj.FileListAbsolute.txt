@@ -18,9 +18,11 @@ C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\D
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.AgregarAlCarrito.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.MetodoDePago.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
@@ -35,5 +37,3 @@ C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fab
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
-C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.AgregarAlCarrito.resources
-C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.MetodoDePago.resources
