@@ -34,9 +34,9 @@
             Rb_MercadoPago = new RadioButton();
             Rb_Credito = new RadioButton();
             Rb_Debito = new RadioButton();
-            Btn_ModificarMonto = new Button();
             Btn_Cancelar = new Button();
             Btn_Comprar = new Button();
+            Lb_MontoMaximo = new Label();
             Gb_MetodoDePago.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             Gb_MetodoDePago.Controls.Add(Rb_Credito);
             Gb_MetodoDePago.Controls.Add(Rb_Debito);
             Gb_MetodoDePago.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Gb_MetodoDePago.Location = new Point(188, 74);
+            Gb_MetodoDePago.Location = new Point(99, 49);
             Gb_MetodoDePago.Name = "Gb_MetodoDePago";
             Gb_MetodoDePago.Size = new Size(328, 209);
             Gb_MetodoDePago.TabIndex = 12;
@@ -121,21 +121,10 @@
             Rb_Debito.UseVisualStyleBackColor = true;
             Rb_Debito.CheckedChanged += Rb_Debito_CheckedChanged;
             // 
-            // Btn_ModificarMonto
-            // 
-            Btn_ModificarMonto.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_ModificarMonto.Location = new Point(222, 325);
-            Btn_ModificarMonto.Name = "Btn_ModificarMonto";
-            Btn_ModificarMonto.Size = new Size(246, 29);
-            Btn_ModificarMonto.TabIndex = 14;
-            Btn_ModificarMonto.Text = "Modificar monto máximo a gastar";
-            Btn_ModificarMonto.UseVisualStyleBackColor = true;
-            Btn_ModificarMonto.Click += Btn_ModificarMonto_Click;
-            // 
             // Btn_Cancelar
             // 
             Btn_Cancelar.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Cancelar.Location = new Point(256, 290);
+            Btn_Cancelar.Location = new Point(161, 304);
             Btn_Cancelar.Name = "Btn_Cancelar";
             Btn_Cancelar.Size = new Size(92, 29);
             Btn_Cancelar.TabIndex = 15;
@@ -146,24 +135,35 @@
             // Btn_Comprar
             // 
             Btn_Comprar.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Comprar.Location = new Point(354, 290);
+            Btn_Comprar.Location = new Point(259, 304);
             Btn_Comprar.Name = "Btn_Comprar";
             Btn_Comprar.Size = new Size(96, 29);
             Btn_Comprar.TabIndex = 16;
             Btn_Comprar.Text = "Comprar";
             Btn_Comprar.UseVisualStyleBackColor = true;
+            Btn_Comprar.Click += Btn_Comprar_Click;
+            // 
+            // Lb_MontoMaximo
+            // 
+            Lb_MontoMaximo.AutoSize = true;
+            Lb_MontoMaximo.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Lb_MontoMaximo.Location = new Point(99, 272);
+            Lb_MontoMaximo.Name = "Lb_MontoMaximo";
+            Lb_MontoMaximo.Size = new Size(172, 20);
+            Lb_MontoMaximo.TabIndex = 17;
+            Lb_MontoMaximo.Text = "Monto máximo a gastar:";
             // 
             // MetodoDePago
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
-            ClientSize = new Size(707, 435);
+            ClientSize = new Size(538, 400);
+            Controls.Add(Lb_MontoMaximo);
             Controls.Add(Btn_Comprar);
             Controls.Add(Btn_Cancelar);
-            Controls.Add(Btn_ModificarMonto);
             Controls.Add(Gb_MetodoDePago);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "MetodoDePago";
@@ -173,6 +173,7 @@
             Gb_MetodoDePago.ResumeLayout(false);
             Gb_MetodoDePago.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -183,8 +184,8 @@
         private RadioButton Rb_MercadoPago;
         private RadioButton Rb_Credito;
         private RadioButton Rb_Debito;
-        private Button Btn_ModificarMonto;
         private Button Btn_Cancelar;
         private Button Btn_Comprar;
+        private Label Lb_MontoMaximo;
     }
 }

@@ -96,7 +96,7 @@ namespace Suarez_Fabiola_2D_2023
                     this.Hide();
                     if(usuario.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
                     {                        
-                        FormVenta formVenta = new FormVenta();
+                        FormVenta formVenta = new FormVenta(usuario);
                         formVenta.Show();
                     }
                     else

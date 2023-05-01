@@ -60,7 +60,7 @@
             Lb_Productos.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Lb_Productos.FormattingEnabled = true;
             Lb_Productos.ItemHeight = 20;
-            Lb_Productos.Location = new Point(17, 93);
+            Lb_Productos.Location = new Point(17, 59);
             Lb_Productos.Name = "Lb_Productos";
             Lb_Productos.Size = new Size(305, 164);
             Lb_Productos.TabIndex = 1;
@@ -71,7 +71,7 @@
             Lb_NombreProducto.AccessibleName = "Lb_NombreProducto";
             Lb_NombreProducto.AutoSize = true;
             Lb_NombreProducto.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_NombreProducto.Location = new Point(17, 71);
+            Lb_NombreProducto.Location = new Point(17, 37);
             Lb_NombreProducto.Name = "Lb_NombreProducto";
             Lb_NombreProducto.Size = new Size(182, 19);
             Lb_NombreProducto.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             Btn_AgregarAlCarrito.AccessibleName = "Btn_AgregarAlCarrito";
             Btn_AgregarAlCarrito.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_AgregarAlCarrito.Location = new Point(175, 296);
+            Btn_AgregarAlCarrito.Location = new Point(175, 262);
             Btn_AgregarAlCarrito.Name = "Btn_AgregarAlCarrito";
             Btn_AgregarAlCarrito.Size = new Size(132, 29);
             Btn_AgregarAlCarrito.TabIndex = 5;
@@ -106,7 +106,7 @@
             Lb_Cantidad.AccessibleName = "Lb_Cantidad";
             Lb_Cantidad.AutoSize = true;
             Lb_Cantidad.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Cantidad.Location = new Point(17, 264);
+            Lb_Cantidad.Location = new Point(17, 230);
             Lb_Cantidad.Name = "Lb_Cantidad";
             Lb_Cantidad.Size = new Size(152, 19);
             Lb_Cantidad.TabIndex = 7;
@@ -117,7 +117,7 @@
             Lb_Total.AccessibleName = "Lb_Total";
             Lb_Total.AutoSize = true;
             Lb_Total.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Total.Location = new Point(17, 365);
+            Lb_Total.Location = new Point(17, 331);
             Lb_Total.Name = "Lb_Total";
             Lb_Total.Size = new Size(61, 19);
             Lb_Total.TabIndex = 9;
@@ -137,9 +137,9 @@
             Gb_ListaDeProductos.Controls.Add(Lb_Cantidad);
             Gb_ListaDeProductos.Controls.Add(Btn_AgregarAlCarrito);
             Gb_ListaDeProductos.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Gb_ListaDeProductos.Location = new Point(28, 12);
+            Gb_ListaDeProductos.Location = new Point(28, 34);
             Gb_ListaDeProductos.Name = "Gb_ListaDeProductos";
-            Gb_ListaDeProductos.Size = new Size(342, 411);
+            Gb_ListaDeProductos.Size = new Size(342, 374);
             Gb_ListaDeProductos.TabIndex = 10;
             Gb_ListaDeProductos.TabStop = false;
             Gb_ListaDeProductos.Text = "Lista de productos";
@@ -148,7 +148,7 @@
             // 
             Btn_EliminarDelCarrito.AccessibleName = "Btn_EliminarDelCarrito";
             Btn_EliminarDelCarrito.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_EliminarDelCarrito.Location = new Point(37, 296);
+            Btn_EliminarDelCarrito.Location = new Point(37, 262);
             Btn_EliminarDelCarrito.Name = "Btn_EliminarDelCarrito";
             Btn_EliminarDelCarrito.Size = new Size(132, 29);
             Btn_EliminarDelCarrito.TabIndex = 13;
@@ -160,7 +160,7 @@
             // 
             Lb_Recordatorio.AccessibleName = "Lb_Recordatorio";
             Lb_Recordatorio.Font = new Font("Book Antiqua", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            Lb_Recordatorio.Location = new Point(17, 337);
+            Lb_Recordatorio.Location = new Point(17, 303);
             Lb_Recordatorio.Name = "Lb_Recordatorio";
             Lb_Recordatorio.Size = new Size(305, 25);
             Lb_Recordatorio.TabIndex = 12;
@@ -171,7 +171,7 @@
             Btn_Comprar.AccessibleName = "Btn_Comprar";
             Btn_Comprar.Enabled = false;
             Btn_Comprar.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Comprar.Location = new Point(228, 365);
+            Btn_Comprar.Location = new Point(228, 331);
             Btn_Comprar.Name = "Btn_Comprar";
             Btn_Comprar.Size = new Size(94, 29);
             Btn_Comprar.TabIndex = 11;
@@ -183,7 +183,7 @@
             // 
             Tb_Cantidad.BorderStyle = BorderStyle.None;
             Tb_Cantidad.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Tb_Cantidad.Location = new Point(175, 263);
+            Tb_Cantidad.Location = new Point(175, 229);
             Tb_Cantidad.MaxLength = 4;
             Tb_Cantidad.Name = "Tb_Cantidad";
             Tb_Cantidad.Size = new Size(125, 19);

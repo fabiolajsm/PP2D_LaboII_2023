@@ -12,15 +12,30 @@ namespace Suarez_Fabiola_2D_2023
 {
     public partial class AgregarAlCarrito : Form
     {
-        float montoMaximoDeCompra;
-        public AgregarAlCarrito(float montoDeCompra)
+        private Usuario usuario;
+        public AgregarAlCarrito(Usuario usuario)
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
-            Btn_Comprar.Enabled = false;
+            HabilitarBotonDeCompra();
             CargarItemsProductos();
+            CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
             CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
-            montoMaximoDeCompra = montoDeCompra;
+            this.usuario = usuario;
+        }
+
+        public void CalcularPrecioTotal(List<Producto> listaProductos)
+        {
+            double precioTotal = 0;
+            if (listaProductos.Count <= 0) Lb_Total.Text = "Total: 0";
+            else
+            {
+                foreach (Producto producto in listaProductos)
+                {
+                    precioTotal += Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
+                }
+                Lb_Total.Text = $"Total: {precioTotal.ToString("0")}";
+            }
         }
 
         private void CargarItemsProductos()
@@ -32,10 +47,6 @@ namespace Suarez_Fabiola_2D_2023
                 {
                     Lb_Productos.Items.Add(producto);
                 }
-            }
-            if (DatosEnMemoria.listaProductosDelCarrito.Count > 0)
-            {
-                Btn_Comprar.Enabled = true;
             }
         }
         private void CargarDatosDelCarrito(DataGridView dataGridView, List<Producto> listaProductos)
@@ -115,10 +126,11 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            else if (!esAgregarAlCarrito & DatosEnMemoria.ExisteProductoEnELCarrito(productos[indexProducto]) == false) { 
+            else if (!esAgregarAlCarrito & DatosEnMemoria.ExisteProductoEnELCarrito(productos[indexProducto]) == false)
+            {
                 MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(!esAgregarAlCarrito && DatosEnMemoria.ObtenerCantidadProductoDelCarrito(productos[indexProducto]) < cantidadIngresada)
+            else if (!esAgregarAlCarrito && DatosEnMemoria.ObtenerCantidadProductoDelCarrito(productos[indexProducto]) < cantidadIngresada)
             {
                 MessageBox.Show($"No se puede eliminar más de la cantidad del producto agregado al carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -132,6 +144,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
+
             int cantidadIngresada = 0;
             try
             {
@@ -169,15 +182,11 @@ namespace Suarez_Fabiola_2D_2023
                     // Recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
                     MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Actualizar precio final:
-                    double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto, productos);
-                    double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
-                    double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim()) + precioProducto;
-
-                    Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
+                    CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
                     CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
                 }
             }
+            HabilitarBotonDeCompra();
         }
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
@@ -199,21 +208,14 @@ namespace Suarez_Fabiola_2D_2023
             {
                 List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
                 Producto productoSeleccionado = productos[indexProducto];
-                
+
                 // borramos el producto del carrito
                 if (DatosEnMemoria.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada))
                 {
                     // recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
                     MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Actualizar precio final:
-                    double precioPorKilo = Producto.ObtenerPrecioProducto(indexProducto, productos);
-                    double precioProducto = Producto.CalcularPrecio(cantidadIngresada, precioPorKilo);
-                    // le restamos el precio de lo ingresado
-                    double precioActual = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
-                    double precioFinal = (precioActual <= 0 ? 0 : precioActual - precioProducto);
-                    Lb_Total.Text = $"Total: {precioFinal.ToString("0")}";
-
+                    CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
                     // Actualizar el detalle del carrito
                     CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
                 }
@@ -222,13 +224,27 @@ namespace Suarez_Fabiola_2D_2023
                     MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            HabilitarBotonDeCompra();
+        }
+
+        private void HabilitarBotonDeCompra()
+        {
+            if (DatosEnMemoria.listaProductosDelCarrito.Count > 0)
+            {
+                Btn_Comprar.Enabled = true;
+            }
+            else
+            {
+                Btn_Comprar.Enabled = false;
+            }
         }
 
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
-            Gb_ListaDeProductos.Enabled = false;
-            float precioFinal = float.Parse(Lb_Total.Text.Split(':')[1].Trim());
-            MetodoDePago metodoDePago = new MetodoDePago(montoMaximoDeCompra, precioFinal);
+            double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
+            this.Hide();
+            MetodoDePago metodoDePago = new MetodoDePago(precioFinal, usuario);
+            metodoDePago.Show();
         }
     }
 }

@@ -12,15 +12,33 @@ namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormVenta : Form
     {
-        private string nombreUsuario;
+        private Usuario usuario;
+        private bool modificarMetodoDePago;
+        private double precioFinal;
         public FormVenta()
         {
             InitializeComponent();
+            usuario = new Usuario();
+            modificarMetodoDePago = false;
+            precioFinal = 0;
         }
-        public FormVenta(string nombreCompleto) : this()
+        public FormVenta(Usuario usuario) : this()
         {
-            Lb_BienvenidaCliente.Text = $"¡Hola {nombreCompleto}!";
-            nombreUsuario = nombreCompleto;
+            Lb_BienvenidaCliente.Text = $"¡Hola {usuario.NombreCompleto}!";
+            this.usuario = usuario;
+            this.modificarMetodoDePago = false;
+            this.precioFinal = 0;
+        }
+
+        public FormVenta(Usuario usuario, string descripcion, bool modificarMetodoDePago, double precioFinal) : this()
+        {
+            Lb_BienvenidaCliente.Text = $"¡Hola {usuario.NombreCompleto}!";
+            Lb_DescripcionBienvenida.Text = descripcion;
+            Btn_CerrarSesion.Visible = false;
+
+            this.usuario = usuario;
+            this.modificarMetodoDePago = modificarMetodoDePago;
+            this.precioFinal = precioFinal;
         }
 
         private void Tb_MontoMaximoCompra_KeyPress(object sender, KeyPressEventArgs e)
@@ -55,11 +73,17 @@ namespace Suarez_Fabiola_2D_2023
             }
             else
             {
-                Usuario usuario = Usuario.ObtenerUsuarioPorNombre(nombreUsuario);
                 usuario.MontoMaximoDeCompra = maximoDeCompra;
                 this.Hide();
-                AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(maximoDeCompra);
-                agregarAlCarrito.Show();
+                if (!modificarMetodoDePago)
+                {
+                    AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(usuario);
+                    agregarAlCarrito.Show();
+                } else
+                {
+                    MetodoDePago metodoDePago = new MetodoDePago(precioFinal, usuario);
+                    metodoDePago.Show();
+                }
             }
         }
 
