@@ -67,9 +67,18 @@ namespace Suarez_Fabiola_2D_2023
 
             if(productoEnCarrito != null)
             {
-                producto.StockDisponible += cantidad;
-                productoEnCarrito.StockDisponible += cantidad;
-                productoEnCarrito.CantidadDeseada -= cantidad;
+                if (cantidad >= productoEnCarrito.CantidadDeseada)
+                {
+                    producto.StockDisponible += productoEnCarrito.CantidadDeseada;
+                    productoEnCarrito.StockDisponible += productoEnCarrito.CantidadDeseada;
+                    productoEnCarrito.CantidadDeseada = 0;
+                }
+                else
+                {
+                    producto.StockDisponible += cantidad;
+                    productoEnCarrito.StockDisponible += cantidad;
+                    productoEnCarrito.CantidadDeseada -= cantidad;
+                }
                 return true;
             }
 
@@ -78,9 +87,22 @@ namespace Suarez_Fabiola_2D_2023
 
         public static bool ExisteProductoEnELCarrito(Producto producto)
         {
-            if(producto == null) return false;
-            return listaProductosDelCarrito.Any(p => p.Nombre == producto.Nombre);
+            if (producto == null)
+            {
+                return false;
+            }
+
+            foreach (Producto prod in listaProductosDelCarrito)
+            {
+                if (prod.Nombre == producto.Nombre)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
+
         public static int ObtenerCantidadProductoDelCarrito(Producto producto)
         {
             if(producto == null) return 0;

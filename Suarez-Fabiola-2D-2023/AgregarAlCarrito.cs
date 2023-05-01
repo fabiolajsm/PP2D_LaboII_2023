@@ -115,7 +115,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-            else if (!esAgregarAlCarrito & !DatosEnMemoria.ExisteProductoEnELCarrito(productos[indexProducto])) { 
+            else if (!esAgregarAlCarrito & DatosEnMemoria.ExisteProductoEnELCarrito(productos[indexProducto]) == false) { 
                 MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if(!esAgregarAlCarrito && DatosEnMemoria.ObtenerCantidadProductoDelCarrito(productos[indexProducto]) < cantidadIngresada)
@@ -203,8 +203,6 @@ namespace Suarez_Fabiola_2D_2023
                 // borramos el producto del carrito
                 if (DatosEnMemoria.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada))
                 {
-                    // le restamos al stock disponible la cantidad ingresada:
-                    productoSeleccionado.StockDisponible += cantidadIngresada;
                     // recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
                     MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
