@@ -75,6 +75,7 @@ namespace Suarez_Fabiola_2D_2023
                 else
                 {
                     productoEnCarrito.StockDisponible += cantidad;
+                    producto.StockDisponible = productoEnCarrito.StockDisponible;
                     productoEnCarrito.CantidadDeseada -= cantidad;
                 }
                 return true;
