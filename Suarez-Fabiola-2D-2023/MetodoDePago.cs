@@ -14,6 +14,7 @@ namespace Suarez_Fabiola_2D_2023
     {
         private float maximoDeCompra;
         private double precioFinal;
+        private double recargo;
         private Usuario usuario;
 
         public MetodoDePago(double precioFinal, Usuario usuario)
@@ -23,6 +24,7 @@ namespace Suarez_Fabiola_2D_2023
             this.maximoDeCompra = usuario.MontoMaximoDeCompra;
             this.precioFinal = precioFinal;
             this.usuario = usuario;
+            this.recargo = 0;
             if (Lb_MontoMaximo != null)
             {
                 Lb_MontoMaximo.Text = $"Monto máximo de compra: {maximoDeCompra}";
@@ -44,10 +46,15 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (Rb_Credito.Checked)
             {
-                double recargo = precioFinal * 0.5;
+                recargo = precioFinal * 0.05;
                 Lb_Recargo.Text = $"Recargo: {recargo}";
                 Lb_PrecioFinal.Text = $"Precio sin recago: {precioFinal}. Precio final: {precioFinal + recargo}";
-                precioFinal = precioFinal * 1.5;
+                precioFinal = precioFinal + recargo;
+            } else
+            {
+                recargo = 0;
+                Lb_Recargo.Text = $"Recargo: {recargo}";
+                Lb_PrecioFinal.Text = $"Precio final: {precioFinal}";
             }
         }
 
@@ -55,7 +62,8 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (Rb_Debito.Checked)
             {
-                Lb_Recargo.Text = "Recargo: 0";
+                recargo = 0;
+                Lb_Recargo.Text = $"Recargo: {recargo}";
                 Lb_PrecioFinal.Text = $"Precio final: {precioFinal}";
             }
         }
@@ -64,14 +72,16 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (Rb_MercadoPago.Checked)
             {
-                Lb_Recargo.Text = "Recargo: 0";
+                recargo = 0;
+                Lb_Recargo.Text = $"Recargo: {recargo}";
                 Lb_PrecioFinal.Text = $"Precio final: {precioFinal}";
             }
         }
 
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
-            if (precioFinal > maximoDeCompra)
+            double total = Rb_Credito.Checked ? precioFinal + recargo: precioFinal;
+            if (total > maximoDeCompra)
             {
                 DialogResult result = MessageBox.Show("El precio supera el monto máximo de compra. ¿Desea modificar su monto máximo?", "Guardar cambios", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
@@ -80,6 +90,22 @@ namespace Suarez_Fabiola_2D_2023
                     FormVenta formVenta = new FormVenta(usuario, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
                     formVenta.Show();
                 }
+            } else
+            {
+                string mensaje = "¡Gracias por su compra!\n\nProductos:\n";
+
+                foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
+                {
+                    mensaje += $"{producto.Nombre} x {producto.CantidadDeseada} unidades =  ${Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo).ToString("#0.00")}\n";
+                }
+
+                mensaje += $"\nRecargo: {recargo.ToString("#0.00")}\nPrecio final: {total.ToString("#0.00")}";
+
+                MessageBox.Show(mensaje, "Detalle de la compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DatosEnMemoria.listaProductosDelCarrito.Clear();
+                this.Hide();
+                AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(usuario);
+                agregarAlCarrito.Show();
             }
         }
     }
