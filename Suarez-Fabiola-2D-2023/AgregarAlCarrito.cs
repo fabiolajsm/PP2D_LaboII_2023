@@ -17,10 +17,11 @@ namespace Suarez_Fabiola_2D_2023
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
-            HabilitarBotonDeCompra();
+            InicializarItemsComboBox();
             CargarItemsProductos();
             CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
             CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
+            HabilitarBotonDeCompra();
             this.usuario = usuario;
         }
 
@@ -38,20 +39,78 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
 
-        private void CargarItemsProductos()
+        private void InicializarItemsComboBox()
         {
-            Lb_Productos.Items.Clear();
-            foreach (Producto producto in DatosEnMemoria.listaProductos)
+            Cb_FiltrarPorCorte.Items.Clear();
+            Cb_FiltrarPorCorte.Items.Add("Ver todos los tipos de corte");
+            Cb_FiltrarPorCorte.SelectedIndex = 0;
+
+            List<string> nombresCorte = DatosEnMemoria.listaProductos
+                .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
+                .Select(p => p.TipoCorte)
+                .Distinct()
+                .ToList();
+
+            nombresCorte.ForEach(corte => Cb_FiltrarPorCorte.Items.Add(corte));
+        }
+        private void Cb_FiltrarPorCorte_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string corteSeleccionado = Cb_FiltrarPorCorte.SelectedItem?.ToString();
+            List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
+
+            if (productos.Count > 0 && !string.IsNullOrEmpty(corteSeleccionado))
             {
-                if (producto.StockDisponible > 0)
+                List<Producto> productosFiltrados = DatosEnMemoria.listaProductos.Where(p => p.TipoCorte == corteSeleccionado).ToList();
+                if (corteSeleccionado != "Ver todos los tipos de corte")
                 {
-                    Lb_Productos.Items.Add(producto);
-                }
-                else if(producto.StockDisponible <= 0 & producto.CantidadDeseada > 0) { 
-                    Lb_Productos.Items.Add(producto);
+                    Lb_Productos.Items.Clear();
+                    foreach (Producto productoFiltrado in productosFiltrados)
+                    {
+                        Lb_Productos.Items.Add(productoFiltrado);
+                    }
+                } else
+                {
+                    Lb_Productos.Items.Clear();
+
+                    foreach (Producto producto in DatosEnMemoria.listaProductos)
+                    {
+                        if (producto.StockDisponible > 0 || (producto.StockDisponible <= 0 && producto.CantidadDeseada > 0))
+                        {
+                            Lb_Productos.Items.Add(producto);
+                        }
+                    }
                 }
             }
         }
+        private void CargarItemsProductos()
+        {
+            string corteSeleccionado = Cb_FiltrarPorCorte.SelectedItem?.ToString();
+            Lb_Productos.Items.Clear();
+
+            if (string.IsNullOrEmpty(corteSeleccionado) || corteSeleccionado == "Ver todos los tipos de corte")
+            {
+                foreach (Producto producto in DatosEnMemoria.listaProductos)
+                {
+                    if (producto.StockDisponible > 0 || (producto.StockDisponible <= 0 && producto.CantidadDeseada > 0))
+                    {
+                        Lb_Productos.Items.Add(producto);
+                    }
+                }
+            }
+            else
+            {
+                if (corteSeleccionado != "Ver todos los tipos de corte")
+                {
+                    Lb_Productos.Items.Clear();
+                    List<Producto> productosFiltrados = DatosEnMemoria.listaProductos.Where(p => p.TipoCorte == corteSeleccionado).ToList();
+                    foreach (Producto productoFiltrado in productosFiltrados)
+                    {
+                        Lb_Productos.Items.Add(productoFiltrado);
+                    }
+                }
+            }     
+        }
+
         private void CargarDatosDelCarrito(DataGridView dataGridView, List<Producto> listaProductos)
         {
             dataGridView.Rows.Clear();
@@ -168,7 +227,7 @@ namespace Suarez_Fabiola_2D_2023
                 Producto productoSeleccionado = productos[indexProducto];
                 // le restamos al stock disponible la cantidad ingresada:
                 productoSeleccionado.StockDisponible -= cantidadIngresada;
-                productoSeleccionado.CantidadDeseada += cantidadIngresada;                
+                productoSeleccionado.CantidadDeseada += cantidadIngresada;
 
                 if (DatosEnMemoria.AgregarProductoAlCarrito(productoSeleccionado))
                 {
