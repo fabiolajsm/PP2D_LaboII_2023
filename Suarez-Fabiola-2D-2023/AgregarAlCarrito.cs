@@ -34,7 +34,7 @@ namespace Suarez_Fabiola_2D_2023
                 {
                     precioTotal += Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
                 }
-                Lb_Total.Text = $"Total: {precioTotal.ToString("0")}";
+                Lb_Total.Text = $"Total: {precioTotal.ToString("#0.00")}";
             }
         }
 
@@ -43,8 +43,11 @@ namespace Suarez_Fabiola_2D_2023
             Lb_Productos.Items.Clear();
             foreach (Producto producto in DatosEnMemoria.listaProductos)
             {
-                if (producto.StockDisponible > 0 & producto.CantidadDeseada == 0)
+                if (producto.StockDisponible > 0)
                 {
+                    Lb_Productos.Items.Add(producto);
+                }
+                else if(producto.StockDisponible <= 0 & producto.CantidadDeseada > 0) { 
                     Lb_Productos.Items.Add(producto);
                 }
             }
@@ -60,7 +63,7 @@ namespace Suarez_Fabiola_2D_2023
                     int rowIndex = dataGridView.Rows.Add();
                     DataGridViewRow row = dataGridView.Rows[rowIndex];
                     row.Cells["Nombre"].Value = producto.Nombre;
-                    row.Cells["Precio"].Value = $"${precioProducto.ToString("0")}";
+                    row.Cells["Precio"].Value = $"${precioProducto.ToString("#0.00")}";
                     row.Cells["Cantidad"].Value = producto.CantidadDeseada;
                 }
             }
@@ -165,19 +168,9 @@ namespace Suarez_Fabiola_2D_2023
                 Producto productoSeleccionado = productos[indexProducto];
                 // le restamos al stock disponible la cantidad ingresada:
                 productoSeleccionado.StockDisponible -= cantidadIngresada;
+                productoSeleccionado.CantidadDeseada += cantidadIngresada;                
 
-                // Agregamos el producto a la lista de listaProductosDelCarrito
-                Producto nuevoProducto = new Producto
-                {
-                    Nombre = productoSeleccionado.Nombre,
-                    Descripcion = productoSeleccionado.Descripcion,
-                    TipoCorte = productoSeleccionado.TipoCorte,
-                    PrecioPorKilo = productoSeleccionado.PrecioPorKilo,
-                    StockDisponible = productoSeleccionado.StockDisponible,
-                    CantidadDeseada = cantidadIngresada
-                };
-
-                if (DatosEnMemoria.AgregarProductoAlCarrito(nuevoProducto))
+                if (DatosEnMemoria.AgregarProductoAlCarrito(productoSeleccionado))
                 {
                     // Recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
