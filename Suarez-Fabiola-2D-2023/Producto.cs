@@ -12,7 +12,7 @@ namespace Suarez_Fabiola_2D_2023
         public string Descripcion { get; set; }
         public string TipoCorte { get; set; }
         public double PrecioPorKilo { get; set; }
-        public double StockDisponible { get; set; }
+        public double StockDisponible { get; set; } // en gramos
         public int CantidadDeseada { get; set; }
 
         public Producto()

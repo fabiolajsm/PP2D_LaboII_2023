@@ -123,7 +123,7 @@ namespace Suarez_Fabiola_2D_2023
                     DataGridViewRow row = dataGridView.Rows[rowIndex];
                     row.Cells["Nombre"].Value = producto.Nombre;
                     row.Cells["Precio"].Value = $"${precioProducto.ToString("#0.00")}";
-                    row.Cells["Cantidad"].Value = producto.CantidadDeseada;
+                    row.Cells["Cantidad"].Value = $"{producto.CantidadDeseada} gr";
                 }
             }
         }

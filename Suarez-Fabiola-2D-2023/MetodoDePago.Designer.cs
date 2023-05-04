@@ -50,9 +50,9 @@
             Gb_MetodoDePago.Controls.Add(Rb_Credito);
             Gb_MetodoDePago.Controls.Add(Rb_Debito);
             Gb_MetodoDePago.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Gb_MetodoDePago.Location = new Point(99, 49);
+            Gb_MetodoDePago.Location = new Point(79, 49);
             Gb_MetodoDePago.Name = "Gb_MetodoDePago";
-            Gb_MetodoDePago.Size = new Size(328, 209);
+            Gb_MetodoDePago.Size = new Size(376, 209);
             Gb_MetodoDePago.TabIndex = 12;
             Gb_MetodoDePago.TabStop = false;
             Gb_MetodoDePago.Text = "Seleccione su método de pago";

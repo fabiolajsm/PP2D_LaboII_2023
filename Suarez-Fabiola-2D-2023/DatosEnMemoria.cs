@@ -29,11 +29,11 @@ namespace Suarez_Fabiola_2D_2023
         };
         public static List<Producto> listaProductos = new List<Producto>()
         {
-            new Producto("Bistec de soja", "Corte de proteína de soja con sabor a carne", "Bistec", 12, 0),
-            new Producto("Filete", "Corte de proteína de trigo con textura similar a la carne", "Filete", 10.99, 15),
-            new Producto("Filete de tempeh", "Corte de proteína de soja fermentada con sabor a nuez", "Filete", 99.9, 12),
-            new Producto("Chorizo vegano", "Corte de proteína vegetal con sabor a chorizo", "Chorizo", 799, 30),
-            new Producto("Carne de lentejas", "Corte de lentejas cocidas y condimentadas con sabor a carne", "Lentejas", 300, 25),
+            new Producto("Bistec de soja", "Corte de proteína de soja con sabor a carne", "Bistec", 1000, 0),
+            new Producto("Filete", "Corte de proteína de trigo con textura similar a la carne", "Filete", 710, 2000),
+            new Producto("Filete de tempeh", "Corte de proteína de soja fermentada con sabor a nuez", "Filete", 500.99, 4000),
+            new Producto("Chorizo vegano", "Corte de proteína vegetal con sabor a chorizo", "Chorizo", 900, 1000),
+            new Producto("Carne de lentejas", "Corte de lentejas cocidas y condimentadas con sabor a carne", "Lentejas", 2000, 5000),
         };
         public static List<Producto> listaProductosDelCarrito = new List<Producto>();
 
