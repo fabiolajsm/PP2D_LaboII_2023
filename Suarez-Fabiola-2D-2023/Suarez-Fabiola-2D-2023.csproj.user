@@ -4,6 +4,12 @@
     <Compile Update="AgregarAlCarrito.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FijarCortes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FijarPrecios.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormHeladera.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -14,6 +20,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MetodoDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ModificarStock.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

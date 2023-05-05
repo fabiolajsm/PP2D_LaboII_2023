@@ -49,7 +49,7 @@ namespace Suarez_Fabiola_2D_2023
         {
             Cb_Opciones.Items.Clear();
 
-            string[] opciones = { "Vender productos", "Reponer productos", "Fijar precios por kilo", "Fijar cortes de carne" };
+            string[] opciones = { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes" };
             for (int i = 0; i < opciones.Length; i++)
             {
                 Cb_Opciones.Items.Add(opciones[i]);
@@ -75,14 +75,20 @@ namespace Suarez_Fabiola_2D_2023
                     case "Vender productos":
                         MessageBox.Show("1");
                         break;
-                    case "Reponer productos":
-                        MessageBox.Show("2");
+                    case "Modificar stock de los productos":
+                        this.Enabled = false;
+                        ModificarStock modificarStock = new ModificarStock();
+                        modificarStock.ShowDialog();
                         break;
                     case "Fijar precios por kilo":
-                        MessageBox.Show("3");
+                        this.Enabled = false;
+                        FijarPrecios fijarPrecios = new FijarPrecios();
+                        fijarPrecios.ShowDialog();
                         break;
-                    case "Fijar cortes de carne":
-                        MessageBox.Show("4");
+                    case "Fijar tipos de cortes":
+                        this.Enabled = false;
+                        FijarCortes fijarCortes = new FijarCortes();
+                        fijarCortes.ShowDialog();
                         break;
                 }
             }
