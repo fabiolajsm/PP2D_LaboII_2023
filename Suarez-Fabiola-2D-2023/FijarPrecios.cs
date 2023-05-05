@@ -22,11 +22,11 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (DatosEnMemoria.listaProductos.Count == 0) return;
 
-            Lb_FijarPrecio.Items.Clear();          
-            foreach (Producto producto in DatosEnMemoria.listaProductos)            
-            {            
-                Lb_FijarPrecio.Items.Add(producto);                
-            }              
+            Lb_FijarPrecio.Items.Clear();
+            foreach (Producto producto in DatosEnMemoria.listaProductos)
+            {
+                Lb_FijarPrecio.Items.Add(producto);
+            }
         }
         private void Lb_FijarPrecio_DrawItem(object sender, DrawItemEventArgs e)
         {

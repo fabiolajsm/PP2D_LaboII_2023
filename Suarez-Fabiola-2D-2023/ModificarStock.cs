@@ -30,6 +30,18 @@ namespace Suarez_Fabiola_2D_2023
                 Lb_ModificarProductos.Items.Add(producto);
             }
         }
+
+        private void Btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ModificarStock_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
+            formHeladera.Enabled = true;
+        }
+
         private void Lb_ModificarProductos_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -54,20 +66,11 @@ namespace Suarez_Fabiola_2D_2023
             e.Graphics.DrawString(nombreProducto, e.Font, brush, col1Rect);
 
             // Dibujar el stock Disponible en la segunda columna
-            e.Graphics.DrawString(stockDisponible.ToString(), e.Font, brush, col2Rect,
+
+            e.Graphics.DrawString($"{stockDisponible.ToString()} gr", e.Font, brush, col2Rect,
                 new StringFormat() { Alignment = StringAlignment.Far });
 
             e.DrawFocusRectangle();
-        }
-        private void Btn_Volver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void ModificarStock_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
         }
     }
 }

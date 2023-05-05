@@ -73,6 +73,7 @@
             Lb_FijarCorte.Name = "Lb_FijarCorte";
             Lb_FijarCorte.Size = new Size(305, 204);
             Lb_FijarCorte.TabIndex = 28;
+            Lb_FijarCorte.DrawItem += Lb_FijarCorte_DrawItem;
             // 
             // Lb_Corte
             // 

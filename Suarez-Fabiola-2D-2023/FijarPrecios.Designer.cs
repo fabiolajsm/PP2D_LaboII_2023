@@ -41,7 +41,7 @@
             // 
             Btn_Volver.AccessibleName = "Btn_Volver";
             Btn_Volver.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Volver.Location = new Point(43, 384);
+            Btn_Volver.Location = new Point(28, 384);
             Btn_Volver.Name = "Btn_Volver";
             Btn_Volver.Size = new Size(132, 29);
             Btn_Volver.TabIndex = 26;
@@ -53,7 +53,7 @@
             // 
             Tb_Precio.BorderStyle = BorderStyle.None;
             Tb_Precio.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Tb_Precio.Location = new Point(245, 340);
+            Tb_Precio.Location = new Point(230, 340);
             Tb_Precio.MaxLength = 4;
             Tb_Precio.Name = "Tb_Precio";
             Tb_Precio.Size = new Size(103, 19);
@@ -66,7 +66,7 @@
             Lb_NombreProducto.AccessibleName = "Lb_NombreProducto";
             Lb_NombreProducto.AutoSize = true;
             Lb_NombreProducto.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_NombreProducto.Location = new Point(43, 71);
+            Lb_NombreProducto.Location = new Point(28, 71);
             Lb_NombreProducto.Name = "Lb_NombreProducto";
             Lb_NombreProducto.Size = new Size(179, 19);
             Lb_NombreProducto.TabIndex = 22;
@@ -81,7 +81,7 @@
             Lb_FijarPrecio.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Lb_FijarPrecio.FormattingEnabled = true;
             Lb_FijarPrecio.ItemHeight = 20;
-            Lb_FijarPrecio.Location = new Point(43, 110);
+            Lb_FijarPrecio.Location = new Point(28, 110);
             Lb_FijarPrecio.Name = "Lb_FijarPrecio";
             Lb_FijarPrecio.Size = new Size(305, 204);
             Lb_FijarPrecio.TabIndex = 21;
@@ -91,7 +91,7 @@
             // 
             Lb_Precio.AccessibleName = "Lb_Precio";
             Lb_Precio.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Precio.Location = new Point(43, 340);
+            Lb_Precio.Location = new Point(28, 340);
             Lb_Precio.Name = "Lb_Precio";
             Lb_Precio.Size = new Size(208, 29);
             Lb_Precio.TabIndex = 24;
@@ -101,7 +101,7 @@
             // 
             Btn_FijarPrecio.AccessibleName = "Btn_FijarPrecio";
             Btn_FijarPrecio.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_FijarPrecio.Location = new Point(196, 384);
+            Btn_FijarPrecio.Location = new Point(181, 384);
             Btn_FijarPrecio.Name = "Btn_FijarPrecio";
             Btn_FijarPrecio.Size = new Size(152, 29);
             Btn_FijarPrecio.TabIndex = 23;
@@ -112,7 +112,7 @@
             // 
             Lb_Titulo.AutoSize = true;
             Lb_Titulo.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Titulo.Location = new Point(43, 34);
+            Lb_Titulo.Location = new Point(28, 34);
             Lb_Titulo.Name = "Lb_Titulo";
             Lb_Titulo.Size = new Size(235, 27);
             Lb_Titulo.TabIndex = 20;
@@ -123,7 +123,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(138, 121, 104);
-            ClientSize = new Size(399, 445);
+            ClientSize = new Size(366, 445);
             ControlBox = false;
             Controls.Add(Btn_Volver);
             Controls.Add(Tb_Precio);

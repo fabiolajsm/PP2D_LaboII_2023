@@ -29,7 +29,19 @@ namespace Suarez_Fabiola_2D_2023
                 Lb_FijarCorte.Items.Add(producto);
             }
         }
-        private void Lb_FijarPrecio_DrawItem(object sender, DrawItemEventArgs e)
+
+        private void Btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FijarCortes_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
+            formHeladera.Enabled = true;
+        }
+
+        private void Lb_FijarCorte_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
             string nombreProducto = ((Producto)Lb_FijarCorte.Items[e.Index]).Nombre;
@@ -57,17 +69,6 @@ namespace Suarez_Fabiola_2D_2023
                 new StringFormat() { Alignment = StringAlignment.Far });
 
             e.DrawFocusRectangle();
-        }
-
-        private void Btn_Volver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void FijarCortes_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
         }
     }
 }
