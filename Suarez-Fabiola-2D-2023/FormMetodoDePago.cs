@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
 {
-    public partial class MetodoDePago : Form
+    public partial class FormMetodoDePago : Form
     {
         private float maximoDeCompra;
         private double precioFinal;
         private double recargo;
         private Cliente cliente;
 
-        public MetodoDePago(double precioFinal, Cliente cliente)
+        public FormMetodoDePago(double precioFinal, Cliente cliente)
         {
             InitializeComponent();
 
@@ -38,7 +38,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(cliente);
+            FormVenta agregarAlCarrito = new FormVenta(cliente);
             agregarAlCarrito.Show();
         }
 
@@ -106,7 +106,7 @@ namespace Suarez_Fabiola_2D_2023
                 cliente.MontoMaximoDeCompra -= (float)total;
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
-                AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(cliente);
+                FormVenta agregarAlCarrito = new FormVenta(cliente);
                 agregarAlCarrito.Show();
             }
         }

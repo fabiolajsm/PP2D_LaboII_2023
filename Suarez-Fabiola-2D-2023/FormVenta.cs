@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
 {
-    public partial class AgregarAlCarrito : Form
+    public partial class FormVenta : Form
     {
         private Cliente cliente;
-        public AgregarAlCarrito(Cliente cliente)
+        public FormVenta(Cliente cliente)
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
@@ -284,7 +284,7 @@ namespace Suarez_Fabiola_2D_2023
         {
             double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
             this.Hide();
-            MetodoDePago metodoDePago = new MetodoDePago(precioFinal, cliente);
+            FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
             metodoDePago.Show();
         }
     }

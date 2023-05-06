@@ -77,11 +77,11 @@ namespace Suarez_Fabiola_2D_2023
                 this.Hide();
                 if (!modificarMetodoDePago)
                 {
-                    AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(cliente);
-                    agregarAlCarrito.Show();
+                    FormVenta formVenta = new FormVenta(cliente);
+                    formVenta.Show();
                 } else
                 {
-                    MetodoDePago metodoDePago = new MetodoDePago(precioFinal, cliente);
+                    FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
                     metodoDePago.Show();
                 }
             }

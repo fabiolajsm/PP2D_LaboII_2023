@@ -1,6 +1,6 @@
 ﻿namespace Suarez_Fabiola_2D_2023
 {
-    partial class MetodoDePago
+    partial class FormMetodoDePago
     {
         /// <summary>
         /// Required designer variable.
