@@ -95,6 +95,7 @@
             Btn_FijarPrecio.TabIndex = 30;
             Btn_FijarPrecio.Text = "Guardar cambios";
             Btn_FijarPrecio.UseVisualStyleBackColor = true;
+            Btn_FijarPrecio.Click += Btn_FijarPrecio_Click;
             // 
             // Lb_Titulo
             // 

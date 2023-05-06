@@ -70,5 +70,50 @@ namespace Suarez_Fabiola_2D_2023
 
             e.DrawFocusRectangle();
         }
+
+        public bool ValidarCampos(int indexProducto, string corteIngresado)
+        {
+            List<Producto> productos = Lb_FijarCorte.Items.Cast<Producto>().ToList();
+            string corteActual = Producto.ObtenerCorteProducto(indexProducto, corteIngresado, DatosEnMemoria.listaProductos);
+            bool esValido = false;
+
+            if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(corteIngresado))
+            {
+                MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (corteIngresado == corteActual)
+            {
+                MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                esValido = true;
+            }
+
+            return esValido;
+        }
+
+        private void Btn_FijarPrecio_Click(object sender, EventArgs e)
+        {
+            int indexProducto = Lb_FijarCorte.SelectedIndex;
+            string corteIngresado = Tb_Corte.Text;
+           
+            if (ValidarCampos(indexProducto, corteIngresado))
+            {
+                if (Producto.ModificarTipoDeCorteProducto(corteIngresado, indexProducto, DatosEnMemoria.listaProductos))
+                {
+                    CargarItemsProductos();
+                    MessageBox.Show($"Tipo de corte del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }

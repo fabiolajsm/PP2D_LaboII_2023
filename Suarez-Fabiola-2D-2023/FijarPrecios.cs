@@ -70,5 +70,74 @@ namespace Suarez_Fabiola_2D_2023
             formHeladera.Enabled = true;
         }
 
+        private void Tb_Precio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Permite sólo un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public bool ValidarCampos(int indexProducto, double precio)
+        {
+            List<Producto> productos = Lb_FijarPrecio.Items.Cast<Producto>().ToList();
+            double precioActual = Producto.ObtenerPrecioProducto(indexProducto, precio, productos);
+            bool esValido = false;
+
+            if (indexProducto < 0 && precio < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (precioActual == precio)
+            {
+                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                esValido = true;
+            }
+
+            return esValido;
+        }
+
+        private void Btn_FijarPrecio_Click(object sender, EventArgs e)
+        {
+            int indexProducto = Lb_FijarPrecio.SelectedIndex;
+            string precioIngresado = Tb_Precio.Text;
+            double precio;
+            if (string.IsNullOrEmpty(precioIngresado))
+            {
+                MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            try
+            {
+                if (!double.TryParse(precioIngresado, out precio))
+                {
+                    MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Debe ingresar una cantidad de stock");
+            }
+            if (ValidarCampos(indexProducto, precio))
+            {
+                if (Producto.ModificarPrecioProducto(precio, indexProducto, DatosEnMemoria.listaProductos))
+                {
+                    CargarItemsProductos();
+                    MessageBox.Show($"Precio del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }

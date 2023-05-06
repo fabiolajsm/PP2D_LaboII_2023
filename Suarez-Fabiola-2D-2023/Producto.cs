@@ -55,18 +55,32 @@ namespace Suarez_Fabiola_2D_2023
             }
             return 0;
         }
-
-        public static double ObtenerPrecioProducto(int indexProducto, List<Producto> listaProductos)
+        public static double ObtenerPrecioProducto(int indexProducto, double precio, List<Producto> listaProductos)
         {
-            if(indexProducto >= 0)
+            if (indexProducto >= 0 & precio >= 0)
             {
-                for(int i = 0; i < listaProductos.Count; i++)
-                {                   
-                    return listaProductos[indexProducto].PrecioPorKilo;
+                for (int i = 0; i < listaProductos.Count; i++)
+                {
+                    Producto productoSeleccionado = listaProductos[indexProducto];
+                    return productoSeleccionado.PrecioPorKilo;
                 }
             }
             return 0;
         }
+
+        public static string ObtenerCorteProducto(int indexProducto, string tipoCorte, List<Producto> listaProductos)
+        {
+            if (indexProducto >= 0 & !string.IsNullOrEmpty(tipoCorte))
+            {
+                for (int i = 0; i < listaProductos.Count; i++)
+                {
+                    Producto productoSeleccionado = listaProductos[indexProducto];
+                    return productoSeleccionado.TipoCorte;
+                }
+            }
+            return string.Empty;
+        }
+
         public static double CalcularPrecio(int cantidadIngresadaEnGramos, double precioPorKilo)
         {
             double cantidadEnKilos = (double)cantidadIngresadaEnGramos / 1000; // Convertir la cantidad a kilos
@@ -86,6 +100,32 @@ namespace Suarez_Fabiola_2D_2023
                 for (int i = 0; i < listaProductos.Count; i++)
                 {                    
                     listaProductos[indexProducto].StockDisponible = nuevoStock;
+                }
+                seModifico = true;
+            }
+            return seModifico;
+        }
+        public static bool ModificarPrecioProducto(double nuevoStock, int indexProducto, List<Producto> listaProductos)
+        {
+            bool seModifico = false;
+            if (indexProducto >= 0 && nuevoStock >= 0)
+            {
+                for (int i = 0; i < listaProductos.Count; i++)
+                {
+                    listaProductos[indexProducto].PrecioPorKilo = nuevoStock;
+                }
+                seModifico = true;
+            }
+            return seModifico;
+        }
+        public static bool ModificarTipoDeCorteProducto(string nuevoCorte, int indexProducto, List<Producto> listaProductos)
+        {
+            bool seModifico = false;
+            if (indexProducto >= 0 && !string.IsNullOrEmpty(nuevoCorte))
+            {
+                for (int i = 0; i < listaProductos.Count; i++)
+                {
+                    listaProductos[indexProducto].TipoCorte = Usuario.Capitalize(nuevoCorte);
                 }
                 seModifico = true;
             }

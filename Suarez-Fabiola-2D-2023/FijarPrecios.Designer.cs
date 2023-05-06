@@ -60,6 +60,7 @@
             Tb_Precio.TabIndex = 25;
             Tb_Precio.Text = "0";
             Tb_Precio.TextAlign = HorizontalAlignment.Center;
+            Tb_Precio.KeyPress += Tb_Precio_KeyPress;
             // 
             // Lb_NombreProducto
             // 
@@ -107,6 +108,7 @@
             Btn_FijarPrecio.TabIndex = 23;
             Btn_FijarPrecio.Text = "Guardar cambios";
             Btn_FijarPrecio.UseVisualStyleBackColor = true;
+            Btn_FijarPrecio.Click += Btn_FijarPrecio_Click;
             // 
             // Lb_Titulo
             // 

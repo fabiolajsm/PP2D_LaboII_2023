@@ -106,6 +106,11 @@ namespace Suarez_Fabiola_2D_2023
             int indexProducto = Lb_ModificarProductos.SelectedIndex;
             string cantidadIngresada = Tb_Cantidad.Text;
             int cantidadStock;
+            // En modificar stock, precio y corte mejorar la validacion
+            if (string.IsNullOrEmpty(cantidadIngresada))
+            {
+                MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             try
             {
                 if (!int.TryParse(cantidadIngresada, out cantidadStock))
@@ -116,10 +121,6 @@ namespace Suarez_Fabiola_2D_2023
             catch (FormatException ex)
             {
                 throw new FormatException("Debe ingresar una cantidad de stock");
-            }
-            if (string.IsNullOrEmpty(cantidadIngresada))
-            {
-                MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if(ValidarCampos(indexProducto, cantidadStock))
             {
