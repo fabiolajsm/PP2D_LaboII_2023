@@ -15,15 +15,15 @@ namespace Suarez_Fabiola_2D_2023
         private float maximoDeCompra;
         private double precioFinal;
         private double recargo;
-        private Usuario usuario;
+        private Cliente cliente;
 
-        public MetodoDePago(double precioFinal, Usuario usuario)
+        public MetodoDePago(double precioFinal, Cliente cliente)
         {
             InitializeComponent();
 
-            this.maximoDeCompra = usuario.MontoMaximoDeCompra;
+            this.maximoDeCompra = cliente.MontoMaximoDeCompra;
             this.precioFinal = precioFinal;
-            this.usuario = usuario;
+            this.cliente = cliente;
             this.recargo = 0;
             if (Lb_MontoMaximo != null)
             {
@@ -38,7 +38,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(usuario);
+            AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(cliente);
             agregarAlCarrito.Show();
         }
 
@@ -87,7 +87,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (result == DialogResult.OK)
                 {
                     this.Hide();
-                    FormVenta formVenta = new FormVenta(usuario, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
+                    FormVenta formVenta = new FormVenta(cliente, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
                     formVenta.Show();
                 }
             }
@@ -103,10 +103,10 @@ namespace Suarez_Fabiola_2D_2023
                 mensaje += $"\nRecargo: {recargo.ToString("#0.00")}\nPrecio final: ${total.ToString("#0.00")}";
 
                 MessageBox.Show(mensaje, "Detalle de la compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                usuario.MontoMaximoDeCompra -= (float)total;
+                cliente.MontoMaximoDeCompra -= (float)total;
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
-                AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(usuario);
+                AgregarAlCarrito agregarAlCarrito = new AgregarAlCarrito(cliente);
                 agregarAlCarrito.Show();
             }
         }

@@ -9,9 +9,14 @@ namespace Suarez_Fabiola_2D_2023
 {
     public class Cliente : Usuario
     {
-        public Cliente(string nombre, string apellido, string email, string contrasena, TipoUsuario tipoDeUsuario)
+        public float MontoMaximoDeCompra { get; set; }
+
+        public Cliente() { }
+
+        public Cliente(string nombre, string apellido, string email, string contrasena, TipoUsuario tipoDeUsuario, float montoMaximo)
            : base(nombre, apellido, email, contrasena, tipoDeUsuario)
         {
+            this.MontoMaximoDeCompra = montoMaximo;
         }
     }
 }

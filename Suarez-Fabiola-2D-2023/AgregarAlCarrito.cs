@@ -12,8 +12,8 @@ namespace Suarez_Fabiola_2D_2023
 {
     public partial class AgregarAlCarrito : Form
     {
-        private Usuario usuario;
-        public AgregarAlCarrito(Usuario usuario)
+        private Cliente cliente;
+        public AgregarAlCarrito(Cliente cliente)
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
@@ -22,7 +22,7 @@ namespace Suarez_Fabiola_2D_2023
             CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
             CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
             HabilitarBotonDeCompra();
-            this.usuario = usuario;
+            this.cliente = cliente;
         }
 
         public void CalcularPrecioTotal(List<Producto> listaProductos)
@@ -243,7 +243,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada = 0;
+            int cantidadIngresada;
             try
             {
                 if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
@@ -295,7 +295,7 @@ namespace Suarez_Fabiola_2D_2023
         {
             double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
             this.Hide();
-            MetodoDePago metodoDePago = new MetodoDePago(precioFinal, usuario);
+            MetodoDePago metodoDePago = new MetodoDePago(precioFinal, cliente);
             metodoDePago.Show();
         }
     }

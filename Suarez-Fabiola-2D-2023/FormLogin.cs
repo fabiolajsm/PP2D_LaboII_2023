@@ -74,6 +74,32 @@ namespace Suarez_Fabiola_2D_2023
         }
 
         /// <summary>
+        /// Valida que el usuario exista en la lista de usuarios existentes
+        /// </summary>
+        /// <param name="usuarioIngresado">Usuario a validar</param>
+        /// <returns>Retorna True si existe en la lista de usuario y False si no</returns>
+        public static bool ValidarExistenciaDeUsuario(Usuario usuarioIngresado)
+        {
+            return DatosEnMemoria.listaUsuarios.Any(usuario => usuario == usuarioIngresado);
+        }
+        /// <summary>
+        /// Obtiene todos los datos del usuario ingresado
+        /// </summary>
+        /// <param name="usuarioIngresado">Usuario a obtener</param>
+        /// <returns>Retorna el Usuario desde la lista de usuarios si lo encuentra y el usuario ingresado si no</returns>
+        public static Usuario? ObtenerUsuario(string email, string contrasena)
+        {
+            foreach (Usuario usuario in DatosEnMemoria.listaUsuarios)
+            {
+                if (usuario.Email == email && usuario.Contrasena == contrasena)
+                {
+                    return usuario;
+                }
+            }
+
+            return null;
+        }
+        /// <summary>
         /// Valida el ingreso de un usuario y si este es válido abre una nueva página segun el TipoUsuario que sea.
         /// </summary>
         /// <param name="sender"></param>
@@ -82,27 +108,32 @@ namespace Suarez_Fabiola_2D_2023
         {
             string email = Tb_Email.Text.Trim();
             string contrasena = Tb_Contrasena.Text.Trim();
-            Usuario usuarioIngresado = new Usuario(email, contrasena);
+            Usuario? usuarioIngresado = null;
 
             if (ValidarEmail(email) & ValidarContraseña(contrasena))
             {
-                if (!Usuario.ValidarExistenciaDeUsuario(usuarioIngresado))
+                usuarioIngresado = ObtenerUsuario(email, contrasena);
+                if (usuarioIngresado == null)
                 {
                     MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    Usuario usuario = Usuario.ObtenerUsuario(usuarioIngresado);
                     this.Hide();
-                    if(usuario.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
+                    if(usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
                     {                        
-                        FormVenta formVenta = new FormVenta(usuario);
+                        Cliente cliente = new Cliente(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario, 0);
+                        FormVenta formVenta = new FormVenta(cliente);
                         formVenta.Show();
                     }
-                    else
+                    else if(usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Vendedor)
                     {
                         FormHeladera formHeladera = new FormHeladera();
                         formHeladera.Show();
+                    } 
+                    else
+                    {
+                        MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
