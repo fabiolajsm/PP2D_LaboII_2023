@@ -38,7 +38,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormVenta agregarAlCarrito = new FormVenta(cliente);
+            FormVenta agregarAlCarrito = new FormVenta(cliente, false);
             agregarAlCarrito.Show();
         }
 
@@ -106,7 +106,7 @@ namespace Suarez_Fabiola_2D_2023
                 cliente.MontoMaximoDeCompra -= (float)total;
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
-                FormVenta agregarAlCarrito = new FormVenta(cliente);
+                FormVenta agregarAlCarrito = new FormVenta(cliente, false);
                 agregarAlCarrito.Show();
             }
         }

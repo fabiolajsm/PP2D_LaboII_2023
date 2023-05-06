@@ -13,7 +13,8 @@ namespace Suarez_Fabiola_2D_2023
     public partial class FormVenta : Form
     {
         private Cliente cliente;
-        public FormVenta(Cliente cliente)
+        private bool esVendedor;
+        public FormVenta(Cliente cliente, bool esVendedor)
         {
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
@@ -23,6 +24,11 @@ namespace Suarez_Fabiola_2D_2023
             CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
             HabilitarBotonDeCompra();
             this.cliente = cliente;
+            this.esVendedor = esVendedor;
+            if (esVendedor)
+            {
+                Btn_VolverVendedor.Visible = true;
+            }
         }
 
         public void CalcularPrecioTotal(List<Producto> listaProductos)
@@ -68,7 +74,8 @@ namespace Suarez_Fabiola_2D_2023
                     {
                         Lb_Productos.Items.Add(productoFiltrado);
                     }
-                } else
+                }
+                else
                 {
                     Lb_Productos.Items.Clear();
 
@@ -108,7 +115,7 @@ namespace Suarez_Fabiola_2D_2023
                         Lb_Productos.Items.Add(productoFiltrado);
                     }
                 }
-            }     
+            }
         }
 
         private void CargarDatosDelCarrito(DataGridView dataGridView, List<Producto> listaProductos)
@@ -206,13 +213,13 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada;            
-               
-            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))               
-            {             
-                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);            
-                return;              
-            }            
+            int cantidadIngresada;
+
+            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
+            {
+                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
 
@@ -237,12 +244,12 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada;            
-               
-            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))               
-            {               
-                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);              
-                return;              
+            int cantidadIngresada;
+
+            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
+            {
+                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             if (ValidarCampos(indexProducto, cantidadIngresada, false))
@@ -286,6 +293,19 @@ namespace Suarez_Fabiola_2D_2023
             this.Hide();
             FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
             metodoDePago.Show();
+        }
+
+        private void Btn_VolverVendedor_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormVenta_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (esVendedor) {             
+                ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];           
+                elegirCliente.Enabled = true;
+            }
         }
     }
 }

@@ -47,7 +47,23 @@ namespace Suarez_Fabiola_2D_2023
 
         private void Btn_Continuar_Click(object sender, EventArgs e)
         {
+            if (Cb_Clientes.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debe seleccionar un cliente de la lista para poder empezarle a vender.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                Cliente? cliente = Cliente.ObtenerClientePorNombre(Cb_Clientes.Text, DatosEnMemoria.listaClientes);
+                if (cliente != null)
+                {
+                    this.Enabled = false;
+                    FormVenta formVenta = new FormVenta(cliente, true);
+                    formVenta.Show();
+                }
+                else {
 
+                    MessageBox.Show("Lo sentimos! Error en nuestros servicios. Intente de nuevo.");
+                }
+            }
         }
 
     }

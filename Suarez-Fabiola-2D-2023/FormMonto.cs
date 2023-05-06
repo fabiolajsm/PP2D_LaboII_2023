@@ -77,7 +77,7 @@ namespace Suarez_Fabiola_2D_2023
                 this.Hide();
                 if (!modificarMetodoDePago)
                 {
-                    FormVenta formVenta = new FormVenta(cliente);
+                    FormVenta formVenta = new FormVenta(cliente, false);
                     formVenta.Show();
                 } else
                 {

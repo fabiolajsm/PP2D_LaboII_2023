@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Lb_Productos = new ListBox();
             Lb_NombreProducto = new Label();
             Btn_CerrarSesion = new Button();
@@ -47,6 +47,7 @@
             Cantidad = new DataGridViewTextBoxColumn();
             Precio = new DataGridViewTextBoxColumn();
             Gb_CarritoDeCompra = new GroupBox();
+            Btn_VolverVendedor = new Button();
             Gb_ListaDeProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             Gb_CarritoDeCompra.SuspendLayout();
@@ -209,24 +210,24 @@
             // 
             dataGridView.BackgroundColor = Color.FromArgb(237, 237, 233);
             dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(241, 247, 238);
-            dataGridViewCellStyle5.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(237, 237, 233);
-            dataGridViewCellStyle5.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(241, 247, 238);
+            dataGridViewCellStyle1.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(237, 237, 233);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.ColumnHeadersHeight = 29;
             dataGridView.Columns.AddRange(new DataGridViewColumn[] { Nombre, Cantidad, Precio });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(237, 237, 233);
-            dataGridViewCellStyle6.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(237, 237, 233);
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dataGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(237, 237, 233);
+            dataGridViewCellStyle2.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(237, 237, 233);
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.GridColor = Color.FromArgb(241, 247, 238);
             dataGridView.Location = new Point(6, 46);
             dataGridView.MultiSelect = false;
@@ -276,21 +277,36 @@
             Gb_CarritoDeCompra.TabStop = false;
             Gb_CarritoDeCompra.Text = "Detalle de compra";
             // 
-            // AgregarAlCarrito
+            // Btn_VolverVendedor
+            // 
+            Btn_VolverVendedor.AccessibleName = "Btn_VolverVendedor";
+            Btn_VolverVendedor.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_VolverVendedor.Location = new Point(578, 401);
+            Btn_VolverVendedor.Name = "Btn_VolverVendedor";
+            Btn_VolverVendedor.Size = new Size(84, 29);
+            Btn_VolverVendedor.TabIndex = 13;
+            Btn_VolverVendedor.Text = "Volver";
+            Btn_VolverVendedor.UseVisualStyleBackColor = true;
+            Btn_VolverVendedor.Visible = false;
+            Btn_VolverVendedor.Click += Btn_VolverVendedor_Click;
+            // 
+            // FormVenta
             // 
             AccessibleName = "Agregar al carrito";
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
+            Controls.Add(Btn_VolverVendedor);
             Controls.Add(Gb_CarritoDeCompra);
             Controls.Add(Gb_ListaDeProductos);
             Controls.Add(Btn_CerrarSesion);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "AgregarAlCarrito";
+            Name = "FormVenta";
             StartPosition = FormStartPosition.CenterScreen;
+            FormClosed += FormVenta_FormClosed;
             Gb_ListaDeProductos.ResumeLayout(false);
             Gb_ListaDeProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
@@ -316,5 +332,6 @@
         private Button Btn_Comprar;
         private GroupBox Gb_CarritoDeCompra;
         private ComboBox Cb_FiltrarPorCorte;
+        private Button Btn_VolverVendedor;
     }
 }

@@ -18,5 +18,18 @@ namespace Suarez_Fabiola_2D_2023
         {
             this.MontoMaximoDeCompra = montoMaximo;
         }
+
+        public static Cliente? ObtenerClientePorNombre(string nombreCompleto, List<Cliente> listaClientes)
+        {
+            if (string.IsNullOrEmpty(nombreCompleto) || listaClientes.Count < 0) return null;
+            foreach (Cliente cliente in listaClientes)
+            {
+                if (cliente.NombreCompleto == nombreCompleto.Trim())
+                {
+                    return cliente;
+                }
+            }
+            return null;
+        }
     }
 }
