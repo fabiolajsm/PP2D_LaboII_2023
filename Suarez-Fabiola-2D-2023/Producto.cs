@@ -105,14 +105,14 @@ namespace Suarez_Fabiola_2D_2023
             }
             return seModifico;
         }
-        public static bool ModificarPrecioProducto(double nuevoStock, int indexProducto, List<Producto> listaProductos)
+        public static bool ModificarPrecioProducto(double nuevoPrecio, int indexProducto, List<Producto> listaProductos)
         {
             bool seModifico = false;
-            if (indexProducto >= 0 && nuevoStock >= 0)
+            if (indexProducto >= 0 && nuevoPrecio >= 0)
             {
                 for (int i = 0; i < listaProductos.Count; i++)
                 {
-                    listaProductos[indexProducto].PrecioPorKilo = nuevoStock;
+                    listaProductos[indexProducto].PrecioPorKilo = nuevoPrecio;
                 }
                 seModifico = true;
             }
@@ -130,6 +130,6 @@ namespace Suarez_Fabiola_2D_2023
                 seModifico = true;
             }
             return seModifico;
-        }
+        }        
     }
 }

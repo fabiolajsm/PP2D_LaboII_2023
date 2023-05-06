@@ -87,18 +87,21 @@ namespace Suarez_Fabiola_2D_2023
         public bool ValidarCampos(int indexProducto, double precio)
         {
             List<Producto> productos = Lb_FijarPrecio.Items.Cast<Producto>().ToList();
-            double precioActual = Producto.ObtenerPrecioProducto(indexProducto, precio, productos);
             bool esValido = false;
 
-            if (indexProducto < 0 && precio < 0)
+            if (indexProducto < 0 & precio < 0)
             {
-                MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (indexProducto < 0)
             {
                 MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (precioActual == precio)
+            else if (precio < 0)
+            {
+                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (Producto.ObtenerPrecioProducto(indexProducto, precio, productos) == precio)
             {
                 MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -115,21 +118,20 @@ namespace Suarez_Fabiola_2D_2023
             int indexProducto = Lb_FijarPrecio.SelectedIndex;
             string precioIngresado = Tb_Precio.Text;
             double precio;
+            string mensajeError = "Debe ingresar un precio válido";
+
             if (string.IsNullOrEmpty(precioIngresado))
             {
-                MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(mensajeError, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            try
+
+            if (!double.TryParse(precioIngresado, out precio))
             {
-                if (!double.TryParse(precioIngresado, out precio))
-                {
-                    MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(mensajeError, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Debe ingresar una cantidad de stock");
-            }
+
             if (ValidarCampos(indexProducto, precio))
             {
                 if (Producto.ModificarPrecioProducto(precio, indexProducto, DatosEnMemoria.listaProductos))

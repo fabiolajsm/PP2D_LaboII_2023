@@ -65,7 +65,7 @@
             Tb_Cantidad.BorderStyle = BorderStyle.None;
             Tb_Cantidad.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Tb_Cantidad.Location = new Point(195, 326);
-            Tb_Cantidad.MaxLength = 4;
+            Tb_Cantidad.MaxLength = 6;
             Tb_Cantidad.Name = "Tb_Cantidad";
             Tb_Cantidad.Size = new Size(152, 19);
             Tb_Cantidad.TabIndex = 18;

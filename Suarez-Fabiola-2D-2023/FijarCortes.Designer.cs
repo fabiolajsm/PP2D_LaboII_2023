@@ -32,7 +32,7 @@
             Lb_NombreProducto = new Label();
             Lb_FijarCorte = new ListBox();
             Lb_Corte = new Label();
-            Btn_FijarPrecio = new Button();
+            Btn_FijarCorte = new Button();
             Lb_Titulo = new Label();
             Tb_Corte = new TextBox();
             SuspendLayout();
@@ -85,17 +85,17 @@
             Lb_Corte.TabIndex = 31;
             Lb_Corte.Text = "Ingrese el nombre del corte a fijar:";
             // 
-            // Btn_FijarPrecio
+            // Btn_FijarCorte
             // 
-            Btn_FijarPrecio.AccessibleName = "Btn_FijarPrecio";
-            Btn_FijarPrecio.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_FijarPrecio.Location = new Point(187, 420);
-            Btn_FijarPrecio.Name = "Btn_FijarPrecio";
-            Btn_FijarPrecio.Size = new Size(152, 29);
-            Btn_FijarPrecio.TabIndex = 30;
-            Btn_FijarPrecio.Text = "Guardar cambios";
-            Btn_FijarPrecio.UseVisualStyleBackColor = true;
-            Btn_FijarPrecio.Click += Btn_FijarPrecio_Click;
+            Btn_FijarCorte.AccessibleName = "Btn_FijarCorte";
+            Btn_FijarCorte.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_FijarCorte.Location = new Point(187, 420);
+            Btn_FijarCorte.Name = "Btn_FijarCorte";
+            Btn_FijarCorte.Size = new Size(152, 29);
+            Btn_FijarCorte.TabIndex = 30;
+            Btn_FijarCorte.Text = "Guardar cambios";
+            Btn_FijarCorte.UseVisualStyleBackColor = true;
+            Btn_FijarCorte.Click += Btn_FijarCorte_Click;
             // 
             // Lb_Titulo
             // 
@@ -111,10 +111,12 @@
             // 
             Tb_Corte.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Tb_Corte.Location = new Point(34, 369);
+            Tb_Corte.MaxLength = 20;
             Tb_Corte.Name = "Tb_Corte";
             Tb_Corte.PlaceholderText = "Ejemplo: \"Filete\"";
             Tb_Corte.Size = new Size(305, 26);
             Tb_Corte.TabIndex = 34;
+            Tb_Corte.KeyPress += Tb_Corte_KeyPress;
             // 
             // FijarCortes
             // 
@@ -128,7 +130,7 @@
             Controls.Add(Lb_NombreProducto);
             Controls.Add(Lb_FijarCorte);
             Controls.Add(Lb_Corte);
-            Controls.Add(Btn_FijarPrecio);
+            Controls.Add(Btn_FijarCorte);
             Controls.Add(Lb_Titulo);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "FijarCortes";
@@ -145,7 +147,7 @@
         private Label Lb_NombreProducto;
         private ListBox Lb_FijarCorte;
         private Label Lb_Corte;
-        private Button Btn_FijarPrecio;
+        private Button Btn_FijarCorte;
         private Label Lb_Titulo;
         private TextBox Tb_Corte;
     }

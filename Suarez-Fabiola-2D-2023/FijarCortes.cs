@@ -74,7 +74,6 @@ namespace Suarez_Fabiola_2D_2023
         public bool ValidarCampos(int indexProducto, string corteIngresado)
         {
             List<Producto> productos = Lb_FijarCorte.Items.Cast<Producto>().ToList();
-            string corteActual = Producto.ObtenerCorteProducto(indexProducto, corteIngresado, DatosEnMemoria.listaProductos);
             bool esValido = false;
 
             if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
@@ -89,7 +88,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (corteIngresado == corteActual)
+            else if (corteIngresado == Producto.ObtenerCorteProducto(indexProducto, corteIngresado, productos))
             {
                 MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -101,11 +100,11 @@ namespace Suarez_Fabiola_2D_2023
             return esValido;
         }
 
-        private void Btn_FijarPrecio_Click(object sender, EventArgs e)
+        private void Btn_FijarCorte_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_FijarCorte.SelectedIndex;
             string corteIngresado = Tb_Corte.Text;
-           
+
             if (ValidarCampos(indexProducto, corteIngresado))
             {
                 if (Producto.ModificarTipoDeCorteProducto(corteIngresado, indexProducto, DatosEnMemoria.listaProductos))
@@ -113,6 +112,14 @@ namespace Suarez_Fabiola_2D_2023
                     CargarItemsProductos();
                     MessageBox.Show($"Tipo de corte del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        private void Tb_Corte_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
+            {
+                e.Handled = true;
             }
         }
     }

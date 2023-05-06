@@ -54,7 +54,7 @@
             Tb_Precio.BorderStyle = BorderStyle.None;
             Tb_Precio.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Tb_Precio.Location = new Point(230, 340);
-            Tb_Precio.MaxLength = 4;
+            Tb_Precio.MaxLength = 6;
             Tb_Precio.Name = "Tb_Precio";
             Tb_Precio.Size = new Size(103, 19);
             Tb_Precio.TabIndex = 25;

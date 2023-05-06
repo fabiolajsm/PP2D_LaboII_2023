@@ -206,19 +206,13 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-
-            int cantidadIngresada = 0;
-            try
-            {
-                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
-                {
-                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Debe ingresar una cantidad válida");
-            }
+            int cantidadIngresada;            
+               
+            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))               
+            {             
+                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);            
+                return;              
+            }            
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
 
@@ -243,17 +237,12 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_Productos.SelectedIndex;
-            int cantidadIngresada;
-            try
-            {
-                if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
-                {
-                    MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Debe ingresar una cantidad válida");
+            int cantidadIngresada;            
+               
+            if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))               
+            {               
+                MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);              
+                return;              
             }
 
             if (ValidarCampos(indexProducto, cantidadIngresada, false))
