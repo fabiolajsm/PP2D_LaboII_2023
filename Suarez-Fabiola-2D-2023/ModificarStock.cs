@@ -72,5 +72,71 @@ namespace Suarez_Fabiola_2D_2023
 
             e.DrawFocusRectangle();
         }
+        public bool ValidarCampos(int indexProducto, int cantidadIngresada)
+        {
+            List<Producto> productos = Lb_ModificarProductos.Items.Cast<Producto>().ToList();
+            double stockDisponible = Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos);
+            bool esValido = false;
+
+            if (indexProducto < 0 && cantidadIngresada < 1)
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (cantidadIngresada < 0)
+            {
+                MessageBox.Show($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(stockDisponible == cantidadIngresada)
+            {
+                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                esValido = true;
+            }
+
+            return esValido;
+        }
+        private void Btn_ModificarStock_Click(object sender, EventArgs e)
+        {
+            int indexProducto = Lb_ModificarProductos.SelectedIndex;
+            string cantidadIngresada = Tb_Cantidad.Text;
+            int cantidadStock;
+            try
+            {
+                if (!int.TryParse(cantidadIngresada, out cantidadStock))
+                {
+                    MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException ex)
+            {
+                throw new FormatException("Debe ingresar una cantidad de stock");
+            }
+            if (string.IsNullOrEmpty(cantidadIngresada))
+            {
+                MessageBox.Show("Debe ingresar una cantidad de stock", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if(ValidarCampos(indexProducto, cantidadStock))
+            {
+               if(Producto.ModificarStockDisponible(cantidadStock, indexProducto, DatosEnMemoria.listaProductos))
+               {
+                    CargarItemsProductos();
+                    MessageBox.Show($"Stock del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               }
+            }
+        }
+
+        private void Tb_Cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

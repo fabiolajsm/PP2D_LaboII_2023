@@ -128,7 +128,8 @@ namespace Suarez_Fabiola_2D_2023
                     }
                     else if(usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Vendedor)
                     {
-                        FormHeladera formHeladera = new FormHeladera();
+                        Vendedor vendedor = new Vendedor(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario); 
+                        FormHeladera formHeladera = new FormHeladera(vendedor);
                         formHeladera.Show();
                     } 
                     else

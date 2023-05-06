@@ -71,6 +71,7 @@
             Tb_Cantidad.TabIndex = 18;
             Tb_Cantidad.Text = "0";
             Tb_Cantidad.TextAlign = HorizontalAlignment.Center;
+            Tb_Cantidad.KeyPress += Tb_Cantidad_KeyPress;
             // 
             // Lb_NombreProducto
             // 
@@ -119,6 +120,7 @@
             Btn_ModificarStock.TabIndex = 16;
             Btn_ModificarStock.Text = "Guardar cambios";
             Btn_ModificarStock.UseVisualStyleBackColor = true;
+            Btn_ModificarStock.Click += Btn_ModificarStock_Click;
             // 
             // LinkLabel_AgregarProducto
             // 

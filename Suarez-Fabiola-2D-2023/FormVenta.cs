@@ -56,12 +56,12 @@ namespace Suarez_Fabiola_2D_2023
             {
                 if (!float.TryParse(Tb_MontoMaximoCompra.Text, out maximoDeCompra))
                 {
-                    MessageBox.Show("Debe ingresar un monto válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (FormatException ex)
             {
-                throw new FormatException("Debe ingresar un monto válida");
+                throw new FormatException("Debe ingresar un monto válido");
             }
             if (string.IsNullOrEmpty(Tb_MontoMaximoCompra.Text))
             {
@@ -69,7 +69,7 @@ namespace Suarez_Fabiola_2D_2023
             }
             else if (maximoDeCompra <= 0)
             {
-                MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0 y sin decimales", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

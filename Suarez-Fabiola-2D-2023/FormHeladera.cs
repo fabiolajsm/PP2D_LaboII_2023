@@ -12,8 +12,10 @@ namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormHeladera : Form
     {
-        public FormHeladera()
+        private Vendedor vendedor;
+        public FormHeladera(Vendedor vendedor)
         {
+            this.vendedor = vendedor;
             InitializeComponent();
             CargarListaProductos(dataGridView, DatosEnMemoria.listaProductos);
             CargarOpcionesDelComboBox();

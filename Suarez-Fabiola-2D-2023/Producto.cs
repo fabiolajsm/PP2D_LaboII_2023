@@ -77,5 +77,19 @@ namespace Suarez_Fabiola_2D_2023
             }
             return precioTotal;
         }
+
+        public static bool ModificarStockDisponible(int nuevoStock, int indexProducto, List<Producto> listaProductos)
+        {
+            bool seModifico = false;
+            if (indexProducto >= 0 && nuevoStock >= 0)
+            {
+                for (int i = 0; i < listaProductos.Count; i++)
+                {                    
+                    listaProductos[indexProducto].StockDisponible = nuevoStock;
+                }
+                seModifico = true;
+            }
+            return seModifico;
+        }
     }
 }
