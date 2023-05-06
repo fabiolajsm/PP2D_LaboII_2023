@@ -20,7 +20,7 @@ namespace Suarez_Fabiola_2D_2023
             CargarItemsProductos();
         }
 
-        private void CargarItemsProductos()
+        public void CargarItemsProductos()
         {
             if (DatosEnMemoria.listaProductos.Count == 0) return;
 
@@ -39,7 +39,11 @@ namespace Suarez_Fabiola_2D_2023
         private void ModificarStock_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
+            if (formHeladera != null)
+            {
+                formHeladera.Enabled = true;
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+            }
         }
 
         private void Lb_ModificarProductos_DrawItem(object sender, DrawItemEventArgs e)
@@ -134,7 +138,9 @@ namespace Suarez_Fabiola_2D_2023
 
         private void LinkLabel_AgregarProducto_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            this.Enabled = false;
+            FormAgregarProducto agregarProducto = new FormAgregarProducto();
+            agregarProducto.ShowDialog();
         }
     }
 }

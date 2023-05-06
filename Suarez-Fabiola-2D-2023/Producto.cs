@@ -143,6 +143,19 @@ namespace Suarez_Fabiola_2D_2023
                 seModifico = true;
             }
             return seModifico;
-        }        
+        }
+        public static bool AgregarProductoALaLista(string nombre, string descripcion, string corte, double precio, double stock, List<Producto> listaProductos)
+        {
+            bool seModifico = false;
+            Producto nuevoProducto = new Producto(nombre, descripcion, corte, precio, stock);
+
+            if (nuevoProducto != null)
+            {
+                listaProductos.Add(nuevoProducto);
+                seModifico = true;
+            }
+
+            return seModifico;
+        }
     }
 }

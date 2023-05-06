@@ -13,15 +13,17 @@ namespace Suarez_Fabiola_2D_2023
     public partial class FormHeladera : Form
     {
         private Vendedor vendedor;
+        public DataGridView dataGridName;
         public FormHeladera(Vendedor vendedor)
         {
             this.vendedor = vendedor;
             InitializeComponent();
+            this.dataGridName = dataGridView;
             CargarListaProductos(dataGridView, DatosEnMemoria.listaProductos);
             CargarOpcionesDelComboBox();
         }
 
-        private void CargarListaProductos(DataGridView dataGridView, List<Producto> listaProductos)
+        public void CargarListaProductos(DataGridView dataGridView, List<Producto> listaProductos)
         {
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
@@ -122,7 +124,8 @@ namespace Suarez_Fabiola_2D_2023
                 {
                     MessageBox.Show($"Detalle del producto:\n\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nTipo de corte: {producto.TipoCorte}\nPrecio por kilo: ${producto.PrecioPorKilo}\nStock disponible: {producto.StockDisponible} gramos");
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Lo sentimos, en este momento no podemos mostrar el detalle");
                 }
             }
