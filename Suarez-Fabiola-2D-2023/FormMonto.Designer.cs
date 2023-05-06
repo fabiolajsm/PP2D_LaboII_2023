@@ -1,6 +1,6 @@
 ﻿namespace Suarez_Fabiola_2D_2023
 {
-    partial class FormVenta
+    partial class FormMonto
     {
         /// <summary>
         /// Required designer variable.

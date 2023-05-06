@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
 {
-    public partial class FormVenta : Form
+    public partial class FormMonto : Form
     {
         private Cliente cliente;
         private bool modificarMetodoDePago;
         private double precioFinal;
-        public FormVenta()
+        public FormMonto()
         {
             InitializeComponent();
             cliente = new Cliente();
             modificarMetodoDePago = false;
             precioFinal = 0;
         }
-        public FormVenta(Cliente cliente) : this()
+        public FormMonto(Cliente cliente) : this()
         {
             Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
             this.cliente = cliente;
@@ -30,7 +30,7 @@ namespace Suarez_Fabiola_2D_2023
             this.precioFinal = 0;
         }
 
-        public FormVenta(Cliente cliente, string descripcion, bool modificarMetodoDePago, double precioFinal) : this()
+        public FormMonto(Cliente cliente, string descripcion, bool modificarMetodoDePago, double precioFinal) : this()
         {
             Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
             Lb_DescripcionBienvenida.Text = descripcion;

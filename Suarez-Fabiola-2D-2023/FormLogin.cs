@@ -123,7 +123,7 @@ namespace Suarez_Fabiola_2D_2023
                     if(usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
                     {                        
                         Cliente cliente = new Cliente(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario, 0);
-                        FormVenta formVenta = new FormVenta(cliente);
+                        FormMonto formVenta = new FormMonto(cliente);
                         formVenta.Show();
                     }
                     else if(usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Vendedor)

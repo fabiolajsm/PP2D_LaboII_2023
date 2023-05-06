@@ -19,7 +19,7 @@
     <Compile Update="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormVenta.cs">
+    <Compile Update="FormMonto.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MetodoDePago.cs">

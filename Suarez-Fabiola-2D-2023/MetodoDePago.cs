@@ -87,7 +87,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (result == DialogResult.OK)
                 {
                     this.Hide();
-                    FormVenta formVenta = new FormVenta(cliente, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
+                    FormMonto formVenta = new FormMonto(cliente, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
                     formVenta.Show();
                 }
             }
