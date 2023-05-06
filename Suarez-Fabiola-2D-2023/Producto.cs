@@ -43,6 +43,19 @@ namespace Suarez_Fabiola_2D_2023
             CantidadDeseada = cantidadDeseada;
         }
 
+        public Producto? ObtenerProductoPorNombre(string nombreDelProducto, List<Producto> listaProductos)
+        {
+            if (string.IsNullOrEmpty(nombreDelProducto) || listaProductos.Count < 0) return null;
+            foreach (Producto producto in listaProductos)
+            {
+                if (producto.Nombre == nombreDelProducto)
+                {
+                    return producto;
+                }
+            }
+            return null;
+        }
+
         public static double ObtenerStockDisponible(int indexProducto, int cantidad, List<Producto> listaProductos)
         {
             if (indexProducto >= 0 & cantidad >= 0)

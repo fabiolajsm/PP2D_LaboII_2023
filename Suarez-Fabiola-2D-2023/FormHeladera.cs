@@ -43,8 +43,9 @@ namespace Suarez_Fabiola_2D_2023
                 row.Cells["Precio por kilo"].Value = $"${producto.PrecioPorKilo.ToString("#0.00")}";
 
                 // Agrega el botón a la celda correspondiente
-                DataGridViewButtonCell buttonCell = (DataGridViewButtonCell)row.Cells["Ver detalle"];
-                buttonCell.Value = "Ver detalle";
+                DataGridViewButtonCell botonDettale = (DataGridViewButtonCell)row.Cells["Ver detalle"];
+                botonDettale.Value = "Ver detalle";
+                botonDettale.UseColumnTextForButtonValue = true;
             }
         }
         private void CargarOpcionesDelComboBox()
@@ -96,7 +97,7 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
 
-        private void HabilitarBotonContinuar()
+        private void Cb_Opciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcionSeleccionada = Cb_Opciones.Text;
 
@@ -110,13 +111,18 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
 
-        private void Cb_Opciones_SelectedIndexChanged(object sender, EventArgs e)
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            string opcionSeleccionada = Cb_Opciones.Text;
-
-            HabilitarBotonContinuar();
-
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView.Columns["Ver detalle"].Index)
+            {
+                DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+                string nombre = row.Cells["Nombre"].Value.ToString();
+                Producto? producto = new Producto().ObtenerProductoPorNombre(nombre, DatosEnMemoria.listaProductos);
+                if(producto != null)
+                {                
+                    MessageBox.Show($"Detalle del producto:\n\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nTipo de corte: {producto.TipoCorte}\nPrecio por kilo: ${producto.PrecioPorKilo}\nStock disponible: {producto.StockDisponible} gramos");
+                }
+            }
         }
     }
 }
