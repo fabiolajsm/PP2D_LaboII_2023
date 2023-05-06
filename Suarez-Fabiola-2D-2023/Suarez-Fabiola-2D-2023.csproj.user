@@ -4,6 +4,9 @@
     <Compile Update="AgregarAlCarrito.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormAgregarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FijarCortes.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -117,6 +117,9 @@ namespace Suarez_Fabiola_2D_2023
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Stock del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else
+                {
+                    MessageBox.Show("Lo sentimos, no se pudo modificar el producto. Intente más tarde.");
                 }
             }
         }
@@ -127,6 +130,11 @@ namespace Suarez_Fabiola_2D_2023
             {
                 e.Handled = true;
             }
+        }
+
+        private void LinkLabel_AgregarProducto_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
         }
     }
 }

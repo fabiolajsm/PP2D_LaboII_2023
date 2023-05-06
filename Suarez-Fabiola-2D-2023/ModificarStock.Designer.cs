@@ -134,6 +134,7 @@
             LinkLabel_AgregarProducto.TabIndex = 20;
             LinkLabel_AgregarProducto.TabStop = true;
             LinkLabel_AgregarProducto.Text = "Si desea agregar un producto presione aquí";
+            LinkLabel_AgregarProducto.LinkClicked += LinkLabel_AgregarProducto_LinkClicked;
             // 
             // ModificarStock
             // 
