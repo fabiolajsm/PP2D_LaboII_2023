@@ -1,57 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormMonto : Form
     {
-        private Cliente cliente;
-        private bool modificarMetodoDePago;
-        private double precioFinal;
-        public FormMonto()
+        private readonly Cliente cliente;
+        private readonly bool modificarMetodoDePago;
+        private readonly double precioFinal;
+
+        public FormMonto(Cliente cliente, string descripcion = "", bool modificarMetodoDePago = false, double precioFinal = 0)
         {
             InitializeComponent();
-            cliente = new Cliente();
-            modificarMetodoDePago = false;
-            precioFinal = 0;
-        }
-        public FormMonto(Cliente cliente) : this()
-        {
-            Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
-            this.cliente = cliente;
-            this.modificarMetodoDePago = false;
-            this.precioFinal = 0;
-        }
-        public FormMonto(Cliente cliente, string descripcion) : this()
-        {
-            Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
-            Lb_DescripcionBienvenida.Text = descripcion;
-            Btn_CerrarSesion.Visible = false;
-            Btn_Volver.Visible = true;
 
-            this.cliente = cliente;
-            this.modificarMetodoDePago = false;
-            this.precioFinal = 0;
-        }
-        public FormMonto(Cliente cliente, string descripcion, bool modificarMetodoDePago, double precioFinal) : this()
-        {
-            Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
-            Lb_DescripcionBienvenida.Text = descripcion;
-            Btn_CerrarSesion.Visible = false;
-            Btn_Volver.Visible = true;
+            this.cliente = cliente ?? new Cliente(); // Si el cliente es null, se crea una nueva instancia de Cliente
+            Lb_BienvenidaCliente.Text = $"¡Hola {this.cliente.NombreCompleto}!";
 
-            this.cliente = cliente;
+            Lb_DescripcionBienvenida.Text = string.IsNullOrEmpty(descripcion) ? "Especifica tu monto máximo de gasto para empezar a explotar nuestros productos" : descripcion;
+            Btn_CerrarSesion.Visible = string.IsNullOrEmpty(descripcion);
+            Btn_Volver.Visible = !string.IsNullOrEmpty(descripcion);
+
             this.modificarMetodoDePago = modificarMetodoDePago;
             this.precioFinal = precioFinal;
         }
-
+        /// <summary>
+        /// Al momento de ingresar un monto máximo de compra, no permite ingresar caracteres especiales, espacios y decimales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_MontoMaximoCompra_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
@@ -59,67 +35,64 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// Valida el monto ingresado y de ser correcto, actualiza y abre una página dependiendo de las condiciones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Continuar_Click(object sender, EventArgs e)
         {
-            float maximoDeCompra;
-
-            if (!float.TryParse(Tb_MontoMaximoCompra.Text, out maximoDeCompra))
+            if (!float.TryParse(Tb_MontoMaximoCompra.Text, out var maximoDeCompra))
             {
                 MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(Tb_MontoMaximoCompra.Text))
+            if (maximoDeCompra == cliente.MontoMaximoDeCompra)
             {
-                MessageBox.Show("Debe ingresar un monto máximo de compra", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El monto ingresado es igual al monto máximo actual", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (maximoDeCompra <= 0)
+            if (maximoDeCompra <= 0)
             {
                 MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0 y sin decimales", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else
-            {
-                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, maximoDeCompra);
-                this.Hide();
-                if (!modificarMetodoDePago)
-                {
-                    FormVenta formVenta = new FormVenta(cliente, false);
-                    formVenta.Show();
-                }
-                else
-                {
-                    FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, false);
-                    metodoDePago.Show();
-                }
-            }
+
+            Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, maximoDeCompra);
+            this.Hide();
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false);
+            form.Show();
         }
 
+        /// <summary>
+        /// Cierra la sesión del usuario y redirecciona al Login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_CerrarSesion_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormLogin formLogin = new FormLogin();
+            var formLogin = new FormLogin();
             formLogin.Show();
         }
-
+        /// <summary>
+        /// Cierra el FormMonto y en el evento FormClosed abre/regresa a la página anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Al momento de cerrar el FormMonto, abre la página abierta anteriormente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormMonto_FormClosed(object sender, FormClosedEventArgs e)
-        {           
-            if (modificarMetodoDePago)
-            {
-                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, false);
-                metodoDePago.Show();
-            } 
-            else
-            {
-                FormVenta formVenta = new FormVenta(cliente, false);
-                formVenta.Show();
-            }
+        {
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false);
+            form.Show();
         }
     }
 }
