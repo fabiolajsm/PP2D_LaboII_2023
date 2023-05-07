@@ -37,7 +37,6 @@ namespace Suarez_Fabiola_2D_2023
                 return true;
             }
         }
-
         /// <summary>
         /// Valida el formato de una Contraseña 
         /// </summary>
@@ -60,9 +59,9 @@ namespace Suarez_Fabiola_2D_2023
         /// <summary>
         /// Obtiene el usuario buscandolo por email y contraseña
         /// </summary>
-        /// <param name="email">email del usuario</param>
-        /// <param name="contrasena">contraseña del usuario</param>
-        /// <returns>Si no se encontró el usuario retorna null y de lo contrario retorna el Usuario</returns>
+        /// <param name="email">Email del usuario</param>
+        /// <param name="contrasena">Contraseña del usuario</param>
+        /// <returns>Si no se encontró el usuario retorna Null y de lo contrario retorna el Usuario</returns>
         public static Usuario? BuscarUsuarioPorEmailYContraseña(string email, string contrasena)
         {
             foreach (Usuario usuario in DatosEnMemoria.listaUsuarios)
