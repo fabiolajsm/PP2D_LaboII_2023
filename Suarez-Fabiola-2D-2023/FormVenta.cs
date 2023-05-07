@@ -22,12 +22,11 @@ namespace Suarez_Fabiola_2D_2023
             CargarItemsProductos();
             CalcularPrecioTotal(DatosEnMemoria.listaProductosDelCarrito);
             CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
-            HabilitarBotonDeCompra();
             this.cliente = cliente;
             this.esVendedor = esVendedor;
-            if (esVendedor)
+            if (this.cliente.MontoMaximoDeCompra != 0)
             {
-                Btn_VolverVendedor.Visible = true;
+                Lb_MontoMaximo.Text = $"Su monto máximo de compra es de ${this.cliente.MontoMaximoDeCompra}";
             }
         }
 
@@ -226,10 +225,8 @@ namespace Suarez_Fabiola_2D_2023
             if (ValidarCampos(indexProducto, cantidadIngresada, true))
             {
                 Producto productoSeleccionado = productos[indexProducto];
-                // le restamos al stock disponible la cantidad ingresada:
-                productoSeleccionado.StockDisponible -= cantidadIngresada;
-                productoSeleccionado.CantidadDeseada += cantidadIngresada;
-
+                productoSeleccionado.CantidadDeseada = cantidadIngresada;
+                
                 if (DatosEnMemoria.AgregarProductoAlCarrito(productoSeleccionado))
                 {
                     // Recargamos la lista de productos segun el stock disponible:
@@ -239,7 +236,6 @@ namespace Suarez_Fabiola_2D_2023
                     CargarDatosDelCarrito(dataGridView, DatosEnMemoria.listaProductosDelCarrito);
                 }
             }
-            HabilitarBotonDeCompra();
         }
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
@@ -272,27 +268,27 @@ namespace Suarez_Fabiola_2D_2023
                     MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            HabilitarBotonDeCompra();
-        }
-
-        private void HabilitarBotonDeCompra()
-        {
-            if (DatosEnMemoria.listaProductosDelCarrito.Count > 0)
-            {
-                Btn_Comprar.Enabled = true;
-            }
-            else
-            {
-                Btn_Comprar.Enabled = false;
-            }
         }
 
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
-            this.Hide();
-            FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
-            metodoDePago.Show();
+            if (precioFinal > cliente.MontoMaximoDeCompra)
+            {
+                MessageBox.Show("El precio supera el monto máximo de compra.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (precioFinal < 1)
+            {
+                MessageBox.Show("Para comprar necesita añadir productos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                this.Hide();
+                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
+                metodoDePago.Show();
+            }
         }
 
         private void Btn_VolverVendedor_Click(object sender, EventArgs e)
@@ -302,9 +298,37 @@ namespace Suarez_Fabiola_2D_2023
 
         private void FormVenta_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (esVendedor) {             
-                ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];           
+            if (esVendedor)
+            {
+                ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];
                 elegirCliente.Enabled = true;
+            }
+        }
+
+        private void Btn_ModificarMonto_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormMonto formMonto = new FormMonto(cliente, $"Su monto actual es de ${cliente.MontoMaximoDeCompra}. Ingrese el nuevo monto máximo de compra:");
+            formMonto.Show();
+        }
+
+        private void FormVenta_Load(object sender, EventArgs e)
+        {
+            if (esVendedor)
+            {
+                this.BackColor = Color.FromArgb(138, 121, 104);
+                Gb_ListaDeProductos.BackColor = Color.FromArgb(211, 200, 187);
+                Gb_CarritoDeCompra.BackColor = Color.FromArgb(211, 200, 187);
+                Btn_VolverVendedor.Visible = true;
+                Btn_ModificarMonto.Visible = false;
+            }
+            else
+            {
+                this.BackColor = Color.FromArgb(241, 247, 238);
+                Gb_ListaDeProductos.BackColor = Color.FromArgb(176, 190, 169);
+                Gb_CarritoDeCompra.BackColor = Color.FromArgb(176, 190, 169);
+                Btn_VolverVendedor.Visible = false;
+                Btn_ModificarMonto.Visible = true;
             }
         }
     }

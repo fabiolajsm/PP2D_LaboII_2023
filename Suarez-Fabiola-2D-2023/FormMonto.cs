@@ -29,12 +29,23 @@ namespace Suarez_Fabiola_2D_2023
             this.modificarMetodoDePago = false;
             this.precioFinal = 0;
         }
+        public FormMonto(Cliente cliente, string descripcion) : this()
+        {
+            Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
+            Lb_DescripcionBienvenida.Text = descripcion;
+            Btn_CerrarSesion.Visible = false;
+            Btn_Volver.Visible = true;
 
+            this.cliente = cliente;
+            this.modificarMetodoDePago = false;
+            this.precioFinal = 0;
+        }
         public FormMonto(Cliente cliente, string descripcion, bool modificarMetodoDePago, double precioFinal) : this()
         {
             Lb_BienvenidaCliente.Text = $"¡Hola {cliente.NombreCompleto}!";
             Lb_DescripcionBienvenida.Text = descripcion;
             Btn_CerrarSesion.Visible = false;
+            Btn_Volver.Visible = true;
 
             this.cliente = cliente;
             this.modificarMetodoDePago = modificarMetodoDePago;
@@ -51,35 +62,34 @@ namespace Suarez_Fabiola_2D_2023
 
         private void Btn_Continuar_Click(object sender, EventArgs e)
         {
-            float maximoDeCompra = 0;
-            try
+            float maximoDeCompra;
+
+            if (!float.TryParse(Tb_MontoMaximoCompra.Text, out maximoDeCompra))
             {
-                if (!float.TryParse(Tb_MontoMaximoCompra.Text, out maximoDeCompra))
-                {
-                    MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (FormatException ex)
-            {
-                throw new FormatException("Debe ingresar un monto válido");
-            }
+
             if (string.IsNullOrEmpty(Tb_MontoMaximoCompra.Text))
             {
                 MessageBox.Show("Debe ingresar un monto máximo de compra", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else if (maximoDeCompra <= 0)
             {
                 MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0 y sin decimales", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
             {
-                cliente.MontoMaximoDeCompra = maximoDeCompra;
+                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, maximoDeCompra);
                 this.Hide();
                 if (!modificarMetodoDePago)
                 {
                     FormVenta formVenta = new FormVenta(cliente, false);
                     formVenta.Show();
-                } else
+                }
+                else
                 {
                     FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
                     metodoDePago.Show();
@@ -92,6 +102,25 @@ namespace Suarez_Fabiola_2D_2023
             this.Hide();
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
+        }
+
+        private void Btn_Volver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void FormMonto_FormClosed(object sender, FormClosedEventArgs e)
+        {           
+            if (modificarMetodoDePago)
+            {
+                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
+                metodoDePago.Show();
+            } 
+            else
+            {
+                FormVenta formVenta = new FormVenta(cliente, false);
+                formVenta.Show();
+            }
         }
     }
 }

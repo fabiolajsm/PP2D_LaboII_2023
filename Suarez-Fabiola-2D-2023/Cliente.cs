@@ -31,5 +31,20 @@ namespace Suarez_Fabiola_2D_2023
             }
             return null;
         }
+
+        public static bool ModificarMontoMaximoDeCompra(Cliente cliente, List<Cliente> listaClientes, float monto)
+        {
+            if (cliente == null || listaClientes.Count < 0) return false;
+            foreach (Cliente clienteLista in listaClientes)
+            {
+                if (clienteLista.NombreCompleto == cliente.NombreCompleto)
+                {
+                    cliente.MontoMaximoDeCompra = monto;
+                    clienteLista.MontoMaximoDeCompra = monto;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

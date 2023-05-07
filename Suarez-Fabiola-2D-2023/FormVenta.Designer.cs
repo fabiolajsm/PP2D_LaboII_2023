@@ -48,6 +48,8 @@
             Precio = new DataGridViewTextBoxColumn();
             Gb_CarritoDeCompra = new GroupBox();
             Btn_VolverVendedor = new Button();
+            Btn_ModificarMonto = new Button();
+            Lb_MontoMaximo = new Label();
             Gb_ListaDeProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             Gb_CarritoDeCompra.SuspendLayout();
@@ -184,7 +186,6 @@
             // Btn_Comprar
             // 
             Btn_Comprar.AccessibleName = "Btn_Comprar";
-            Btn_Comprar.Enabled = false;
             Btn_Comprar.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Btn_Comprar.Location = new Point(230, 364);
             Btn_Comprar.Name = "Btn_Comprar";
@@ -270,7 +271,7 @@
             Gb_CarritoDeCompra.BackColor = Color.FromArgb(176, 190, 169);
             Gb_CarritoDeCompra.Controls.Add(dataGridView);
             Gb_CarritoDeCompra.Font = new Font("Cambria", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Gb_CarritoDeCompra.Location = new Point(407, 70);
+            Gb_CarritoDeCompra.Location = new Point(407, 40);
             Gb_CarritoDeCompra.Name = "Gb_CarritoDeCompra";
             Gb_CarritoDeCompra.Size = new Size(368, 320);
             Gb_CarritoDeCompra.TabIndex = 12;
@@ -290,6 +291,29 @@
             Btn_VolverVendedor.Visible = false;
             Btn_VolverVendedor.Click += Btn_VolverVendedor_Click;
             // 
+            // Btn_ModificarMonto
+            // 
+            Btn_ModificarMonto.AccessibleName = "Btn_ModificarMonto";
+            Btn_ModificarMonto.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_ModificarMonto.Location = new Point(407, 401);
+            Btn_ModificarMonto.Name = "Btn_ModificarMonto";
+            Btn_ModificarMonto.Size = new Size(255, 29);
+            Btn_ModificarMonto.TabIndex = 14;
+            Btn_ModificarMonto.Text = "Modificar monto máximo de compra";
+            Btn_ModificarMonto.UseVisualStyleBackColor = true;
+            Btn_ModificarMonto.Visible = false;
+            Btn_ModificarMonto.Click += Btn_ModificarMonto_Click;
+            // 
+            // Lb_MontoMaximo
+            // 
+            Lb_MontoMaximo.AccessibleName = "Lb_MontoMaximo";
+            Lb_MontoMaximo.Font = new Font("Book Antiqua", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            Lb_MontoMaximo.Location = new Point(407, 373);
+            Lb_MontoMaximo.Name = "Lb_MontoMaximo";
+            Lb_MontoMaximo.Size = new Size(305, 25);
+            Lb_MontoMaximo.TabIndex = 15;
+            Lb_MontoMaximo.Text = "Su monto máximo de compra es de $0";
+            // 
             // FormVenta
             // 
             AccessibleName = "Agregar al carrito";
@@ -297,6 +321,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
+            Controls.Add(Lb_MontoMaximo);
+            Controls.Add(Btn_ModificarMonto);
             Controls.Add(Btn_VolverVendedor);
             Controls.Add(Gb_CarritoDeCompra);
             Controls.Add(Gb_ListaDeProductos);
@@ -307,6 +333,7 @@
             Name = "FormVenta";
             StartPosition = FormStartPosition.CenterScreen;
             FormClosed += FormVenta_FormClosed;
+            Load += FormVenta_Load;
             Gb_ListaDeProductos.ResumeLayout(false);
             Gb_ListaDeProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
@@ -333,5 +360,7 @@
         private GroupBox Gb_CarritoDeCompra;
         private ComboBox Cb_FiltrarPorCorte;
         private Button Btn_VolverVendedor;
+        private Button Btn_ModificarMonto;
+        private Label Lb_MontoMaximo;
     }
 }

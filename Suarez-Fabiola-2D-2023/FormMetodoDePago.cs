@@ -38,8 +38,8 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormVenta agregarAlCarrito = new FormVenta(cliente, false);
-            agregarAlCarrito.Show();
+            FormVenta formVenta = new FormVenta(cliente, false);
+            formVenta.Show();
         }
 
         private void Rb_Credito_CheckedChanged(object sender, EventArgs e)
@@ -87,8 +87,8 @@ namespace Suarez_Fabiola_2D_2023
                 if (result == DialogResult.OK)
                 {
                     this.Hide();
-                    FormMonto formVenta = new FormMonto(cliente, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
-                    formVenta.Show();
+                    FormMonto formMonto = new FormMonto(cliente, $"Su monto actual es de ${maximoDeCompra}. Ingrese el nuevo monto máximo de compra:", true, precioFinal);
+                    formMonto.ShowDialog();
                 }
             }
             else

@@ -33,6 +33,7 @@
             Tb_MontoMaximoCompra = new TextBox();
             Btn_Continuar = new Button();
             Btn_CerrarSesion = new Button();
+            Btn_Volver = new Button();
             SuspendLayout();
             // 
             // Lb_BienvenidaCliente
@@ -71,6 +72,7 @@
             // Btn_Continuar
             // 
             Btn_Continuar.AccessibleName = "Btn_Continuar";
+            Btn_Continuar.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
             Btn_Continuar.Location = new Point(402, 261);
             Btn_Continuar.Name = "Btn_Continuar";
             Btn_Continuar.Size = new Size(94, 29);
@@ -82,6 +84,7 @@
             // Btn_CerrarSesion
             // 
             Btn_CerrarSesion.AccessibleName = "Btn_CerrarSesion";
+            Btn_CerrarSesion.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Btn_CerrarSesion.Location = new Point(286, 261);
             Btn_CerrarSesion.Name = "Btn_CerrarSesion";
             Btn_CerrarSesion.Size = new Size(94, 29);
@@ -90,13 +93,27 @@
             Btn_CerrarSesion.UseVisualStyleBackColor = true;
             Btn_CerrarSesion.Click += Btn_CerrarSesion_Click;
             // 
-            // FormVenta
+            // Btn_Volver
+            // 
+            Btn_Volver.AccessibleName = "Btn_Volver";
+            Btn_Volver.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_Volver.Location = new Point(286, 261);
+            Btn_Volver.Name = "Btn_Volver";
+            Btn_Volver.Size = new Size(94, 29);
+            Btn_Volver.TabIndex = 5;
+            Btn_Volver.Text = "Volver";
+            Btn_Volver.UseVisualStyleBackColor = true;
+            Btn_Volver.Visible = false;
+            Btn_Volver.Click += Btn_Volver_Click;
+            // 
+            // FormMonto
             // 
             AccessibleName = "FormVenta";
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
+            Controls.Add(Btn_Volver);
             Controls.Add(Btn_CerrarSesion);
             Controls.Add(Btn_Continuar);
             Controls.Add(Tb_MontoMaximoCompra);
@@ -105,9 +122,10 @@
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormVenta";
+            Name = "FormMonto";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Especificar Monto";
+            FormClosed += FormMonto_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -119,5 +137,6 @@
         private TextBox Tb_MontoMaximoCompra;
         private Button Btn_Continuar;
         private Button Btn_CerrarSesion;
+        private Button Btn_Volver;
     }
 }
