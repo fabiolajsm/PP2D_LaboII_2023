@@ -273,7 +273,12 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             double precioFinal = double.Parse(Lb_Total.Text.Split(':')[1].Trim());
-            if (precioFinal > cliente.MontoMaximoDeCompra)
+            if (cliente.MontoMaximoDeCompra == 0)
+            {
+                MessageBox.Show("Monto máximo de compra no disponible.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else if (precioFinal > cliente.MontoMaximoDeCompra)
             {
                 MessageBox.Show("El precio supera el monto máximo de compra.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

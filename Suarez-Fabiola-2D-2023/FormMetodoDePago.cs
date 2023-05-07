@@ -104,6 +104,7 @@ namespace Suarez_Fabiola_2D_2023
 
                 MessageBox.Show(mensaje, "Detalle de la compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cliente.MontoMaximoDeCompra -= (float)total;
+                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, cliente.MontoMaximoDeCompra);
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
                 FormVenta agregarAlCarrito = new FormVenta(cliente, false);
