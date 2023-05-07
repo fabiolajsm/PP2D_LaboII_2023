@@ -69,8 +69,7 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            if (string.IsNullOrEmpty(Tb_MontoMaximoCompra.Text))
+            else if (string.IsNullOrEmpty(Tb_MontoMaximoCompra.Text))
             {
                 MessageBox.Show("Debe ingresar un monto máximo de compra", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -91,7 +90,7 @@ namespace Suarez_Fabiola_2D_2023
                 }
                 else
                 {
-                    FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
+                    FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, false);
                     metodoDePago.Show();
                 }
             }
@@ -113,7 +112,7 @@ namespace Suarez_Fabiola_2D_2023
         {           
             if (modificarMetodoDePago)
             {
-                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
+                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, false);
                 metodoDePago.Show();
             } 
             else

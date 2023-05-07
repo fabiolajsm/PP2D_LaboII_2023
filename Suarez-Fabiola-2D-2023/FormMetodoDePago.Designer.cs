@@ -50,9 +50,9 @@
             Gb_MetodoDePago.Controls.Add(Rb_Credito);
             Gb_MetodoDePago.Controls.Add(Rb_Debito);
             Gb_MetodoDePago.Font = new Font("Cambria", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            Gb_MetodoDePago.Location = new Point(79, 49);
+            Gb_MetodoDePago.Location = new Point(46, 48);
             Gb_MetodoDePago.Name = "Gb_MetodoDePago";
-            Gb_MetodoDePago.Size = new Size(376, 209);
+            Gb_MetodoDePago.Size = new Size(439, 209);
             Gb_MetodoDePago.TabIndex = 12;
             Gb_MetodoDePago.TabStop = false;
             Gb_MetodoDePago.Text = "Seleccione su método de pago";
@@ -124,7 +124,7 @@
             // Btn_Cancelar
             // 
             Btn_Cancelar.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Cancelar.Location = new Point(161, 304);
+            Btn_Cancelar.Location = new Point(154, 322);
             Btn_Cancelar.Name = "Btn_Cancelar";
             Btn_Cancelar.Size = new Size(92, 29);
             Btn_Cancelar.TabIndex = 15;
@@ -135,7 +135,7 @@
             // Btn_Comprar
             // 
             Btn_Comprar.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Comprar.Location = new Point(259, 304);
+            Btn_Comprar.Location = new Point(252, 322);
             Btn_Comprar.Name = "Btn_Comprar";
             Btn_Comprar.Size = new Size(96, 29);
             Btn_Comprar.TabIndex = 16;
@@ -147,13 +147,13 @@
             // 
             Lb_MontoMaximo.AutoSize = true;
             Lb_MontoMaximo.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Lb_MontoMaximo.Location = new Point(99, 272);
+            Lb_MontoMaximo.Location = new Point(80, 281);
             Lb_MontoMaximo.Name = "Lb_MontoMaximo";
             Lb_MontoMaximo.Size = new Size(172, 20);
             Lb_MontoMaximo.TabIndex = 17;
             Lb_MontoMaximo.Text = "Monto máximo a gastar:";
             // 
-            // MetodoDePago
+            // FormMetodoDePago
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -166,10 +166,11 @@
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "MetodoDePago";
+            Name = "FormMetodoDePago";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MetodoDePago";
+            Load += FormMetodoDePago_Load;
             Gb_MetodoDePago.ResumeLayout(false);
             Gb_MetodoDePago.PerformLayout();
             ResumeLayout(false);

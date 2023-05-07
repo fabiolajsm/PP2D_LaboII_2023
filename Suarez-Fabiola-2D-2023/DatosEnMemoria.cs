@@ -25,7 +25,7 @@ namespace Suarez_Fabiola_2D_2023
         public static List<Cliente> listaClientes = new List<Cliente>()
         {
             new Cliente("Julia", "Lopez", "julia@gmail.com", "contra", TipoUsuario.Cliente, 0),
-            new Cliente("Pepe", "Rana", "pepe@gmail.com", "1234", TipoUsuario.Cliente, 0),
+            new Cliente("Pepe", "Rana", "pepe@gmail.com", "1234", TipoUsuario.Cliente, 2000),
         };
         public static List<Producto> listaProductos = new List<Producto>()
         {

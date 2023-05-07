@@ -291,7 +291,7 @@ namespace Suarez_Fabiola_2D_2023
             else
             {
                 this.Hide();
-                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente);
+                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, esVendedor);
                 metodoDePago.Show();
             }
         }
@@ -307,6 +307,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];
                 elegirCliente.Enabled = true;
+                DatosEnMemoria.listaProductosDelCarrito.Clear();
             }
         }
 

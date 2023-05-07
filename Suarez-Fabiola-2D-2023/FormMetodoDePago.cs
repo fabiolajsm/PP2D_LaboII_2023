@@ -16,8 +16,9 @@ namespace Suarez_Fabiola_2D_2023
         private double precioFinal;
         private double recargo;
         private Cliente cliente;
+        private bool esVendedor;
 
-        public FormMetodoDePago(double precioFinal, Cliente cliente)
+        public FormMetodoDePago(double precioFinal, Cliente cliente, bool esVendedor)
         {
             InitializeComponent();
 
@@ -25,6 +26,7 @@ namespace Suarez_Fabiola_2D_2023
             this.precioFinal = precioFinal;
             this.cliente = cliente;
             this.recargo = 0;
+            this.esVendedor = esVendedor;
             if (Lb_MontoMaximo != null)
             {
                 Lb_MontoMaximo.Text = $"Monto máximo de compra: ${maximoDeCompra}";
@@ -38,7 +40,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormVenta formVenta = new FormVenta(cliente, false);
+            FormVenta formVenta = new FormVenta(cliente, esVendedor);
             formVenta.Show();
         }
 
@@ -48,7 +50,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 recargo = precioFinal * 0.05;
                 Lb_Recargo.Text = $"Recargo: ${recargo}";
-                Lb_PrecioFinal.Text = $"Precio sin recago: ${precioFinal}. Precio final: ${precioFinal + recargo}";                
+                Lb_PrecioFinal.Text = $"Precio sin recago: ${precioFinal}. Precio final: ${precioFinal + recargo}";
             }
             else
             {
@@ -81,9 +83,9 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             double total = Rb_Credito.Checked ? precioFinal + recargo : precioFinal;
-            if (total > maximoDeCompra)
+            if (total > maximoDeCompra && !esVendedor)
             {
-                DialogResult result = MessageBox.Show("El precio supera el monto máximo de compra. ¿Desea modificar su monto máximo?", "Guardar cambios", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("El precio supera el monto máximo de compra. ¿Desea modificar su monto máximo?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
                     this.Hide();
@@ -91,9 +93,24 @@ namespace Suarez_Fabiola_2D_2023
                     formMonto.ShowDialog();
                 }
             }
+            else if(total > maximoDeCompra && esVendedor)
+            {
+                DialogResult result = MessageBox.Show("El precio supera el monto máximo de compra. ¿Desea cancelar la venta?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("Venta cancelada", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    this.Hide();
+                    FormVenta formVenta = new FormVenta(cliente, esVendedor);
+                    formVenta.Show();
+                }
+            }
             else
             {
                 string mensaje = "¡Gracias por su compra!\n\nProductos:\n";
+                if (esVendedor)
+                {
+                    mensaje = "Resumen de la venta\n";
+                }
 
                 foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
                 {
@@ -102,13 +119,27 @@ namespace Suarez_Fabiola_2D_2023
 
                 mensaje += $"\nRecargo: {recargo.ToString("#0.00")}\nPrecio final: ${total.ToString("#0.00")}";
 
-                MessageBox.Show(mensaje, "Detalle de la compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(mensaje, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cliente.MontoMaximoDeCompra -= (float)total;
                 Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, cliente.MontoMaximoDeCompra);
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
-                FormVenta agregarAlCarrito = new FormVenta(cliente, false);
+                FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor);
                 agregarAlCarrito.Show();
+            }
+        }
+
+        private void FormMetodoDePago_Load(object sender, EventArgs e)
+        {
+            if (esVendedor)
+            {
+                this.BackColor = Color.FromArgb(138, 121, 104);
+                Gb_MetodoDePago.BackColor = Color.FromArgb(211, 200, 187);
+            }
+            else
+            {
+                this.BackColor = Color.FromArgb(241, 247, 238);
+                Gb_MetodoDePago.BackColor = Color.FromArgb(176, 190, 169);
             }
         }
     }
