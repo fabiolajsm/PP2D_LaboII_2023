@@ -37,6 +37,7 @@
             Cb_mostrarContrasena = new CheckBox();
             error_email = new Label();
             error_contraseña = new Label();
+            Btn_AutocompletarUsuario = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogin).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +54,6 @@
             // Tb_Email
             // 
             Tb_Email.AccessibleName = "Tb_Email";
-            Tb_Email.AutoCompleteCustomSource.AddRange(new string[] { "julia@gmail.com", "petunia@gmail.com" });
             Tb_Email.AutoCompleteMode = AutoCompleteMode.Suggest;
             Tb_Email.AutoCompleteSource = AutoCompleteSource.CustomSource;
             Tb_Email.CharacterCasing = CharacterCasing.Lower;
@@ -63,7 +63,7 @@
             Tb_Email.MaxLength = 30;
             Tb_Email.Name = "Tb_Email";
             Tb_Email.PlaceholderText = "Email:";
-            Tb_Email.Size = new Size(277, 26);
+            Tb_Email.Size = new Size(294, 26);
             Tb_Email.TabIndex = 1;
             // 
             // Tb_Contrasena
@@ -75,7 +75,7 @@
             Tb_Contrasena.Name = "Tb_Contrasena";
             Tb_Contrasena.PasswordChar = '*';
             Tb_Contrasena.PlaceholderText = "Contraseña:";
-            Tb_Contrasena.Size = new Size(277, 26);
+            Tb_Contrasena.Size = new Size(294, 26);
             Tb_Contrasena.TabIndex = 2;
             // 
             // Btn_Login
@@ -84,10 +84,10 @@
             Btn_Login.BackColor = Color.FromArgb(241, 247, 238);
             Btn_Login.FlatAppearance.BorderColor = Color.FromArgb(176, 190, 169);
             Btn_Login.FlatAppearance.MouseOverBackColor = Color.FromArgb(146, 170, 131);
-            Btn_Login.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Login.Location = new Point(326, 269);
+            Btn_Login.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Btn_Login.Location = new Point(446, 279);
             Btn_Login.Name = "Btn_Login";
-            Btn_Login.Size = new Size(94, 29);
+            Btn_Login.Size = new Size(103, 29);
             Btn_Login.TabIndex = 3;
             Btn_Login.Text = "Entrar";
             Btn_Login.UseVisualStyleBackColor = false;
@@ -108,7 +108,7 @@
             Cb_mostrarContrasena.AccessibleName = "Cb_mostrarContrasena";
             Cb_mostrarContrasena.AutoSize = true;
             Cb_mostrarContrasena.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Cb_mostrarContrasena.Location = new Point(255, 229);
+            Cb_mostrarContrasena.Location = new Point(256, 238);
             Cb_mostrarContrasena.Name = "Cb_mostrarContrasena";
             Cb_mostrarContrasena.Size = new Size(165, 24);
             Cb_mostrarContrasena.TabIndex = 5;
@@ -142,6 +142,17 @@
             error_contraseña.Text = "⚠ Debe ingresar Contraseña";
             error_contraseña.Visible = false;
             // 
+            // Btn_AutocompletarUsuario
+            // 
+            Btn_AutocompletarUsuario.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_AutocompletarUsuario.Location = new Point(256, 279);
+            Btn_AutocompletarUsuario.Name = "Btn_AutocompletarUsuario";
+            Btn_AutocompletarUsuario.Size = new Size(184, 29);
+            Btn_AutocompletarUsuario.TabIndex = 8;
+            Btn_AutocompletarUsuario.Text = "Autocompletar campos";
+            Btn_AutocompletarUsuario.UseVisualStyleBackColor = true;
+            Btn_AutocompletarUsuario.Click += Btn_AutocompletarUsuario_Click;
+            // 
             // FormLogin
             // 
             AccessibleName = "FormLogin";
@@ -149,6 +160,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
+            Controls.Add(Btn_AutocompletarUsuario);
             Controls.Add(error_contraseña);
             Controls.Add(error_email);
             Controls.Add(Cb_mostrarContrasena);
@@ -177,5 +189,6 @@
         private CheckBox Cb_mostrarContrasena;
         private Label error_email;
         private Label error_contraseña;
+        private Button Btn_AutocompletarUsuario;
     }
 }
