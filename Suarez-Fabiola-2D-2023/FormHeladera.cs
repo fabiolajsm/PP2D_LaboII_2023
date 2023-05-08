@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
@@ -22,7 +16,11 @@ namespace Suarez_Fabiola_2D_2023
             CargarListaProductos(dataGridView, DatosEnMemoria.listaProductos);
             CargarOpcionesDelComboBox();
         }
-
+        /// <summary>
+        /// Carga la lista de productos para que se visualice en el DataGridView
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="listaProductos"></param>
         public void CargarListaProductos(DataGridView dataGridView, List<Producto> listaProductos)
         {
             dataGridView.Columns.Clear();
@@ -50,25 +48,30 @@ namespace Suarez_Fabiola_2D_2023
                 botonDetalle.UseColumnTextForButtonValue = true;
             }
         }
+        /// <summary>
+        /// Se cargan en el ComboBox las opciones del vendedor
+        /// </summary>
         private void CargarOpcionesDelComboBox()
         {
-            Cb_Opciones.Items.Clear();
-
-            string[] opciones = { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes" };
-            for (int i = 0; i < opciones.Length; i++)
-            {
-                Cb_Opciones.Items.Add(opciones[i]);
-            }
+            Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes" });
             Cb_Opciones.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// Cierra la sesión del usuario y redirecciona al Login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_CerrarSesion_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
         }
-
+        /// <summary>
+        /// Redirecciona a la página de la opción seleccionada en el ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Continuar_Click(object sender, EventArgs e)
         {
             string opcionSeleccionada = Cb_Opciones.Text;
@@ -100,27 +103,25 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
+        /// <summary>
+        /// Habilita el botón de Compra si el usuario seleccionó una opción del ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cb_Opciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string opcionSeleccionada = Cb_Opciones.Text;
-
-            if (!string.IsNullOrEmpty(opcionSeleccionada))
-            {
-                Btn_Continuar.Enabled = true;
-            }
-            else
-            {
-                Btn_Continuar.Enabled = false;
-            }
+            Btn_Continuar.Enabled = !string.IsNullOrEmpty(Cb_Opciones.Text);
         }
-
+        /// <summary>
+        /// Muestra el detalle del producto seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView.Columns["Ver detalle"].Index)
             {
-                DataGridViewRow row = dataGridView.Rows[e.RowIndex];
-                string nombre = row.Cells["Nombre"].Value.ToString();
+                string nombre = dataGridView.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
                 Producto? producto = new Producto().ObtenerProductoPorNombre(nombre, DatosEnMemoria.listaProductos);
                 if (producto != null)
                 {
