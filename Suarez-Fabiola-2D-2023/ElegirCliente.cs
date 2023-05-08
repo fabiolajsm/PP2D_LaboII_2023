@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Suarez_Fabiola_2D_2023
@@ -17,34 +11,47 @@ namespace Suarez_Fabiola_2D_2023
             InitializeComponent();
             CargarClientes();
         }
+        /// <summary>
+        /// Carga la lista de clientes como opciones del ComboBox
+        /// </summary>
         private void CargarClientes()
         {
-            List<Cliente> listaClientes = DatosEnMemoria.listaClientes;
             Cb_Clientes.Items.Clear();
+            List<Cliente> listaClientes = DatosEnMemoria.listaClientes;
+
             if(listaClientes.Count > 0 )
             {
                 foreach (Cliente cliente in listaClientes)
-                {
-                    if( cliente != null )
-                    {
-                        Cb_Clientes.Items.Add(cliente.NombreCompleto);
-                    }
+                {                        
+                    Cb_Clientes.Items.Add(cliente.NombreCompleto);                    
                 }
-            }
-            if (Cb_Clientes.Items.Count > 0) {             
                 Cb_Clientes.SelectedIndex = 0;
             }
         }
+        /// <summary>
+        /// Cierra la páginaElegir y en el evento FormClosed abre/regresa a la página anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        /// <summary>
+        /// Regresa a la página Heladera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ElegirCliente_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             formHeladera.Enabled = true;
         }
-
+        /// <summary>
+        /// Si selecciona un cliente y se puede obtener bien de la lista de clientes, redirecciona al FormVenta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Continuar_Click(object sender, EventArgs e)
         {
             if (Cb_Clientes.SelectedIndex < 0)
@@ -65,6 +72,5 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
     }
 }
