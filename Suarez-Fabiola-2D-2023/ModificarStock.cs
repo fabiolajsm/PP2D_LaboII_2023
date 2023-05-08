@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.DataFormats;
+using System.Data;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -19,7 +13,21 @@ namespace Suarez_Fabiola_2D_2023
             Lb_ModificarProductos.DrawMode = DrawMode.OwnerDrawFixed;
             CargarItemsProductos();
         }
-
+        /// <summary>
+        /// No le permite ingresar al usuario caracteres especiales, sólo permite ingresar números sin decimales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tb_Cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        /// <summary>
+        /// Carga los productos que se van a mostrar en el ListBox
+        /// </summary>
         public void CargarItemsProductos()
         {
             if (DatosEnMemoria.listaProductos.Count == 0) return;
@@ -30,12 +38,20 @@ namespace Suarez_Fabiola_2D_2023
                 Lb_ModificarProductos.Items.Add(producto);
             }
         }
-
+        /// <summary>
+        /// Cierra la página ModificarStock y en el evento FormClosed abre/regresa a la página anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Regresa a la página Heladera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModificarStock_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
@@ -45,7 +61,11 @@ namespace Suarez_Fabiola_2D_2023
                 formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
             }
         }
-
+        /// <summary>
+        /// Dibuja los productos cargados en el ListBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Lb_ModificarProductos_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -76,34 +96,11 @@ namespace Suarez_Fabiola_2D_2023
 
             e.DrawFocusRectangle();
         }
-        public bool ValidarCampos(int indexProducto, int cantidadIngresada)
-        {
-            List<Producto> productos = Lb_ModificarProductos.Items.Cast<Producto>().ToList();
-            bool esValido = false;
-
-            if (indexProducto < 0 && cantidadIngresada < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (cantidadIngresada < 0)
-            {
-                MessageBox.Show($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos) == cantidadIngresada)
-            {
-                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                esValido = true;
-            }
-
-            return esValido;
-        }
+        /// <summary>
+        /// Si tiene un stock válido, modifica el stock del producto seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_ModificarStock_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_ModificarProductos.SelectedIndex;
@@ -115,7 +112,7 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (ValidarCampos(indexProducto, cantidadStock))
+            if (Producto.ValidarCampoStock(indexProducto, cantidadStock, Lb_ModificarProductos.Items.Cast<Producto>().ToList()))
             {
                 if (Producto.ModificarStockDisponible(cantidadStock, indexProducto, DatosEnMemoria.listaProductos))
                 {
@@ -126,16 +123,12 @@ namespace Suarez_Fabiola_2D_2023
                     MessageBox.Show("Lo sentimos, no se pudo modificar el producto. Intente más tarde.");
                 }
             }
-        }
-
-        private void Tb_Cantidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-
+        }        
+        /// <summary>
+        /// Redirecciona a la pantalla Agregar un nuevo producto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LinkLabel_AgregarProducto_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Enabled = false;

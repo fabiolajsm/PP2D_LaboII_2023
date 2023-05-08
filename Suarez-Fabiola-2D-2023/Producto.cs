@@ -157,5 +157,83 @@ namespace Suarez_Fabiola_2D_2023
 
             return seModifico;
         }
+        public static bool ValidarCampoTipoDeCorte(int indexProducto, string corteIngresado, List<Producto> productos)
+        {
+            if (productos.Count == 0) return false;
+            if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (string.IsNullOrEmpty(corteIngresado))
+            {
+                MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (corteIngresado == Producto.ObtenerCorteProducto(indexProducto, corteIngresado, productos))
+            {
+                MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        public static bool ValidarCampoPrecio(int indexProducto, double precio, List<Producto> productos)
+        {
+            if(productos.Count == 0) return false;
+
+            if (indexProducto < 0 & precio < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+            else if (precio < 0)
+            {
+                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (Producto.ObtenerPrecioProducto(indexProducto, precio, productos) == precio)
+            {
+                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+
+            return true;
+        }
+        public static bool ValidarCampoStock(int indexProducto, int cantidadIngresada, List<Producto> productos)
+        {
+            if (productos.Count == 0) return false;
+
+            if (indexProducto < 0 && cantidadIngresada < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+            else if (indexProducto < 0)
+            {
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+            else if (cantidadIngresada < 0)
+            {
+                MessageBox.Show($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+            else if (Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos) == cantidadIngresada)
+            {
+                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                return false;
+            }
+            return true;
+        }
     }
 }

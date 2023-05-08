@@ -29,7 +29,7 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
         /// <summary>
-        /// Cierra la páginaElegir y en el evento FormClosed abre/regresa a la página anterior
+        /// Cierra la página ElegirCliente y en el evento FormClosed abre/regresa a la página anterior
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

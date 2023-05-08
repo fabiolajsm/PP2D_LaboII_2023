@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -18,16 +13,42 @@ namespace Suarez_Fabiola_2D_2023
             Lb_FijarPrecio.DrawMode = DrawMode.OwnerDrawFixed;
             CargarItemsProductos();
         }
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo perimte números y una coma
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tb_Precio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // Permite sólo un punto decimal
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+        /// <summary>
+        /// Carga los productos que se van a mostrar en el ListBox
+        /// </summary>
         private void CargarItemsProductos()
         {
             if (DatosEnMemoria.listaProductos.Count == 0) return;
-
             Lb_FijarPrecio.Items.Clear();
+
             foreach (Producto producto in DatosEnMemoria.listaProductos)
             {
                 Lb_FijarPrecio.Items.Add(producto);
             }
         }
+        /// <summary>
+        /// Dibuja los productos cargados en el ListBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Lb_FijarPrecio_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -58,61 +79,30 @@ namespace Suarez_Fabiola_2D_2023
 
             e.DrawFocusRectangle();
         }
-
+        /// <summary>
+        /// Cierra la página FijarPrecios y en el evento FormClosed abre/regresa a la página anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Regresa a la página Heladera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FijarPrecios_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             formHeladera.Enabled = true;
         }
-
-        private void Tb_Precio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.')
-            {
-                e.Handled = true;
-            }
-
-            // Permite sólo un punto decimal
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-        }
-
-        public bool ValidarCampos(int indexProducto, double precio)
-        {
-            List<Producto> productos = Lb_FijarPrecio.Items.Cast<Producto>().ToList();
-            bool esValido = false;
-
-            if (indexProducto < 0 & precio < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (precio < 0)
-            {
-                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (Producto.ObtenerPrecioProducto(indexProducto, precio, productos) == precio)
-            {
-                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                esValido = true;
-            }
-
-            return esValido;
-        }
-
+        /// <summary>
+        /// Si tiene un precio válido, modifica el precio del producto seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_FijarPrecio_Click(object sender, EventArgs e)
         {
             int indexProducto = Lb_FijarPrecio.SelectedIndex;
@@ -132,7 +122,7 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (ValidarCampos(indexProducto, precio))
+            if (Producto.ValidarCampoPrecio(indexProducto, precio, Lb_FijarPrecio.Items.Cast<Producto>().ToList()))
             {
                 if (Producto.ModificarPrecioProducto(precio, indexProducto, DatosEnMemoria.listaProductos))
                 {
