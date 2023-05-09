@@ -57,7 +57,6 @@ namespace Suarez_Fabiola_2D_2023
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             if (formHeladera != null)
             {
-                formHeladera.Enabled = true;
                 formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
             }
         }

@@ -91,7 +91,6 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "ElegirCliente";
             StartPosition = FormStartPosition.CenterScreen;
-            FormClosed += ElegirCliente_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

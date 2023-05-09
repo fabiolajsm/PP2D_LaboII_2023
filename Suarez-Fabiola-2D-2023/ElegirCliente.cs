@@ -35,17 +35,9 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-        /// <summary>
-        /// Regresa a la página Heladera
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ElegirCliente_FormClosed(object sender, FormClosedEventArgs e)
-        {
+            this.Hide();
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
+            formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
         }
         /// <summary>
         /// Si selecciona un cliente y se puede obtener bien de la lista de clientes, redirecciona al FormVenta
