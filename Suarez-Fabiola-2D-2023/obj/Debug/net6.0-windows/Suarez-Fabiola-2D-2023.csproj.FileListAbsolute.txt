@@ -42,3 +42,4 @@ C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fab
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
 C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources

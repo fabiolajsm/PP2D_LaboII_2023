@@ -10,6 +10,7 @@ namespace Suarez_Fabiola_2D_2023
         public DataGridView dataGridName;
         public FormHeladera(Vendedor vendedor)
         {
+            this.Enabled = true;
             this.vendedor = vendedor;
             InitializeComponent();
             this.dataGridName = dataGridView;
@@ -53,7 +54,7 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CargarOpcionesDelComboBox()
         {
-            Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes" });
+            Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes", "Ver historial de ventas" });
             Cb_Opciones.SelectedIndex = 0;
         }
         /// <summary>
@@ -81,24 +82,24 @@ namespace Suarez_Fabiola_2D_2023
                 switch (opcionSeleccionada)
                 {
                     case "Vender productos":
-                        this.Enabled = false;
                         ElegirCliente elegirCliente = new ElegirCliente();
                         elegirCliente.ShowDialog();
                         break;
                     case "Modificar stock de los productos":
-                        this.Enabled = false;
                         ModificarStock modificarStock = new ModificarStock();
                         modificarStock.ShowDialog();
                         break;
                     case "Fijar precios por kilo":
-                        this.Enabled = false;
                         FijarPrecios fijarPrecios = new FijarPrecios();
                         fijarPrecios.ShowDialog();
                         break;
                     case "Fijar tipos de cortes":
-                        this.Enabled = false;
                         FijarCortes fijarCortes = new FijarCortes();
                         fijarCortes.ShowDialog();
+                        break;
+                    case "Ver historial de ventas":
+                        HistorialVentas historialVentas = new HistorialVentas();
+                        historialVentas.ShowDialog();
                         break;
                 }
             }

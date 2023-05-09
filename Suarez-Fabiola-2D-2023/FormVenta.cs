@@ -26,7 +26,7 @@ namespace Suarez_Fabiola_2D_2023
             this.esVendedor = esVendedor;
             if (this.cliente.MontoMaximoDeCompra != 0)
             {
-                Lb_MontoMaximo.Text = $"Su monto máximo de compra es de ${this.cliente.MontoMaximoDeCompra}";
+                Lb_MontoMaximo.Text = $"Su monto máximo de compra es de ${this.cliente.MontoMaximoDeCompra.ToString("#0.00")}";
             }
         }
         /// <summary>

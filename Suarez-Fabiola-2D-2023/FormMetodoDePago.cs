@@ -163,6 +163,7 @@ namespace Suarez_Fabiola_2D_2023
             else
             {
                 StringBuilder mensajeBuilder = new StringBuilder();
+                string tipoDeVenta = esVendedor ? "En el local" : "Online";
 
                 if (esVendedor)
                 {
@@ -174,21 +175,38 @@ namespace Suarez_Fabiola_2D_2023
                     mensajeBuilder.AppendLine("Productos:");
                 }
 
+                List<Factura> listaDeFacturas = new List<Factura>(); 
+
                 foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
                 {
-                    mensajeBuilder.AppendFormat("{0} x {1} Kilos = ${2:#0.00}\n",
+                    mensajeBuilder.AppendFormat("{0} x {1} Gramos = ${2:#0.00}\n",
                         producto.Nombre,
-                        producto.CantidadDeseada / 1000,
+                        producto.CantidadDeseada,
                         Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+
+                    // Creamos una instancia de Factura para cada producto
+                    Factura factura = new Factura(
+                        tipoDeVenta,
+                        cliente.NombreCompleto,
+                        producto.Nombre,
+                        producto.CantidadDeseada,
+                        Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo),
+                        recargo
+                    );
+                    listaDeFacturas.Add(factura); // agregamos la factura a la lista de facturas
                 }
 
-                mensajeBuilder.AppendFormat("Recargo: {0:#0.00}\n", recargo);
-                mensajeBuilder.AppendFormat("Precio final: {0:#0.00}", total);
+                mensajeBuilder.AppendFormat("Recargo: ${0:#0.00}\n", recargo);
+                mensajeBuilder.AppendFormat("Precio final: ${0:#0.00}", total);
 
                 MessageBox.Show(mensajeBuilder.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // Agregamos la factura al historial de ventas
+                Factura.AgregarFacturasAlHistorial(listaDeFacturas);
+                // Actualizamos el monto maximo de compra del cliente
                 cliente.MontoMaximoDeCompra -= (float)total;
                 Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, cliente.MontoMaximoDeCompra);
+                // Por último limpiamos la listaProductosDelCarrito y regresamos al FormVenta
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();
                 FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor);

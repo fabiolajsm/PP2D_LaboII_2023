@@ -28,6 +28,9 @@
     <Compile Update="FormMetodoDePago.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="HistorialVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ModificarStock.cs">
       <SubType>Form</SubType>
     </Compile>

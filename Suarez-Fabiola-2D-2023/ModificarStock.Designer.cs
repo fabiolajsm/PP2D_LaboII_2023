@@ -42,9 +42,10 @@
             // 
             Lb_ModificarStock.AutoSize = true;
             Lb_ModificarStock.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_ModificarStock.Location = new Point(32, 29);
+            Lb_ModificarStock.Location = new Point(40, 36);
+            Lb_ModificarStock.Margin = new Padding(4, 0, 4, 0);
             Lb_ModificarStock.Name = "Lb_ModificarStock";
-            Lb_ModificarStock.Size = new Size(294, 27);
+            Lb_ModificarStock.Size = new Size(360, 33);
             Lb_ModificarStock.TabIndex = 0;
             Lb_ModificarStock.Text = "Modificar stock disponible";
             // 
@@ -52,9 +53,10 @@
             // 
             Btn_Volver.AccessibleName = "Btn_Volver";
             Btn_Volver.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Volver.Location = new Point(32, 358);
+            Btn_Volver.Location = new Point(40, 448);
+            Btn_Volver.Margin = new Padding(4);
             Btn_Volver.Name = "Btn_Volver";
-            Btn_Volver.Size = new Size(132, 29);
+            Btn_Volver.Size = new Size(165, 36);
             Btn_Volver.TabIndex = 19;
             Btn_Volver.Text = "Volver";
             Btn_Volver.UseVisualStyleBackColor = true;
@@ -64,10 +66,11 @@
             // 
             Tb_Cantidad.BorderStyle = BorderStyle.None;
             Tb_Cantidad.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Tb_Cantidad.Location = new Point(195, 326);
+            Tb_Cantidad.Location = new Point(244, 408);
+            Tb_Cantidad.Margin = new Padding(4);
             Tb_Cantidad.MaxLength = 6;
             Tb_Cantidad.Name = "Tb_Cantidad";
-            Tb_Cantidad.Size = new Size(152, 19);
+            Tb_Cantidad.Size = new Size(190, 23);
             Tb_Cantidad.TabIndex = 18;
             Tb_Cantidad.Text = "0";
             Tb_Cantidad.TextAlign = HorizontalAlignment.Center;
@@ -78,9 +81,10 @@
             Lb_NombreProducto.AccessibleName = "Lb_NombreProducto";
             Lb_NombreProducto.AutoSize = true;
             Lb_NombreProducto.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_NombreProducto.Location = new Point(32, 69);
+            Lb_NombreProducto.Location = new Point(40, 86);
+            Lb_NombreProducto.Margin = new Padding(4, 0, 4, 0);
             Lb_NombreProducto.Name = "Lb_NombreProducto";
-            Lb_NombreProducto.Size = new Size(269, 19);
+            Lb_NombreProducto.Size = new Size(323, 22);
             Lb_NombreProducto.TabIndex = 15;
             Lb_NombreProducto.Text = "Nombre / Stock disponible en gramos";
             // 
@@ -93,9 +97,10 @@
             Lb_ModificarProductos.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Lb_ModificarProductos.FormattingEnabled = true;
             Lb_ModificarProductos.ItemHeight = 20;
-            Lb_ModificarProductos.Location = new Point(32, 104);
+            Lb_ModificarProductos.Location = new Point(40, 130);
+            Lb_ModificarProductos.Margin = new Padding(4);
             Lb_ModificarProductos.Name = "Lb_ModificarProductos";
-            Lb_ModificarProductos.Size = new Size(315, 204);
+            Lb_ModificarProductos.Size = new Size(393, 244);
             Lb_ModificarProductos.TabIndex = 14;
             Lb_ModificarProductos.DrawItem += Lb_ModificarProductos_DrawItem;
             // 
@@ -104,9 +109,10 @@
             Lb_Cantidad.AccessibleName = "Lb_Cantidad";
             Lb_Cantidad.AutoSize = true;
             Lb_Cantidad.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Cantidad.Location = new Point(32, 326);
+            Lb_Cantidad.Location = new Point(40, 408);
+            Lb_Cantidad.Margin = new Padding(4, 0, 4, 0);
             Lb_Cantidad.Name = "Lb_Cantidad";
-            Lb_Cantidad.Size = new Size(152, 19);
+            Lb_Cantidad.Size = new Size(181, 22);
             Lb_Cantidad.TabIndex = 17;
             Lb_Cantidad.Text = "Cantidad en gramos:";
             // 
@@ -114,9 +120,10 @@
             // 
             Btn_ModificarStock.AccessibleName = "Btn_ModificarStock";
             Btn_ModificarStock.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_ModificarStock.Location = new Point(195, 358);
+            Btn_ModificarStock.Location = new Point(244, 448);
+            Btn_ModificarStock.Margin = new Padding(4);
             Btn_ModificarStock.Name = "Btn_ModificarStock";
-            Btn_ModificarStock.Size = new Size(152, 29);
+            Btn_ModificarStock.Size = new Size(190, 36);
             Btn_ModificarStock.TabIndex = 16;
             Btn_ModificarStock.Text = "Guardar cambios";
             Btn_ModificarStock.UseVisualStyleBackColor = true;
@@ -128,9 +135,10 @@
             LinkLabel_AgregarProducto.AutoSize = true;
             LinkLabel_AgregarProducto.Font = new Font("Book Antiqua", 10.2F, FontStyle.Italic, GraphicsUnit.Point);
             LinkLabel_AgregarProducto.LinkColor = Color.Black;
-            LinkLabel_AgregarProducto.Location = new Point(32, 402);
+            LinkLabel_AgregarProducto.Location = new Point(40, 502);
+            LinkLabel_AgregarProducto.Margin = new Padding(4, 0, 4, 0);
             LinkLabel_AgregarProducto.Name = "LinkLabel_AgregarProducto";
-            LinkLabel_AgregarProducto.Size = new Size(311, 22);
+            LinkLabel_AgregarProducto.Size = new Size(375, 27);
             LinkLabel_AgregarProducto.TabIndex = 20;
             LinkLabel_AgregarProducto.TabStop = true;
             LinkLabel_AgregarProducto.Text = "Si desea agregar un producto presione aquí";
@@ -138,11 +146,11 @@
             // 
             // ModificarStock
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(138, 121, 104);
             CancelButton = Btn_Volver;
-            ClientSize = new Size(380, 450);
+            ClientSize = new Size(475, 562);
             ControlBox = false;
             Controls.Add(LinkLabel_AgregarProducto);
             Controls.Add(Btn_Volver);
@@ -153,6 +161,7 @@
             Controls.Add(Btn_ModificarStock);
             Controls.Add(Lb_ModificarStock);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Margin = new Padding(4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ModificarStock";

@@ -36,5 +36,6 @@ namespace Suarez_Fabiola_2D_2023
             new Cliente("Pepe", "Rana", "pepe@gmail.com", "1234", TipoUsuario.Cliente, 2000),
         };        
         public static List<Producto> listaProductosDelCarrito = new List<Producto>();
+        public static List<Factura> HistorialVentas { get; } = new List<Factura>();
     }
 }

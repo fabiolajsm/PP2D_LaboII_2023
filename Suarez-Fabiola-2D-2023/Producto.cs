@@ -81,25 +81,15 @@ namespace Suarez_Fabiola_2D_2023
         /// <summary>
         /// Agrega un producto a la lista de productos
         /// </summary>
-        /// <param name="nombre">Nombre del producto</param>
-        /// <param name="descripcion">Descripción del producto</param>
-        /// <param name="corte">Corte del producto</param>
-        /// <param name="precio">Precio del producto</param>
-        /// <param name="stock">Stock disponible del producto</param>
+        /// <param name="nuevoProducto">Producto a agregar</param>
         /// <param name="listaProductos">Lista de productos en donde se va a agregar</param>
         /// <returns>Retorna True si se agregó y False si no</returns>
-        public static bool AgregarProductoALaLista(string nombre, string descripcion, string corte, double precio, double stock, List<Producto> listaProductos)
+        public static bool AgregarProductoALaLista(Producto nuevoProducto, List<Producto> listaProductos)
         {
-            bool seModifico = false;
-            Producto nuevoProducto = new Producto(nombre.Trim(), descripcion.Trim(), corte.Trim(), precio, stock);
-
-            if (nuevoProducto != null)
-            {
-                listaProductos.Add(nuevoProducto);
-                seModifico = true;
-            }
-
-            return seModifico;
+            if (nuevoProducto == null) return false;           
+                
+            listaProductos.Add(nuevoProducto);
+            return true;           
         }
         /// <summary>
         /// Busca si existe un producto en la lista de productos del carrito

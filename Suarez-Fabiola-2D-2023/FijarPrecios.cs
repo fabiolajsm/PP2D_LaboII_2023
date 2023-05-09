@@ -127,7 +127,7 @@ namespace Suarez_Fabiola_2D_2023
             }
 
             if (Validadores.ValidarCampoPrecio(indexProducto, precio, Lb_FijarPrecio.Items.Cast<Producto>().ToList()))
-            {                
+            {
                 if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, null, precio, ""))
                 {
                     CargarItemsProductos();

@@ -41,9 +41,10 @@
             // 
             Btn_Volver.AccessibleName = "Btn_Volver";
             Btn_Volver.Font = new Font("Cambria", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_Volver.Location = new Point(34, 420);
+            Btn_Volver.Location = new Point(42, 525);
+            Btn_Volver.Margin = new Padding(4);
             Btn_Volver.Name = "Btn_Volver";
-            Btn_Volver.Size = new Size(132, 29);
+            Btn_Volver.Size = new Size(165, 36);
             Btn_Volver.TabIndex = 33;
             Btn_Volver.Text = "Volver";
             Btn_Volver.UseVisualStyleBackColor = true;
@@ -54,9 +55,10 @@
             Lb_NombreProducto.AccessibleName = "Lb_NombreProducto";
             Lb_NombreProducto.AutoSize = true;
             Lb_NombreProducto.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_NombreProducto.Location = new Point(34, 68);
+            Lb_NombreProducto.Location = new Point(42, 85);
+            Lb_NombreProducto.Margin = new Padding(4, 0, 4, 0);
             Lb_NombreProducto.Name = "Lb_NombreProducto";
-            Lb_NombreProducto.Size = new Size(264, 19);
+            Lb_NombreProducto.Size = new Size(316, 22);
             Lb_NombreProducto.TabIndex = 29;
             Lb_NombreProducto.Text = "Nombre Producto / Nombre del corte";
             // 
@@ -69,9 +71,10 @@
             Lb_FijarCorte.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Lb_FijarCorte.FormattingEnabled = true;
             Lb_FijarCorte.ItemHeight = 20;
-            Lb_FijarCorte.Location = new Point(34, 107);
+            Lb_FijarCorte.Location = new Point(42, 134);
+            Lb_FijarCorte.Margin = new Padding(4);
             Lb_FijarCorte.Name = "Lb_FijarCorte";
-            Lb_FijarCorte.Size = new Size(305, 204);
+            Lb_FijarCorte.Size = new Size(380, 244);
             Lb_FijarCorte.TabIndex = 28;
             Lb_FijarCorte.DrawItem += Lb_FijarCorte_DrawItem;
             // 
@@ -79,9 +82,10 @@
             // 
             Lb_Corte.AccessibleName = "Lb_Corte";
             Lb_Corte.Font = new Font("Book Antiqua", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Corte.Location = new Point(34, 337);
+            Lb_Corte.Location = new Point(42, 421);
+            Lb_Corte.Margin = new Padding(4, 0, 4, 0);
             Lb_Corte.Name = "Lb_Corte";
-            Lb_Corte.Size = new Size(264, 29);
+            Lb_Corte.Size = new Size(330, 36);
             Lb_Corte.TabIndex = 31;
             Lb_Corte.Text = "Ingrese el nombre del corte a fijar:";
             // 
@@ -89,9 +93,10 @@
             // 
             Btn_FijarCorte.AccessibleName = "Btn_FijarCorte";
             Btn_FijarCorte.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_FijarCorte.Location = new Point(187, 420);
+            Btn_FijarCorte.Location = new Point(234, 525);
+            Btn_FijarCorte.Margin = new Padding(4);
             Btn_FijarCorte.Name = "Btn_FijarCorte";
-            Btn_FijarCorte.Size = new Size(152, 29);
+            Btn_FijarCorte.Size = new Size(190, 36);
             Btn_FijarCorte.TabIndex = 30;
             Btn_FijarCorte.Text = "Guardar cambios";
             Btn_FijarCorte.UseVisualStyleBackColor = true;
@@ -101,29 +106,31 @@
             // 
             Lb_Titulo.AutoSize = true;
             Lb_Titulo.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Titulo.Location = new Point(34, 31);
+            Lb_Titulo.Location = new Point(42, 39);
+            Lb_Titulo.Margin = new Padding(4, 0, 4, 0);
             Lb_Titulo.Name = "Lb_Titulo";
-            Lb_Titulo.Size = new Size(274, 27);
+            Lb_Titulo.Size = new Size(333, 33);
             Lb_Titulo.TabIndex = 27;
             Lb_Titulo.Text = "Fijar cortes del producto";
             // 
             // Tb_Corte
             // 
             Tb_Corte.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Tb_Corte.Location = new Point(34, 369);
+            Tb_Corte.Location = new Point(42, 461);
+            Tb_Corte.Margin = new Padding(4);
             Tb_Corte.MaxLength = 20;
             Tb_Corte.Name = "Tb_Corte";
             Tb_Corte.PlaceholderText = "Ejemplo: \"Filete\"";
-            Tb_Corte.Size = new Size(305, 26);
+            Tb_Corte.Size = new Size(380, 30);
             Tb_Corte.TabIndex = 34;
             Tb_Corte.KeyPress += Tb_Corte_KeyPress;
             // 
             // FijarCortes
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(138, 121, 104);
-            ClientSize = new Size(366, 489);
+            ClientSize = new Size(458, 611);
             ControlBox = false;
             Controls.Add(Tb_Corte);
             Controls.Add(Btn_Volver);
@@ -133,6 +140,7 @@
             Controls.Add(Btn_FijarCorte);
             Controls.Add(Lb_Titulo);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Margin = new Padding(4);
             Name = "FijarCortes";
             StartPosition = FormStartPosition.CenterScreen;
             FormClosed += FijarCortes_FormClosed;

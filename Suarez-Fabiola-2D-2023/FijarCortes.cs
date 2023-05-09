@@ -117,6 +117,6 @@ namespace Suarez_Fabiola_2D_2023
                     MessageBox.Show("Lo sentimos, no se pudo modificar el producto. Intente más tarde.");
                 }
             }
-        }       
+        }
     }
 }
