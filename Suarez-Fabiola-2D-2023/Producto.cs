@@ -42,7 +42,12 @@ namespace Suarez_Fabiola_2D_2023
             StockDisponible = stockDisponible;
             CantidadDeseada = cantidadDeseada;
         }
-
+        /// <summary>
+        /// Obtiene un producto buscándolo por nombre en la lista de productos
+        /// </summary>
+        /// <param name="nombreDelProducto">Nombre del producto a buscar</param>
+        /// <param name="listaProductos">Lista productos</param>
+        /// <returns></returns>
         public Producto? ObtenerProductoPorNombre(string nombreDelProducto, List<Producto> listaProductos)
         {
             if (string.IsNullOrEmpty(nombreDelProducto) || listaProductos.Count < 0) return null;
@@ -55,99 +60,38 @@ namespace Suarez_Fabiola_2D_2023
             }
             return null;
         }
-
-        public static double ObtenerStockDisponible(int indexProducto, int cantidad, List<Producto> listaProductos)
+        /// <summary>
+        /// Obtiene el atributo indicado del producto seleccionado
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="indexProducto"></param>
+        /// <param name="propiedad"></param>
+        /// <param name="listaProductos"></param>
+        /// <param name="valorPorDefecto"></param>
+        /// <returns></returns>
+        public static T ObtenerPropiedadProducto<T>(int indexProducto, Func<Producto, T> propiedad, List<Producto> listaProductos, T valorPorDefecto = default(T))
         {
-            if (indexProducto >= 0 & cantidad >= 0)
+            if (indexProducto >= 0 && listaProductos != null && listaProductos.Count > indexProducto)
             {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {
-                    Producto productoSeleccionado = listaProductos[indexProducto];
-                    return productoSeleccionado.StockDisponible;
-                }
+                Producto productoSeleccionado = listaProductos[indexProducto];
+                return propiedad(productoSeleccionado);
             }
-            return 0;
+            return valorPorDefecto;
         }
-        public static double ObtenerPrecioProducto(int indexProducto, double precio, List<Producto> listaProductos)
-        {
-            if (indexProducto >= 0 & precio >= 0)
-            {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {
-                    Producto productoSeleccionado = listaProductos[indexProducto];
-                    return productoSeleccionado.PrecioPorKilo;
-                }
-            }
-            return 0;
-        }
-
-        public static string ObtenerCorteProducto(int indexProducto, string tipoCorte, List<Producto> listaProductos)
-        {
-            if (indexProducto >= 0 & !string.IsNullOrEmpty(tipoCorte))
-            {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {
-                    Producto productoSeleccionado = listaProductos[indexProducto];
-                    return productoSeleccionado.TipoCorte;
-                }
-            }
-            return string.Empty;
-        }
-
-        public static double CalcularPrecio(int cantidadIngresadaEnGramos, double precioPorKilo)
-        {
-            double cantidadEnKilos = (double)cantidadIngresadaEnGramos / 1000; // Convertir la cantidad a kilos
-            double precioTotal = 0; 
-            if(cantidadIngresadaEnGramos> 0 & precioPorKilo > 0)
-            {
-                precioTotal = cantidadEnKilos * precioPorKilo;
-            }
-            return precioTotal;
-        }
-
-        public static bool ModificarStockDisponible(int nuevoStock, int indexProducto, List<Producto> listaProductos)
-        {
-            bool seModifico = false;
-            if (indexProducto >= 0 && nuevoStock >= 0)
-            {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {                    
-                    listaProductos[indexProducto].StockDisponible = nuevoStock;
-                }
-                seModifico = true;
-            }
-            return seModifico;
-        }
-        public static bool ModificarPrecioProducto(double nuevoPrecio, int indexProducto, List<Producto> listaProductos)
-        {
-            bool seModifico = false;
-            if (indexProducto >= 0 && nuevoPrecio >= 0)
-            {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {
-                    listaProductos[indexProducto].PrecioPorKilo = nuevoPrecio;
-                }
-                seModifico = true;
-            }
-            return seModifico;
-        }
-        public static bool ModificarTipoDeCorteProducto(string nuevoCorte, int indexProducto, List<Producto> listaProductos)
-        {
-            bool seModifico = false;
-            if (indexProducto >= 0 && !string.IsNullOrEmpty(nuevoCorte))
-            {
-                for (int i = 0; i < listaProductos.Count; i++)
-                {
-                    listaProductos[indexProducto].TipoCorte = Usuario.Capitalize(nuevoCorte);
-                }
-                seModifico = true;
-            }
-            return seModifico;
-        }
+        /// <summary>
+        /// Agrega un producto a la lista de productos
+        /// </summary>
+        /// <param name="nombre">Nombre del producto</param>
+        /// <param name="descripcion">Descripción del producto</param>
+        /// <param name="corte">Corte del producto</param>
+        /// <param name="precio">Precio del producto</param>
+        /// <param name="stock">Stock disponible del producto</param>
+        /// <param name="listaProductos">Lista de productos en donde se va a agregar</param>
+        /// <returns>Retorna True si se agregó y False si no</returns>
         public static bool AgregarProductoALaLista(string nombre, string descripcion, string corte, double precio, double stock, List<Producto> listaProductos)
         {
             bool seModifico = false;
-            Producto nuevoProducto = new Producto(nombre, descripcion, corte, precio, stock);
+            Producto nuevoProducto = new Producto(nombre.Trim(), descripcion.Trim(), corte.Trim(), precio, stock);
 
             if (nuevoProducto != null)
             {
@@ -157,83 +101,93 @@ namespace Suarez_Fabiola_2D_2023
 
             return seModifico;
         }
-        public static bool ValidarCampoTipoDeCorte(int indexProducto, string corteIngresado, List<Producto> productos)
+        /// <summary>
+        /// Busca si existe un producto en la lista de productos del carrito
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Retorna True si existe y False si no</returns>
+        public static bool ExisteProductoEnELCarrito(string nombreProducto, List<Producto> listaProductos)
         {
-            if (productos.Count == 0) return false;
-            if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
+            if (string.IsNullOrEmpty(nombreProducto) || listaProductos.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar un producto e ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (string.IsNullOrEmpty(corteIngresado))
-            {
-                MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (corteIngresado == Producto.ObtenerCorteProducto(indexProducto, corteIngresado, productos))
-            {
-                MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
+
+            return DatosEnMemoria.listaProductosDelCarrito.Any(prod => prod.Nombre == nombreProducto);
         }
-        public static bool ValidarCampoPrecio(int indexProducto, double precio, List<Producto> productos)
+        /// <summary>
+        /// Obtiene la cantidad deseada de un producto de a lista de productos del carrito
+        /// </summary>
+        /// <param name="producto">Producto al que se le obtendrá la cantidad deseada</param>
+        /// <returns>Retorna la cantidad deseada del producto ingresado</returns>
+        public static int ObtenerCantidadProductoDelCarrito(Producto producto, List<Producto> listaProductosCarrito)
         {
-            if(productos.Count == 0) return false;
+            if (producto == null || listaProductosCarrito.Count == 0) return 0;
 
-            if (indexProducto < 0 & precio < 0)
+            foreach (Producto item in listaProductosCarrito)
             {
-                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                if (item.Nombre == producto.Nombre)
+                {
+                    return item.CantidadDeseada;
+                }
             }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
-            }
-            else if (precio < 0)
-            {
-                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (Producto.ObtenerPrecioProducto(indexProducto, precio, productos) == precio)
-            {
-                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
-            }
-
-            return true;
+            return 0;
         }
-        public static bool ValidarCampoStock(int indexProducto, int cantidadIngresada, List<Producto> productos)
+        /// <summary>
+        /// Agrega un producto al carrito
+        /// </summary>
+        /// <param name="producto">Producto a agregar</param>
+        /// <param name="listaProductosDelCarrito">Lista a la que se le agregará el nuevo producto</param>
+        /// <returns>Retorna True si se pudo agregar y False si no</returns>
+        public static bool AgregarProductoAlCarrito(Producto producto, List<Producto> listaProductosDelCarrito)
         {
-            if (productos.Count == 0) return false;
+            if (producto != null)
+            {
+                Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
 
-            if (indexProducto < 0 && cantidadIngresada < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
+                if (productoEnCarrito != null)
+                {
+                    productoEnCarrito.CantidadDeseada += producto.CantidadDeseada;
+                    productoEnCarrito.StockDisponible -= producto.StockDisponible;
+                }
+                else
+                {
+                    producto.StockDisponible -= producto.CantidadDeseada;
+                    listaProductosDelCarrito.Add(producto);
+                }
+
+                return true;
             }
-            else if (indexProducto < 0)
+            return false;
+        }
+        /// <summary>
+        /// Elimina un producto del carrito
+        /// </summary>
+        /// <param name="producto">Producto a eliminar</param>
+        /// <param name="cantidad">Cantidad de producto a eliminar</param>
+        /// <param name="listaProductosDelCarrito">Lista a la que se le va a eliminar el producto</param>
+        /// <returns>Retorna True si se pudo eliminar y False si no</returns>
+        public static bool EliminarProductoDelCarrito(Producto producto, int cantidad, List<Producto> listaProductosDelCarrito)
+        {
+            if (producto == null || cantidad <= 0 || listaProductosDelCarrito.Count < 1) return false;
+            Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
+
+            if (productoEnCarrito != null)
             {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
+                if (cantidad == productoEnCarrito.CantidadDeseada)
+                {
+                    producto.StockDisponible += cantidad;
+                    listaProductosDelCarrito.Remove(productoEnCarrito);
+                }
+                else
+                {
+                    productoEnCarrito.StockDisponible += cantidad;
+                    producto.StockDisponible = productoEnCarrito.StockDisponible;
+                    productoEnCarrito.CantidadDeseada -= cantidad;
+                }
+                return true;
             }
-            else if (cantidadIngresada < 0)
-            {
-                MessageBox.Show($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
-            }
-            else if (Producto.ObtenerStockDisponible(indexProducto, cantidadIngresada, productos) == cantidadIngresada)
-            {
-                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false;
-            }
-            return true;
+            return false;
         }
     }
 }

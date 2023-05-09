@@ -106,7 +106,7 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CalcularPrecioTotal()
         {
-            var precioTotal = DatosEnMemoria.listaProductosDelCarrito.Sum(producto => Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+            var precioTotal = DatosEnMemoria.listaProductosDelCarrito.Sum(producto => Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
             Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
         }
         /// <summary>
@@ -118,7 +118,7 @@ namespace Suarez_Fabiola_2D_2023
             dataGridView.Rows.Clear();
             foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
             {
-                double precioProducto = Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
+                double precioProducto = Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
                 if (precioProducto > 0 & producto.CantidadDeseada > 0)
                 {
                     int rowIndex = dataGridView.Rows.Add();
@@ -195,6 +195,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_CerrarSesion_Click(object sender, EventArgs e)
         {
+            DatosEnMemoria.listaProductosDelCarrito.Clear();
             this.Hide();
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
@@ -217,12 +218,12 @@ namespace Suarez_Fabiola_2D_2023
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
 
-            if (MetodosVenta.ValidarCampos(indexProducto, cantidadIngresada, true, Lb_Productos.Items.Cast<Producto>().ToList()))
+            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, true, Lb_Productos.Items.Cast<Producto>().ToList()))
             {
                 Producto productoSeleccionado = productos[indexProducto];
                 productoSeleccionado.CantidadDeseada = cantidadIngresada;
                 
-                if (MetodosVenta.AgregarProductoAlCarrito(productoSeleccionado, DatosEnMemoria.listaProductosDelCarrito))
+                if (Producto.AgregarProductoAlCarrito(productoSeleccionado, DatosEnMemoria.listaProductosDelCarrito))
                 {
                     // Recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
@@ -248,13 +249,13 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (MetodosVenta.ValidarCampos(indexProducto, cantidadIngresada, false, Lb_Productos.Items.Cast<Producto>().ToList()))
+            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, false, Lb_Productos.Items.Cast<Producto>().ToList()))
             {
                 List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
                 Producto productoSeleccionado = productos[indexProducto];
 
                 // borramos el producto del carrito
-                if (MetodosVenta.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, DatosEnMemoria.listaProductosDelCarrito))
+                if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, DatosEnMemoria.listaProductosDelCarrito))
                 {
                     // recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
@@ -279,17 +280,17 @@ namespace Suarez_Fabiola_2D_2023
             double precioFinal = double.Parse(Lb_Total.Text.Split('$')[1].Trim());
             if (cliente.MontoMaximoDeCompra == 0)
             {                   
-                MetodosVenta.MostrarError("No tiene monto máximo de compra/fondos.");                
+                Utilidades.MostrarError("No tiene monto máximo de compra/fondos.");                
                 return;
             }
             else if (precioFinal > cliente.MontoMaximoDeCompra)
             {
-                MetodosVenta.MostrarError("El precio supera el monto máximo de compra.");
+                Utilidades.MostrarError("El precio supera el monto máximo de compra.");
                 return;
             }
             else if (precioFinal < 1)
             {
-                MetodosVenta.MostrarError("Para comprar necesita añadir productos.");
+                Utilidades.MostrarError("Para comprar necesita añadir productos.");
                 return;
             }
             else
@@ -306,6 +307,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_VolverVendedor_Click(object sender, EventArgs e)
         {
+            DatosEnMemoria.listaProductosDelCarrito.Clear();
             this.Close();
         }
         /// <summary>

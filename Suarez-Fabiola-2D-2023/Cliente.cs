@@ -18,7 +18,20 @@ namespace Suarez_Fabiola_2D_2023
         {
             this.MontoMaximoDeCompra = montoMaximo;
         }
-
+        /// <summary>
+        /// Lógica para iniciar sesión de un vendedor
+        /// </summary>
+        public override void IniciarSesion()
+        {
+            FormMonto formMonto = new FormMonto(this);
+            formMonto.Show();
+        }
+        /// <summary>
+        /// Obtiene el cliente buscándolo por nombre en la lista de clientes
+        /// </summary>
+        /// <param name="nombreCompleto">Nombre del cliente</param>
+        /// <param name="listaClientes">Lista de clientes</param>
+        /// <returns></returns>
         public static Cliente? ObtenerClientePorNombre(string nombreCompleto, List<Cliente> listaClientes)
         {
             if (string.IsNullOrEmpty(nombreCompleto) || listaClientes.Count < 0) return null;
@@ -30,8 +43,14 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
             return null;
-        }
-
+        }       
+        /// <summary>
+        /// Si el monto máximo de compra es válido, lo modifica
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <param name="listaClientes"></param>
+        /// <param name="monto"></param>
+        /// <returns></returns>
         public static bool ModificarMontoMaximoDeCompra(Cliente cliente, List<Cliente> listaClientes, float monto)
         {
             if (cliente == null || listaClientes.Count < 0) return false;

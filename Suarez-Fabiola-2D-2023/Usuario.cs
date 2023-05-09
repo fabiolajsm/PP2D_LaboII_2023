@@ -37,26 +37,14 @@ namespace Suarez_Fabiola_2D_2023
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            this.NombreCompleto = $"{Capitalize(this.Nombre)} {Capitalize(this.Apellido)}";
+            this.NombreCompleto = $"{Utilidades.Capitalize(this.Nombre)} {Utilidades.Capitalize(this.Apellido)}";
             this.Email = email;
             this.Contrasena = contrasena;
             this.TipoDeUsuario = tipo;
         }
-
         /// <summary>
-        /// Capitaliza la palabra ingresada. Ej: flor => Flor
+        /// Lógica para iniciar sesión de un usuario
         /// </summary>
-        /// <param name="palabra">Palabra a Capitalizar</param>
-        /// <returns>Si existe la palabra la retorna capitalizada, si no, retorna la misma palabra sin modificar</returns>
-        public static string Capitalize(string palabra)
-        {
-            if (string.IsNullOrEmpty(palabra))
-            {
-                return palabra;
-            }
-            string palabraCapitalizada = char.ToUpper(palabra[0]) + palabra.Substring(1);
-
-            return palabraCapitalizada.Trim();
-        }
+        public abstract void IniciarSesion();
     }
 }

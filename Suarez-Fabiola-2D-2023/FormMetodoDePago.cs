@@ -179,7 +179,7 @@ namespace Suarez_Fabiola_2D_2023
                     mensajeBuilder.AppendFormat("{0} x {1} Kilos = ${2:#0.00}\n",
                         producto.Nombre,
                         producto.CantidadDeseada / 1000,
-                        Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+                        Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
                 }
 
                 mensajeBuilder.AppendFormat("Recargo: {0:#0.00}\n", recargo);

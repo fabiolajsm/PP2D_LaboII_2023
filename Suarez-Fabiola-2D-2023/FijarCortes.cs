@@ -55,7 +55,11 @@ namespace Suarez_Fabiola_2D_2023
         private void FijarCortes_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
+            if (formHeladera != null)
+            {
+                formHeladera.Enabled = true;
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+            }
         }
         /// <summary>
         /// Dibuja los productos cargados en el ListBox
@@ -101,9 +105,9 @@ namespace Suarez_Fabiola_2D_2023
             int indexProducto = Lb_FijarCorte.SelectedIndex;
             string corteIngresado = Tb_Corte.Text;
 
-            if (Producto.ValidarCampoTipoDeCorte(indexProducto, corteIngresado, Lb_FijarCorte.Items.Cast<Producto>().ToList()))
+            if (Validadores.ValidarCampoTipoDeCorte(indexProducto, corteIngresado, Lb_FijarCorte.Items.Cast<Producto>().ToList()))
             {
-                if (Producto.ModificarTipoDeCorteProducto(corteIngresado, indexProducto, DatosEnMemoria.listaProductos))
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, null, null, corteIngresado))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Tipo de corte del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

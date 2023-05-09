@@ -112,9 +112,9 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (Producto.ValidarCampoStock(indexProducto, cantidadStock, Lb_ModificarProductos.Items.Cast<Producto>().ToList()))
-            {
-                if (Producto.ModificarStockDisponible(cantidadStock, indexProducto, DatosEnMemoria.listaProductos))
+            if (Validadores.ValidarCampoStock(indexProducto, cantidadStock, Lb_ModificarProductos.Items.Cast<Producto>().ToList()))
+            {                
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, cantidadStock, null, ""))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Stock del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

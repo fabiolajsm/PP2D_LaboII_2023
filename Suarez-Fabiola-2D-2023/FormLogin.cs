@@ -52,8 +52,8 @@ namespace Suarez_Fabiola_2D_2023
         /// <returns>Retorna True si son válidos y False de lo contrario</returns>
         private bool ValidarFormatoEmailYContraseña(string email, string contrasena)
         {
-            bool emailValido = ValidadorLoginUsuario.ValidarFormatoEmail(email, error_email);
-            bool contrasenaValida = ValidadorLoginUsuario.ValidarFormatoContraseña(contrasena, error_contraseña);
+            bool emailValido = Validadores.ValidarFormatoEmail(email, error_email);
+            bool contrasenaValida = Validadores.ValidarFormatoContraseña(contrasena, error_contraseña);
 
             return emailValido && contrasenaValida;
         }
@@ -69,7 +69,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (!ValidarFormatoEmailYContraseña(email, contrasena)) return;
 
-            Usuario? usuarioIngresado = ValidadorLoginUsuario.BuscarUsuarioPorEmailYContraseña(email, contrasena);
+            Usuario? usuarioIngresado = Utilidades.BuscarUsuarioPorEmailYContraseña(email, contrasena);
             if (usuarioIngresado == null)
             {
                 MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -80,14 +80,13 @@ namespace Suarez_Fabiola_2D_2023
             if (usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
             {
                 Cliente cliente = new Cliente(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario, 0);
-                FormMonto formMonto = new FormMonto(cliente);
-                formMonto.Show();
+                cliente.IniciarSesion();
+                
             }
             else if (usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Vendedor)
             {
                 Vendedor vendedor = new Vendedor(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario);
-                FormHeladera formHeladera = new FormHeladera(vendedor);
-                formHeladera.Show();
+                vendedor.IniciarSesion();
             }
             else
             {

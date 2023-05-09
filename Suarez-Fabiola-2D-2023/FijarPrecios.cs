@@ -96,7 +96,11 @@ namespace Suarez_Fabiola_2D_2023
         private void FijarPrecios_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.Enabled = true;
+            if (formHeladera != null)
+            {
+                formHeladera.Enabled = true;
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+            }
         }
         /// <summary>
         /// Si tiene un precio válido, modifica el precio del producto seleccionado
@@ -122,9 +126,9 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (Producto.ValidarCampoPrecio(indexProducto, precio, Lb_FijarPrecio.Items.Cast<Producto>().ToList()))
-            {
-                if (Producto.ModificarPrecioProducto(precio, indexProducto, DatosEnMemoria.listaProductos))
+            if (Validadores.ValidarCampoPrecio(indexProducto, precio, Lb_FijarPrecio.Items.Cast<Producto>().ToList()))
+            {                
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, null, precio, ""))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Precio del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -16,56 +16,34 @@ namespace Suarez_Fabiola_2D_2023
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Cierra la página AgregarProducto y en el evento FormClosed abre/regresa a la página anterior
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Volver_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Regresa a la página ModificarStock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormAgregarProducto_FormClosed(object sender, FormClosedEventArgs e)
         {
             ModificarStock modificarStock = (ModificarStock)Application.OpenForms["ModificarStock"];
             modificarStock.CargarItemsProductos();
             modificarStock.Enabled = true;
-        }
-        public bool ValidarCampos(string nombre, string descripcion, string corte, string precioString, string stockString)
-        {
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(corte) || string.IsNullOrEmpty(precioString) || string.IsNullOrEmpty(stockString))
-            {
-                MessageBox.Show("Todos los campos son requeridos y deben ser válidos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (!double.TryParse(precioString, out double precio))
-            {
-                MessageBox.Show($"Debe ingresar un precio válido.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (!double.TryParse(stockString, out double stock))
-            {
-                MessageBox.Show($"Debe ingresar un stock válido.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (precio < 0)
-            {
-                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (stock < 0)
-            {
-                MessageBox.Show("Debe ingresar un stock mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
-        }
-
+        }       
+        /// <summary>
+        /// Si los datos del producto a agregar son válidos agrega el producto a la lista de productos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_AgregarProducto_Click(object sender, EventArgs e)
         {
-            if (ValidarCampos(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Tb_Precio.Text, Tb_Stock.Text))
+            if (Validadores.ValidarCamposAgregarProducto(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Tb_Precio.Text, Tb_Stock.Text))
             {
                 if (Producto.AgregarProductoALaLista(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text), DatosEnMemoria.listaProductos))
                 {
@@ -82,7 +60,11 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite letras y espacios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_Nombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
@@ -90,7 +72,11 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite letras y espacios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_Descripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
@@ -98,7 +84,11 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite letras y espacios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_TipoCorte_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
@@ -106,7 +96,11 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite numeros y un punto para convertirlo en decimal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_Precio_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.')
@@ -120,7 +114,11 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite numeros sin decimales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tb_Stock_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
