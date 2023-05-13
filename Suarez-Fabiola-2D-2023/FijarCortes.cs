@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -30,10 +31,11 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CargarItemsProductos()
         {
-            if (DatosEnMemoria.listaProductos.Count == 0) return;
+            List<Producto> listaProductos = DatosEnMemoria.ObtenerListaProductos();
+            if (listaProductos.Count == 0) return;
 
             Lb_FijarCorte.Items.Clear();
-            foreach (Producto producto in DatosEnMemoria.listaProductos)
+            foreach (Producto producto in listaProductos)
             {
                 Lb_FijarCorte.Items.Add(producto);
             }
@@ -57,7 +59,7 @@ namespace Suarez_Fabiola_2D_2023
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             if (formHeladera != null)
             {
-                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.ObtenerListaProductos());
             }
         }
         /// <summary>
@@ -106,7 +108,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (Validadores.ValidarCampoTipoDeCorte(indexProducto, corteIngresado, Lb_FijarCorte.Items.Cast<Producto>().ToList()))
             {
-                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, null, null, corteIngresado))
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.ObtenerListaProductos(), null, null, corteIngresado))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Tipo de corte del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

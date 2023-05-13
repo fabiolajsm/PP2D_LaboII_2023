@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -62,7 +63,7 @@ namespace Suarez_Fabiola_2D_2023
             Cb_FiltrarPorCorte.Items.Add("Ver todos los tipos de corte");
             Cb_FiltrarPorCorte.SelectedIndex = 0;
 
-            List<string> nombresCorte = DatosEnMemoria.listaProductos
+            List<string> nombresCorte = DatosEnMemoria.ObtenerListaProductos()
                 .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
                 .Select(p => p.TipoCorte)
                 .Distinct()
@@ -80,7 +81,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (string.IsNullOrEmpty(corteSeleccionado) || corteSeleccionado == "Ver todos los tipos de corte")
             {
-                foreach (Producto producto in DatosEnMemoria.listaProductos)
+                foreach (Producto producto in DatosEnMemoria.ObtenerListaProductos())
                 {
                     if (producto.StockDisponible > 0 || (producto.StockDisponible <= 0 && producto.CantidadDeseada > 0))
                     {
@@ -93,7 +94,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (corteSeleccionado != "Ver todos los tipos de corte")
                 {
                     Lb_Productos.Items.Clear();
-                    List<Producto> productosFiltrados = DatosEnMemoria.listaProductos.Where(p => p.TipoCorte == corteSeleccionado).ToList();
+                    List<Producto> productosFiltrados = DatosEnMemoria.ObtenerListaProductos().Where(p => p.TipoCorte == corteSeleccionado).ToList();
                     foreach (Producto productoFiltrado in productosFiltrados)
                     {
                         Lb_Productos.Items.Add(productoFiltrado);
@@ -141,7 +142,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (productos.Count > 0 && !string.IsNullOrEmpty(corteSeleccionado))
             {
-                List<Producto> productosFiltrados = DatosEnMemoria.listaProductos
+                List<Producto> productosFiltrados = DatosEnMemoria.ObtenerListaProductos()
                     .Where(p => corteSeleccionado == "Ver todos los tipos de corte" || p.TipoCorte == corteSeleccionado)
                     .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
                     .ToList();
@@ -280,17 +281,17 @@ namespace Suarez_Fabiola_2D_2023
             double precioFinal = double.Parse(Lb_Total.Text.Split('$')[1].Trim());
             if (cliente.MontoMaximoDeCompra == 0)
             {                   
-                Utilidades.MostrarError("No tiene monto máximo de compra/fondos.");                
+                MessageBox.Show("No tiene monto máximo de compra/fondos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);                
                 return;
             }
             else if (precioFinal > cliente.MontoMaximoDeCompra)
             {
-                Utilidades.MostrarError("El precio supera el monto máximo de compra.");
+                MessageBox.Show("El precio supera el monto máximo de compra.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (precioFinal < 1)
             {
-                Utilidades.MostrarError("Para comprar necesita añadir productos.");
+                MessageBox.Show("Para comprar necesita añadir productos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else

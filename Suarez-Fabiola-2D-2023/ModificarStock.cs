@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -30,10 +31,10 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         public void CargarItemsProductos()
         {
-            if (DatosEnMemoria.listaProductos.Count == 0) return;
+            if (DatosEnMemoria.ObtenerListaProductos().Count == 0) return;
 
             Lb_ModificarProductos.Items.Clear();
-            foreach (Producto producto in DatosEnMemoria.listaProductos)
+            foreach (Producto producto in DatosEnMemoria.ObtenerListaProductos())
             {
                 Lb_ModificarProductos.Items.Add(producto);
             }
@@ -57,7 +58,7 @@ namespace Suarez_Fabiola_2D_2023
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             if (formHeladera != null)
             {
-                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.ObtenerListaProductos());
             }
         }
         /// <summary>
@@ -113,7 +114,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (Validadores.ValidarCampoStock(indexProducto, cantidadStock, Lb_ModificarProductos.Items.Cast<Producto>().ToList()))
             {
-                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, cantidadStock, null, ""))
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.ObtenerListaProductos(), cantidadStock, null, ""))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Stock del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -58,7 +59,7 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, maximoDeCompra);
+            Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), maximoDeCompra);
             this.Hide();
             var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false);
             form.Show();

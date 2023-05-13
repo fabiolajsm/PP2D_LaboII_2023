@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -17,7 +18,7 @@ namespace Suarez_Fabiola_2D_2023
         private void CargarClientes()
         {
             Cb_Clientes.Items.Clear();
-            List<Cliente> listaClientes = DatosEnMemoria.listaClientes;
+            List<Cliente> listaClientes = DatosEnMemoria.ObtenerListaClientes();
 
             if(listaClientes.Count > 0 )
             {
@@ -37,7 +38,7 @@ namespace Suarez_Fabiola_2D_2023
         {
             this.Hide();
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
-            formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+            formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.ObtenerListaProductos());
         }
         /// <summary>
         /// Si selecciona un cliente y se puede obtener bien de la lista de clientes, redirecciona al FormVenta
@@ -51,7 +52,7 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show("Debe seleccionar un cliente de la lista para poder empezarle a vender.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else
             {
-                Cliente? cliente = Cliente.ObtenerClientePorNombre(Cb_Clientes.Text, DatosEnMemoria.listaClientes);
+                Cliente? cliente = Cliente.ObtenerClientePorNombre(Cb_Clientes.Text, DatosEnMemoria.ObtenerListaClientes());
                 if (cliente != null)
                 {
                     this.Enabled = false;

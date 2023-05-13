@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -36,10 +37,10 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CargarItemsProductos()
         {
-            if (DatosEnMemoria.listaProductos.Count == 0) return;
+            if (DatosEnMemoria.ObtenerListaProductos().Count == 0) return;
             Lb_FijarPrecio.Items.Clear();
 
-            foreach (Producto producto in DatosEnMemoria.listaProductos)
+            foreach (Producto producto in DatosEnMemoria.ObtenerListaProductos())
             {
                 Lb_FijarPrecio.Items.Add(producto);
             }
@@ -97,8 +98,8 @@ namespace Suarez_Fabiola_2D_2023
         {
             FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
             if (formHeladera != null)
-            {
-                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.listaProductos);
+            {   
+                formHeladera.CargarListaProductos(formHeladera.dataGridName, DatosEnMemoria.ObtenerListaProductos());
             }
         }
         /// <summary>
@@ -127,7 +128,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (Validadores.ValidarCampoPrecio(indexProducto, precio, Lb_FijarPrecio.Items.Cast<Producto>().ToList()))
             {
-                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.listaProductos, null, precio, ""))
+                if (Vendedor.ModificarProducto(indexProducto, DatosEnMemoria.ObtenerListaProductos(), null, precio, ""))
                 {
                     CargarItemsProductos();
                     MessageBox.Show($"Precio del producto modificado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

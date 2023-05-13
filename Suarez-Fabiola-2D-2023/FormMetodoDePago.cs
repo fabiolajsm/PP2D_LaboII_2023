@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -205,7 +206,7 @@ namespace Suarez_Fabiola_2D_2023
                 Factura.AgregarFacturasAlHistorial(listaDeFacturas);
                 // Actualizamos el monto maximo de compra del cliente
                 cliente.MontoMaximoDeCompra -= (float)total;
-                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.listaClientes, cliente.MontoMaximoDeCompra);
+                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), cliente.MontoMaximoDeCompra);
                 // Por último limpiamos la listaProductosDelCarrito y regresamos al FormVenta
                 DatosEnMemoria.listaProductosDelCarrito.Clear();
                 this.Hide();

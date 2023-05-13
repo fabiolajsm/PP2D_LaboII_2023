@@ -17,7 +17,7 @@ namespace Suarez_Fabiola_2D_2023
             InitializeComponent();
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
-            if (DatosEnMemoria.HistorialVentas.Count == 0)
+            if (DatosEnMemoria.ObtenerHistorialVentas().Count == 0)
             {
                 Lb_SinVentas.Visible = true;
             }
@@ -34,7 +34,7 @@ namespace Suarez_Fabiola_2D_2023
                 dataGridView.Columns.Add("PrecioFinal", "Precio Final");
 
                 // Agrega las filas al control
-                foreach (Factura factura in DatosEnMemoria.HistorialVentas)
+                foreach (Factura factura in DatosEnMemoria.ObtenerHistorialVentas())
                 {
                     int rowIndex = dataGridView.Rows.Add();
                     DataGridViewRow row = dataGridView.Rows[rowIndex];

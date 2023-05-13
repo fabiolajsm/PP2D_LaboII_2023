@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormHeladera : Form
     {
-        private Vendedor vendedor;
         public DataGridView dataGridName;
-        public FormHeladera(Vendedor vendedor)
+        public FormHeladera()
         {
             this.Enabled = true;
-            this.vendedor = vendedor;
             InitializeComponent();
             this.dataGridName = dataGridView;
-            CargarListaProductos(dataGridView, DatosEnMemoria.listaProductos);
+            CargarListaProductos(dataGridView, DatosEnMemoria.ObtenerListaProductos());
             CargarOpcionesDelComboBox();
         }
         /// <summary>
@@ -123,7 +122,7 @@ namespace Suarez_Fabiola_2D_2023
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView.Columns["Ver detalle"].Index)
             {
                 string nombre = dataGridView.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
-                Producto? producto = new Producto().ObtenerProductoPorNombre(nombre, DatosEnMemoria.listaProductos);
+                Producto? producto = new Producto().ObtenerProductoPorNombre(nombre, DatosEnMemoria.ObtenerListaProductos());
                 if (producto != null)
                 {
                     MessageBox.Show($"Detalle del producto:\n\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nTipo de corte: {producto.TipoCorte}\nPrecio por kilo: ${producto.PrecioPorKilo}\nStock disponible: {producto.StockDisponible} gramos");

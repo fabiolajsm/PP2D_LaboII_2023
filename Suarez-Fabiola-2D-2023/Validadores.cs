@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -70,32 +71,32 @@ namespace Suarez_Fabiola_2D_2023
 
             if (indexProducto < 0 && cantidadIngresada < 1)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto e ingresar cantidad.");
+                MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (indexProducto < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto de la lista.");
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (cantidadIngresada < 1)
             {
-                Utilidades.MostrarError($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos.");
+                MessageBox.Show($"Debe ingresar una cantidad mayor a {cantidadIngresada} gramos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (stockDisponible < cantidadIngresada & esAgregarAlCarrito)
             {
-                Utilidades.MostrarError($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado");
+                MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(productos[indexProducto].Nombre, productos) == false)
+            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(productos[indexProducto].Nombre, productos, DatosEnMemoria.listaProductosDelCarrito) == false)
             {
-                Utilidades.MostrarError($"No se encontró producto en el carrito");
+                MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (!esAgregarAlCarrito && Producto.ObtenerCantidadProductoDelCarrito(productos[indexProducto], DatosEnMemoria.listaProductosDelCarrito) < cantidadIngresada)
             {
-                Utilidades.MostrarError($"No se puede eliminar más de la cantidad del producto agregado al carrito");
+                MessageBox.Show($"No se puede eliminar más de la cantidad del producto agregado al carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -115,22 +116,22 @@ namespace Suarez_Fabiola_2D_2023
 
             if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
             {
-                Utilidades.MostrarError("Debe seleccionar un producto e ingresar un tipo de corte.");
+                MessageBox.Show("Debe seleccionar un producto e ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (indexProducto < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto de la lista.");
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (string.IsNullOrEmpty(corteIngresado))
             {
-                Utilidades.MostrarError("Debe ingresar un tipo de corte.");
+                MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (corteIngresado == tipoCorteProducto)
             {
-                Utilidades.MostrarError($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.");
+                MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -150,22 +151,22 @@ namespace Suarez_Fabiola_2D_2023
 
             if (indexProducto < 0 & precio < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.");
+                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (indexProducto < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto de la lista.");
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (precio < 0)
             {
-                Utilidades.MostrarError("Debe ingresar un precio mayor o igual a cero.");
+                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (precioProducto == precio)
             {
-                Utilidades.MostrarError($"No hay cambios en el precio. El precio ingresado es igual al precio actual.");
+                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -185,22 +186,22 @@ namespace Suarez_Fabiola_2D_2023
 
             if (indexProducto < 0 && cantidadIngresada < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.");
+                MessageBox.Show("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (indexProducto < 0)
             {
-                Utilidades.MostrarError("Debe seleccionar un producto de la lista.");
+                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (cantidadIngresada < 0)
             {
-                Utilidades.MostrarError($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.");
+                MessageBox.Show($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (stockDisponible == cantidadIngresada)
             {
-                Utilidades.MostrarError($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.");
+                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;

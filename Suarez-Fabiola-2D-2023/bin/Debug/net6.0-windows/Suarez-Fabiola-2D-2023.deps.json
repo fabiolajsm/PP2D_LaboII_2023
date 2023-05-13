@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Suarez-Fabiola-2D-2023/1.0.0": {
+        "dependencies": {
+          "Entidades": "1.0.0"
+        },
         "runtime": {
           "Suarez-Fabiola-2D-2023.dll": {}
+        }
+      },
+      "Entidades/1.0.0": {
+        "runtime": {
+          "Entidades.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Suarez-Fabiola-2D-2023/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Entidades/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

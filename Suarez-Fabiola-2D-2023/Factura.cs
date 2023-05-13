@@ -41,7 +41,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                if(factura != null)
                 {
-                    DatosEnMemoria.HistorialVentas.Add(factura);
+                    DatosEnMemoria.ObtenerHistorialVentas().Add(factura);
                 } 
             }
             return true;            

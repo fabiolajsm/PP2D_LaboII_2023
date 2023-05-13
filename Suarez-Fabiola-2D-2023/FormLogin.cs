@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
-using static Suarez_Fabiola_2D_2023.eTipoUsuario;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -29,17 +29,33 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
         /// <summary>
-        /// Autocompleta en los textbox la información del usuario, eligiendo a un usuario de manera aleatoria
+        /// Autocompleta en los textbox la información del usuario, eligiendo  a un usuario tipo Cliente de manera aleatoria
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Btn_AutocompletarUsuario_Click(object sender, EventArgs e)
+        private void Btn_AutocompletarCliente_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            List<Usuario> listaUsuarios = DatosEnMemoria.listaUsuarios;
+            List<Cliente> listaUsuarios = DatosEnMemoria.ObtenerListaClientes();
             int index = rnd.Next(listaUsuarios.Count);
 
-            Usuario usuario = listaUsuarios[index];
+            Cliente usuario = listaUsuarios[index];
+
+            Tb_Email.Text = usuario.Email;
+            Tb_Contrasena.Text = usuario.Contrasena;
+        }
+        /// <summary>
+        /// Autocompleta en los textbox la información del usuario, eligiendo a un usuario tipo Vendedor de manera aleatoria
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Btn_AutocompletarVendedor_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            List<Vendedor> listaUsuarios = DatosEnMemoria.ObtenerListaVendedores();
+            int index = rnd.Next(listaUsuarios.Count);
+
+            Vendedor usuario = listaUsuarios[index];
 
             Tb_Email.Text = usuario.Email;
             Tb_Contrasena.Text = usuario.Contrasena;
@@ -69,7 +85,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (!ValidarFormatoEmailYContraseña(email, contrasena)) return;
 
-            Usuario? usuarioIngresado = Utilidades.BuscarUsuarioPorEmailYContraseña(email, contrasena);
+            Usuario? usuarioIngresado = Utilidades.BuscarUsuarioPorEmailYContraseña(email, contrasena, DatosEnMemoria.ObtenerListaUsuarios());
             if (usuarioIngresado == null)
             {
                 MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -77,22 +93,17 @@ namespace Suarez_Fabiola_2D_2023
             }
 
             this.Hide();
-            if (usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Cliente)
+            // Si es Vendedor va al formHeladera y si es Cliente va al formMonto
+            if (usuarioIngresado is Vendedor)
             {
-                Cliente cliente = new Cliente(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario, 0);
-                cliente.IniciarSesion();
-                
-            }
-            else if (usuarioIngresado.TipoDeUsuario == eTipoUsuario.TipoUsuario.Vendedor)
-            {
-                Vendedor vendedor = new Vendedor(usuarioIngresado.Nombre, usuarioIngresado.Apellido, usuarioIngresado.Email, usuarioIngresado.Contrasena, usuarioIngresado.TipoDeUsuario);
-                vendedor.IniciarSesion();
+                FormHeladera formHeladera = new FormHeladera();
+                formHeladera.Show();
             }
             else
             {
-                MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                FormMonto formMonto = new FormMonto(usuarioIngresado as Cliente);
+                formMonto.Show();
             }
-        }       
+        }
     }
 }

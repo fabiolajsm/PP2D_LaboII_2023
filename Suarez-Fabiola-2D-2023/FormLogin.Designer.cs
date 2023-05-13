@@ -37,7 +37,8 @@
             Cb_mostrarContrasena = new CheckBox();
             error_email = new Label();
             error_contraseña = new Label();
-            Btn_AutocompletarUsuario = new Button();
+            Btn_AutocompletarCliente = new Button();
+            Btn_AutocompletarVendedor = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogin).BeginInit();
             SuspendLayout();
             // 
@@ -45,9 +46,9 @@
             // 
             pictureBoxLogin.AccessibleName = "pictureBoxLogin";
             pictureBoxLogin.Image = Properties.Resources.logo1;
-            pictureBoxLogin.Location = new Point(90, 76);
+            pictureBoxLogin.Location = new Point(86, 76);
             pictureBoxLogin.Name = "pictureBoxLogin";
-            pictureBoxLogin.Size = new Size(145, 177);
+            pictureBoxLogin.Size = new Size(145, 186);
             pictureBoxLogin.TabIndex = 0;
             pictureBoxLogin.TabStop = false;
             // 
@@ -85,9 +86,9 @@
             Btn_Login.FlatAppearance.BorderColor = Color.FromArgb(176, 190, 169);
             Btn_Login.FlatAppearance.MouseOverBackColor = Color.FromArgb(146, 170, 131);
             Btn_Login.Font = new Font("Cambria", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Login.Location = new Point(446, 279);
+            Btn_Login.Location = new Point(256, 354);
             Btn_Login.Name = "Btn_Login";
-            Btn_Login.Size = new Size(103, 29);
+            Btn_Login.Size = new Size(293, 29);
             Btn_Login.TabIndex = 3;
             Btn_Login.Text = "Entrar";
             Btn_Login.UseVisualStyleBackColor = false;
@@ -142,16 +143,28 @@
             error_contraseña.Text = "⚠ Debe ingresar Contraseña";
             error_contraseña.Visible = false;
             // 
-            // Btn_AutocompletarUsuario
+            // Btn_AutocompletarCliente
             // 
-            Btn_AutocompletarUsuario.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_AutocompletarUsuario.Location = new Point(256, 279);
-            Btn_AutocompletarUsuario.Name = "Btn_AutocompletarUsuario";
-            Btn_AutocompletarUsuario.Size = new Size(184, 29);
-            Btn_AutocompletarUsuario.TabIndex = 8;
-            Btn_AutocompletarUsuario.Text = "Autocompletar campos";
-            Btn_AutocompletarUsuario.UseVisualStyleBackColor = true;
-            Btn_AutocompletarUsuario.Click += Btn_AutocompletarUsuario_Click;
+            Btn_AutocompletarCliente.FlatAppearance.BorderColor = Color.FromArgb(224, 224, 224);
+            Btn_AutocompletarCliente.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_AutocompletarCliente.Location = new Point(256, 279);
+            Btn_AutocompletarCliente.Name = "Btn_AutocompletarCliente";
+            Btn_AutocompletarCliente.Size = new Size(144, 50);
+            Btn_AutocompletarCliente.TabIndex = 8;
+            Btn_AutocompletarCliente.Text = "Autocompletar Cliente";
+            Btn_AutocompletarCliente.UseVisualStyleBackColor = true;
+            Btn_AutocompletarCliente.Click += Btn_AutocompletarCliente_Click;
+            // 
+            // Btn_AutocompletarVendedor
+            // 
+            Btn_AutocompletarVendedor.Font = new Font("Book Antiqua", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Btn_AutocompletarVendedor.Location = new Point(413, 279);
+            Btn_AutocompletarVendedor.Name = "Btn_AutocompletarVendedor";
+            Btn_AutocompletarVendedor.Size = new Size(136, 50);
+            Btn_AutocompletarVendedor.TabIndex = 9;
+            Btn_AutocompletarVendedor.Text = "Autocompletar Vendedor";
+            Btn_AutocompletarVendedor.UseVisualStyleBackColor = true;
+            Btn_AutocompletarVendedor.Click += Btn_AutocompletarVendedor_Click;
             // 
             // FormLogin
             // 
@@ -160,7 +173,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(241, 247, 238);
             ClientSize = new Size(800, 450);
-            Controls.Add(Btn_AutocompletarUsuario);
+            Controls.Add(Btn_AutocompletarVendedor);
+            Controls.Add(Btn_AutocompletarCliente);
             Controls.Add(error_contraseña);
             Controls.Add(error_email);
             Controls.Add(Cb_mostrarContrasena);
@@ -189,6 +203,7 @@
         private CheckBox Cb_mostrarContrasena;
         private Label error_email;
         private Label error_contraseña;
-        private Button Btn_AutocompletarUsuario;
+        private Button Btn_AutocompletarCliente;
+        private Button Btn_AutocompletarVendedor;
     }
 }
