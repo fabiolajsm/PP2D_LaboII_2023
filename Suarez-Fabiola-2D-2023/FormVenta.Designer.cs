@@ -335,6 +335,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             FormClosed += FormVenta_FormClosed;
             Load += FormVenta_Load;
+            Shown += FormVenta_Shown;
             Gb_ListaDeProductos.ResumeLayout(false);
             Gb_ListaDeProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();

@@ -63,7 +63,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormVenta formVenta = new FormVenta(cliente, esVendedor);
+            FormVenta formVenta = new FormVenta(cliente, esVendedor, false);
             formVenta.Show();
         }
         /// <summary>
@@ -115,7 +115,7 @@ namespace Suarez_Fabiola_2D_2023
         private void ActualizarPrecioFinal()
         {
             double total = precioFinal + recargo;
-            Lb_Recargo.Text = $"Recargo: ${recargo}";
+            Lb_Recargo.Text = $"Recargo: ${recargo.ToString("#0.00")}";
             Lb_PrecioFinal.Text = $"Precio final: ${total.ToString("#0.00")}";
         }
         /// <summary>
@@ -128,7 +128,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show("Venta cancelada", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 this.Hide();
-                FormVenta formVenta = new FormVenta(cliente, esVendedor);
+                FormVenta formVenta = new FormVenta(cliente, esVendedor, false);
                 formVenta.Show();
             }
         }
@@ -211,7 +211,7 @@ namespace Suarez_Fabiola_2D_2023
                 // Por último limpiamos la listaProductosDelCarrito y regresamos al FormVenta
                 FormVenta.LimpiarListaProductosCarrito();
                 this.Hide();
-                FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor);
+                FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor, false);
                 agregarAlCarrito.Show();
             }
         }

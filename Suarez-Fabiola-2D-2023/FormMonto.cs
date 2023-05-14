@@ -9,12 +9,14 @@ namespace Suarez_Fabiola_2D_2023
         private readonly Cliente cliente;
         private readonly bool modificarMetodoDePago;
         private readonly double precioFinal;
+        private bool mostrarBienvenida;
 
         public FormMonto(Cliente cliente, string descripcion = "", bool modificarMetodoDePago = false, double precioFinal = 0)
         {
             InitializeComponent();
 
             this.cliente = cliente ?? new Cliente(); // Si el cliente es null, se crea una nueva instancia de Cliente
+            this.mostrarBienvenida = string.IsNullOrEmpty(descripcion);
             Lb_BienvenidaCliente.Text = $"¡Hola {this.cliente.NombreCompleto}!";
 
             Lb_DescripcionBienvenida.Text = string.IsNullOrEmpty(descripcion) ? "Especifica tu monto máximo de gasto para empezar a explotar nuestros productos" : descripcion;
@@ -56,7 +58,7 @@ namespace Suarez_Fabiola_2D_2023
 
             Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), maximoDeCompra);
             this.Hide();
-            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false);
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false, mostrarBienvenida);
             form.Show();
         }
 
@@ -87,7 +89,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormMonto_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false);
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false, false);
             form.Show();
         }
     }

@@ -10,17 +10,21 @@ namespace Suarez_Fabiola_2D_2023
         private bool esVendedor;
         private List<Producto> listaProductos = DatosEnMemoria.ObtenerListaProductos();
         public static List<Producto> listaProductosDelCarrito = new List<Producto>();
+        private bool mostrarModalBienvenida;
 
-        public FormVenta(Cliente cliente, bool esVendedor)
+        public FormVenta(Cliente cliente, bool esVendedor, bool mostrarBienvenida)
         {
+            this.cliente = cliente ?? new Cliente();
+            this.esVendedor = esVendedor;
+            this.mostrarModalBienvenida = mostrarBienvenida;
+            
             InitializeComponent();
             Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
             InicializarItemsComboBox();
             CargarItemsProductos();
             CalcularPrecioTotal();
             CargarDatosDelCarrito(dataGridView);
-            this.cliente = cliente ?? new Cliente();
-            this.esVendedor = esVendedor;
+
             if (this.cliente.MontoMaximoDeCompra != 0)
             {
                 Lb_MontoMaximo.Text = $"Su monto máximo de compra es de ${this.cliente.MontoMaximoDeCompra.ToString("#0.00")}";
@@ -349,6 +353,18 @@ namespace Suarez_Fabiola_2D_2023
         public static void LimpiarListaProductosCarrito()
         {
             listaProductosDelCarrito.Clear();
+        }
+        /// <summary>
+        /// Muestra mensaje de bienvenida apenas se entra a la pagina
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormVenta_Shown(object sender, EventArgs e)
+        {
+            if (!esVendedor && mostrarModalBienvenida)
+            {
+                MessageBox.Show(cliente.ObtenerMensajeBienvenida());
+            }
         }
     }
 }

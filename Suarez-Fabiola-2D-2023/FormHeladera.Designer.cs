@@ -177,6 +177,7 @@
             Name = "FormHeladera";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormHeladera";
+            Shown += FormHeladera_Shown;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

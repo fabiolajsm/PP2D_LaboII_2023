@@ -56,7 +56,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (cliente != null)
                 {
                     this.Enabled = false;
-                    FormVenta formVenta = new FormVenta(cliente, true);
+                    FormVenta formVenta = new FormVenta(cliente, true, false);
                     formVenta.Show();
                 }
                 else {

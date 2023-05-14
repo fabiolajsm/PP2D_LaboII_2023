@@ -23,7 +23,7 @@ namespace Entidades
         /// <returns>Retorna el mensaje de bienvenida en string</returns>
         public override string ObtenerMensajeBienvenida()
         {
-            return $"¡Hola! Bienvenido/a a nuestra tienda en línea. Echa un vistazo a nuestra lista de productos y encuentra lo que necesitas. ¡Que tengas una excelente experiencia de compra!";
+            return $"Bienvenido/a a nuestra tienda en línea. Echa un vistazo a nuestra lista de productos y encuentra lo que necesitas. ¡Que tengas una excelente experiencia de compra!";
         }
         /// <summary>
         /// Si el monto máximo de compra es válido, lo modifica

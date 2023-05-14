@@ -9,9 +9,11 @@ namespace Suarez_Fabiola_2D_2023
     {
         public DataGridView dataGridName;
         private Vendedor vendedor;
-        public FormHeladera(Vendedor vendedor)
+        private bool mostrarModalBienvenida;
+        public FormHeladera(Vendedor vendedor, bool mostrarBienvenida)
         {
-            this.vendedor = vendedor;            
+            this.vendedor = vendedor;
+            this.mostrarModalBienvenida = mostrarBienvenida;
             this.Enabled = true;
             InitializeComponent();
             this.dataGridName = dataGridView;
@@ -56,7 +58,7 @@ namespace Suarez_Fabiola_2D_2023
         private void CargarOpcionesDelComboBox()
         {
             Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes", "Ver historial de ventas" });
-            Cb_Opciones.SelectedIndex = 0;            
+            Cb_Opciones.SelectedIndex = 0;
         }
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
@@ -133,6 +135,18 @@ namespace Suarez_Fabiola_2D_2023
                 {
                     MessageBox.Show("Lo sentimos, en este momento no podemos mostrar el detalle");
                 }
+            }
+        }
+        /// <summary>
+        /// Cuando termina de cargar la página, muestra un mensaje de bienvenida
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormHeladera_Shown(object sender, EventArgs e)
+        {
+            if (mostrarModalBienvenida)
+            {            
+                MessageBox.Show(vendedor.ObtenerMensajeBienvenida());               
             }
         }
     }
