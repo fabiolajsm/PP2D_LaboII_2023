@@ -8,8 +8,10 @@ namespace Suarez_Fabiola_2D_2023
     public partial class FormHeladera : Form
     {
         public DataGridView dataGridName;
-        public FormHeladera()
+        private Vendedor vendedor;
+        public FormHeladera(Vendedor vendedor)
         {
+            this.vendedor = vendedor;            
             this.Enabled = true;
             InitializeComponent();
             this.dataGridName = dataGridView;
@@ -54,7 +56,7 @@ namespace Suarez_Fabiola_2D_2023
         private void CargarOpcionesDelComboBox()
         {
             Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes", "Ver historial de ventas" });
-            Cb_Opciones.SelectedIndex = 0;
+            Cb_Opciones.SelectedIndex = 0;            
         }
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login

@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
@@ -15,6 +8,9 @@ namespace Suarez_Fabiola_2D_2023
     {
         private Cliente cliente;
         private bool esVendedor;
+        private List<Producto> listaProductos = DatosEnMemoria.ObtenerListaProductos();
+        public static List<Producto> listaProductosDelCarrito = new List<Producto>();
+
         public FormVenta(Cliente cliente, bool esVendedor)
         {
             InitializeComponent();
@@ -63,7 +59,7 @@ namespace Suarez_Fabiola_2D_2023
             Cb_FiltrarPorCorte.Items.Add("Ver todos los tipos de corte");
             Cb_FiltrarPorCorte.SelectedIndex = 0;
 
-            List<string> nombresCorte = DatosEnMemoria.ObtenerListaProductos()
+            List<string> nombresCorte = listaProductos
                 .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
                 .Select(p => p.TipoCorte)
                 .Distinct()
@@ -81,7 +77,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (string.IsNullOrEmpty(corteSeleccionado) || corteSeleccionado == "Ver todos los tipos de corte")
             {
-                foreach (Producto producto in DatosEnMemoria.ObtenerListaProductos())
+                foreach (Producto producto in listaProductos)
                 {
                     if (producto.StockDisponible > 0 || (producto.StockDisponible <= 0 && producto.CantidadDeseada > 0))
                     {
@@ -94,7 +90,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (corteSeleccionado != "Ver todos los tipos de corte")
                 {
                     Lb_Productos.Items.Clear();
-                    List<Producto> productosFiltrados = DatosEnMemoria.ObtenerListaProductos().Where(p => p.TipoCorte == corteSeleccionado).ToList();
+                    List<Producto> productosFiltrados = listaProductos.Where(p => p.TipoCorte == corteSeleccionado).ToList();
                     foreach (Producto productoFiltrado in productosFiltrados)
                     {
                         Lb_Productos.Items.Add(productoFiltrado);
@@ -107,7 +103,7 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CalcularPrecioTotal()
         {
-            var precioTotal = DatosEnMemoria.listaProductosDelCarrito.Sum(producto => Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+            var precioTotal = listaProductosDelCarrito.Sum(producto => Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
             Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
         }
         /// <summary>
@@ -117,7 +113,7 @@ namespace Suarez_Fabiola_2D_2023
         private void CargarDatosDelCarrito(DataGridView dataGridView)
         {
             dataGridView.Rows.Clear();
-            foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
+            foreach (Producto producto in listaProductosDelCarrito)
             {
                 double precioProducto = Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
                 if (precioProducto > 0 & producto.CantidadDeseada > 0)
@@ -142,7 +138,7 @@ namespace Suarez_Fabiola_2D_2023
 
             if (productos.Count > 0 && !string.IsNullOrEmpty(corteSeleccionado))
             {
-                List<Producto> productosFiltrados = DatosEnMemoria.ObtenerListaProductos()
+                List<Producto> productosFiltrados = listaProductos
                     .Where(p => corteSeleccionado == "Ver todos los tipos de corte" || p.TipoCorte == corteSeleccionado)
                     .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
                     .ToList();
@@ -196,7 +192,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_CerrarSesion_Click(object sender, EventArgs e)
         {
-            DatosEnMemoria.listaProductosDelCarrito.Clear();
+            LimpiarListaProductosCarrito();
             this.Hide();
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
@@ -219,12 +215,11 @@ namespace Suarez_Fabiola_2D_2023
 
             List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
 
-            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, true, Lb_Productos.Items.Cast<Producto>().ToList()))
+            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, true, Lb_Productos.Items.Cast<Producto>().ToList(), listaProductosDelCarrito))
             {
                 Producto productoSeleccionado = productos[indexProducto];
-                productoSeleccionado.CantidadDeseada = cantidadIngresada;
-                
-                if (Producto.AgregarProductoAlCarrito(productoSeleccionado, DatosEnMemoria.listaProductosDelCarrito))
+
+                if (Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                 {
                     // Recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
@@ -250,13 +245,13 @@ namespace Suarez_Fabiola_2D_2023
                 return;
             }
 
-            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, false, Lb_Productos.Items.Cast<Producto>().ToList()))
+            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, false, Lb_Productos.Items.Cast<Producto>().ToList(), listaProductosDelCarrito))
             {
                 List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
                 Producto productoSeleccionado = productos[indexProducto];
 
                 // borramos el producto del carrito
-                if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, DatosEnMemoria.listaProductosDelCarrito))
+                if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                 {
                     // recargamos la lista de productos segun el stock disponible:
                     CargarItemsProductos();
@@ -280,8 +275,8 @@ namespace Suarez_Fabiola_2D_2023
         {
             double precioFinal = double.Parse(Lb_Total.Text.Split('$')[1].Trim());
             if (cliente.MontoMaximoDeCompra == 0)
-            {                   
-                MessageBox.Show("No tiene monto máximo de compra/fondos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);                
+            {
+                MessageBox.Show("No tiene monto máximo de compra/fondos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (precioFinal > cliente.MontoMaximoDeCompra)
@@ -308,7 +303,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_VolverVendedor_Click(object sender, EventArgs e)
         {
-            DatosEnMemoria.listaProductosDelCarrito.Clear();
+            LimpiarListaProductosCarrito();
             this.Close();
         }
         /// <summary>
@@ -322,7 +317,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];
                 elegirCliente.Enabled = true;
-                DatosEnMemoria.listaProductosDelCarrito.Clear();
+                LimpiarListaProductosCarrito();
             }
         }
         /// <summary>
@@ -335,6 +330,25 @@ namespace Suarez_Fabiola_2D_2023
             this.Hide();
             FormMonto formMonto = new FormMonto(cliente, $"Su monto actual es de ${cliente.MontoMaximoDeCompra}. Ingrese el nuevo monto máximo de compra:");
             formMonto.Show();
-        }        
+        }
+        /// <summary>
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite numeros sin decimales
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tb_Cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        /// <summary>
+        /// Elimina todos los productos de la lista de productos del carrito
+        /// </summary>
+        public static void LimpiarListaProductosCarrito()
+        {
+            listaProductosDelCarrito.Clear();
+        }
     }
 }

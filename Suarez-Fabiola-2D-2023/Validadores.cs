@@ -64,7 +64,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="cantidadIngresada">Cantidad de producto ingresado</param>
         /// <param name="esAgregarAlCarrito">Indica si es para agregar al carrito en vez de para eliminar del carrito</param>
         /// <returns>Retorna True si son válidos y False de lo contrario</returns>
-        public static bool ValidarCamposParaModificarCarrito(int indexProducto, int cantidadIngresada, bool esAgregarAlCarrito, List<Producto> productos)
+        public static bool ValidarCamposParaModificarCarrito(int indexProducto, int cantidadIngresada, bool esAgregarAlCarrito, List<Producto> productos, List<Producto> productosCarrito)
         {
             if (productos.Count == 0) return false;
             double stockDisponible = Producto.ObtenerPropiedadProducto<double>(indexProducto, p => p.StockDisponible, productos);
@@ -89,12 +89,12 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(productos[indexProducto].Nombre, productos, DatosEnMemoria.listaProductosDelCarrito) == false)
+            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(productos[indexProducto].Nombre, productos, productosCarrito) == false)
             {
                 MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (!esAgregarAlCarrito && Producto.ObtenerCantidadProductoDelCarrito(productos[indexProducto], DatosEnMemoria.listaProductosDelCarrito) < cantidadIngresada)
+            if (!esAgregarAlCarrito && Producto.ObtenerCantidadProductoDelCarrito(productos[indexProducto], productosCarrito) < cantidadIngresada)
             {
                 MessageBox.Show($"No se puede eliminar más de la cantidad del producto agregado al carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

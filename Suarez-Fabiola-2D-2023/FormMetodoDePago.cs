@@ -178,7 +178,7 @@ namespace Suarez_Fabiola_2D_2023
 
                 List<Factura> listaDeFacturas = new List<Factura>(); 
 
-                foreach (Producto producto in DatosEnMemoria.listaProductosDelCarrito)
+                foreach (Producto producto in FormVenta.listaProductosDelCarrito)
                 {
                     mensajeBuilder.AppendFormat("{0} x {1} Gramos = ${2:#0.00}\n",
                         producto.Nombre,
@@ -203,12 +203,13 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show(mensajeBuilder.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Agregamos la factura al historial de ventas
-                Factura.AgregarFacturasAlHistorial(listaDeFacturas);
+                List<Factura> historialVentas = DatosEnMemoria.ObtenerHistorialVentas();
+                Factura.AgregarFacturasAlHistorial(listaDeFacturas, historialVentas);
                 // Actualizamos el monto maximo de compra del cliente
                 cliente.MontoMaximoDeCompra -= (float)total;
                 Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), cliente.MontoMaximoDeCompra);
                 // Por último limpiamos la listaProductosDelCarrito y regresamos al FormVenta
-                DatosEnMemoria.listaProductosDelCarrito.Clear();
+                FormVenta.LimpiarListaProductosCarrito();
                 this.Hide();
                 FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor);
                 agregarAlCarrito.Show();

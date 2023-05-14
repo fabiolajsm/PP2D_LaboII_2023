@@ -85,14 +85,13 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.GridColor = Color.BlanchedAlmond;
-            dataGridView.Location = new Point(69, 238);
-            dataGridView.Margin = new Padding(4, 4, 4, 4);
+            dataGridView.Location = new Point(55, 190);
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.RowHeadersVisible = false;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.RowTemplate.Height = 29;
-            dataGridView.Size = new Size(721, 332);
+            dataGridView.Size = new Size(577, 266);
             dataGridView.TabIndex = 0;
             dataGridView.CellContentClick += dataGridView_CellContentClick;
             // 
@@ -100,20 +99,18 @@
             // 
             Lb_Titulo.AutoSize = true;
             Lb_Titulo.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Titulo.Location = new Point(69, 189);
-            Lb_Titulo.Margin = new Padding(4, 0, 4, 0);
+            Lb_Titulo.Location = new Point(55, 151);
             Lb_Titulo.Name = "Lb_Titulo";
-            Lb_Titulo.Size = new Size(253, 33);
+            Lb_Titulo.Size = new Size(208, 27);
             Lb_Titulo.TabIndex = 1;
             Lb_Titulo.Text = "Lista de productos";
             // 
             // Btn_CerrarSesion
             // 
             Btn_CerrarSesion.Font = new Font("Book Antiqua", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            Btn_CerrarSesion.Location = new Point(69, 602);
-            Btn_CerrarSesion.Margin = new Padding(4, 4, 4, 4);
+            Btn_CerrarSesion.Location = new Point(55, 482);
             Btn_CerrarSesion.Name = "Btn_CerrarSesion";
-            Btn_CerrarSesion.Size = new Size(178, 36);
+            Btn_CerrarSesion.Size = new Size(142, 29);
             Btn_CerrarSesion.TabIndex = 2;
             Btn_CerrarSesion.Text = "Cerrar sesión";
             Btn_CerrarSesion.UseVisualStyleBackColor = true;
@@ -124,10 +121,9 @@
             Cb_Opciones.DropDownStyle = ComboBoxStyle.DropDownList;
             Cb_Opciones.Font = new Font("Book Antiqua", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Cb_Opciones.FormattingEnabled = true;
-            Cb_Opciones.Location = new Point(69, 95);
-            Cb_Opciones.Margin = new Padding(4, 4, 4, 4);
+            Cb_Opciones.Location = new Point(55, 76);
             Cb_Opciones.Name = "Cb_Opciones";
-            Cb_Opciones.Size = new Size(720, 32);
+            Cb_Opciones.Size = new Size(577, 30);
             Cb_Opciones.TabIndex = 3;
             Cb_Opciones.SelectedIndexChanged += Cb_Opciones_SelectedIndexChanged;
             // 
@@ -135,10 +131,9 @@
             // 
             Lb_Opciones.AutoSize = true;
             Lb_Opciones.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            Lb_Opciones.Location = new Point(69, 38);
-            Lb_Opciones.Margin = new Padding(4, 0, 4, 0);
+            Lb_Opciones.Location = new Point(55, 30);
             Lb_Opciones.Name = "Lb_Opciones";
-            Lb_Opciones.Size = new Size(308, 33);
+            Lb_Opciones.Size = new Size(251, 27);
             Lb_Opciones.TabIndex = 4;
             Lb_Opciones.Text = "Seleccione una opción:";
             // 
@@ -146,10 +141,9 @@
             // 
             Btn_Continuar.Enabled = false;
             Btn_Continuar.Font = new Font("Book Antiqua", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            Btn_Continuar.Location = new Point(612, 602);
-            Btn_Continuar.Margin = new Padding(4, 4, 4, 4);
+            Btn_Continuar.Location = new Point(490, 482);
             Btn_Continuar.Name = "Btn_Continuar";
-            Btn_Continuar.Size = new Size(178, 36);
+            Btn_Continuar.Size = new Size(142, 29);
             Btn_Continuar.TabIndex = 5;
             Btn_Continuar.Text = "Continuar";
             Btn_Continuar.UseVisualStyleBackColor = true;
@@ -159,20 +153,19 @@
             // 
             Lb_Aclaracion.AutoSize = true;
             Lb_Aclaracion.Font = new Font("Book Antiqua", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            Lb_Aclaracion.Location = new Point(288, 149);
-            Lb_Aclaracion.Margin = new Padding(4, 0, 4, 0);
+            Lb_Aclaracion.Location = new Point(230, 119);
             Lb_Aclaracion.Name = "Lb_Aclaracion";
-            Lb_Aclaracion.Size = new Size(476, 22);
+            Lb_Aclaracion.Size = new Size(402, 19);
             Lb_Aclaracion.TabIndex = 6;
             Lb_Aclaracion.Text = "Para ir a la página de la opción seleccionada presione Continuar";
             // 
             // FormHeladera
             // 
             AccessibleName = "FormHeladera";
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(211, 200, 187);
-            ClientSize = new Size(958, 665);
+            ClientSize = new Size(716, 560);
             Controls.Add(Lb_Aclaracion);
             Controls.Add(Btn_Continuar);
             Controls.Add(Lb_Opciones);
@@ -181,7 +174,6 @@
             Controls.Add(Lb_Titulo);
             Controls.Add(dataGridView);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
             Name = "FormHeladera";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormHeladera";

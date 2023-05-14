@@ -206,6 +206,7 @@
             Tb_Cantidad.TabIndex = 10;
             Tb_Cantidad.Text = "0";
             Tb_Cantidad.TextAlign = HorizontalAlignment.Center;
+            Tb_Cantidad.KeyPress += Tb_Cantidad_KeyPress;
             // 
             // dataGridView
             // 

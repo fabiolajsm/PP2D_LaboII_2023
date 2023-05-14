@@ -96,7 +96,7 @@ namespace Suarez_Fabiola_2D_2023
             // Si es Vendedor va al formHeladera y si es Cliente va al formMonto
             if (usuarioIngresado is Vendedor)
             {
-                FormHeladera formHeladera = new FormHeladera();
+                FormHeladera formHeladera = new FormHeladera(usuarioIngresado as Vendedor);
                 formHeladera.Show();
             }
             else

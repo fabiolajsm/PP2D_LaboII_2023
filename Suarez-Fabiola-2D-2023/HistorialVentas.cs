@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -14,10 +15,11 @@ namespace Suarez_Fabiola_2D_2023
     {
         public HistorialVentas()
         {
+            List<Factura> historialDeVentas = DatosEnMemoria.ObtenerHistorialVentas();
             InitializeComponent();
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
-            if (DatosEnMemoria.ObtenerHistorialVentas().Count == 0)
+            if (historialDeVentas.Count == 0)
             {
                 Lb_SinVentas.Visible = true;
             }
@@ -34,7 +36,7 @@ namespace Suarez_Fabiola_2D_2023
                 dataGridView.Columns.Add("PrecioFinal", "Precio Final");
 
                 // Agrega las filas al control
-                foreach (Factura factura in DatosEnMemoria.ObtenerHistorialVentas())
+                foreach (Factura factura in historialDeVentas)
                 {
                     int rowIndex = dataGridView.Rows.Add();
                     DataGridViewRow row = dataGridView.Rows[rowIndex];

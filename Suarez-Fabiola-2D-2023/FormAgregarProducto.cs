@@ -46,8 +46,8 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (Validadores.ValidarCamposAgregarProducto(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Tb_Precio.Text, Tb_Stock.Text))
             {
-                Producto nuevoProducto = new Producto(Tb_Nombre.Text.Trim(), Tb_Descripcion.Text.Trim(), Tb_TipoCorte.Text.Trim(), Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text));
-                if (Producto.AgregarProductoALaLista(nuevoProducto, DatosEnMemoria.ObtenerListaProductos()))
+                Producto nuevoProducto = new Producto(Utilidades.Capitalize(Tb_Nombre.Text), Tb_Descripcion.Text.Trim(), Tb_TipoCorte.Text.Trim(), Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text));
+                if (Producto.AgregarProductoALaLista(nuevoProducto))
                 {
                     MessageBox.Show("Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Tb_Nombre.Text = string.Empty;

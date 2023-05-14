@@ -48,11 +48,6 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show("Debe ingresar un monto válido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (maximoDeCompra == cliente.MontoMaximoDeCompra)
-            {
-                MessageBox.Show("El monto ingresado es igual al monto máximo actual", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             if (maximoDeCompra <= 0)
             {
                 MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0 y sin decimales", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
