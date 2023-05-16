@@ -80,9 +80,9 @@ namespace Entidades
             return new List<Factura>(HistorialVentas);
         }
         /// <summary>
-        /// Agerga una factura a la lista de facturas(historial de ventas)
+        /// Agrega una factura a la lista de facturas(historial de ventas)
         /// </summary>
-        /// <param name="factura"></param>
+        /// <param name="factura">Factura a agregar a la lista</param>
         public static void AgregarFacturaAHistorial(Factura factura)
         {
             HistorialVentas.Add(factura);
@@ -90,7 +90,7 @@ namespace Entidades
         /// <summary>
         /// Agrega un producto a la lista de productos
         /// </summary>
-        /// <param name="producto"></param>
+        /// <param name="producto">Producto a agregar a la lista</param>
         public static void AgregarProducto(Producto producto)
         {
             listaProductos.Add(producto);

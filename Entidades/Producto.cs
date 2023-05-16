@@ -127,6 +127,7 @@ namespace Entidades
         /// Agrega un producto al carrito
         /// </summary>
         /// <param name="producto">Producto a agregar</param>
+        /// <param name="cantidadDeseada">Cantidad del producto a agregar</param>
         /// <param name="listaProductosDelCarrito">Lista a la que se le agregará el nuevo producto</param>
         /// <returns>Retorna True si se pudo agregar y False si no</returns>
         public static bool AgregarProductoAlCarrito(Producto producto, int cantidadDeseada,List<Producto> listaProductosDelCarrito)

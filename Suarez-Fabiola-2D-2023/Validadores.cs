@@ -207,14 +207,14 @@ namespace Suarez_Fabiola_2D_2023
             return true;
         }
         /// <summary>
-        /// 
+        /// Valida todos los campos de un prodcuto antes de agregarlo a la lista
         /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="descripcion"></param>
-        /// <param name="corte"></param>
-        /// <param name="precioString"></param>
-        /// <param name="stockString"></param>
-        /// <returns></returns>
+        /// <param name="nombre">Nombre del producto</param>
+        /// <param name="descripcion">Descripción del producto</param>
+        /// <param name="corte">Tipo de corte del producto</param>
+        /// <param name="precioString">Precio por kilo del producto</param>
+        /// <param name="stockString">Stock disponible del producto</param>
+        /// <returns>Retorna True si los campos son válidos y False si no</returns>
         public static bool ValidarCamposAgregarProducto(string nombre, string descripcion, string corte, string precioString, string stockString)
         {
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(corte) || string.IsNullOrEmpty(precioString) || string.IsNullOrEmpty(stockString))

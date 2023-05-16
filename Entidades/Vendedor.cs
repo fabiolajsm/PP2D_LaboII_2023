@@ -13,7 +13,7 @@ namespace Entidades
         {
         }
         /// <summary>
-        /// Obtiene el mensaje de bienvenida que se le va a mostrar al cliente cuando ingrese a la aplicación
+        /// Obtiene el mensaje de bienvenida que se le va a mostrar al vendedor cuando ingrese a la aplicación
         /// </summary>
         /// <returns>Retorna el mensaje de bienvenida en string</returns>
         public override string ObtenerMensajeBienvenida()
@@ -28,7 +28,7 @@ namespace Entidades
         /// <param name="nuevoStock">Si quiere modificar el stock, pasa el nuevo stock, del resto pasa un null</param>
         /// <param name="nuevoPrecio">Si quiere modificar el precio, pasa el nuevo precio, del resto pasa un null</param>
         /// <param name="nuevoCorte">Si quiere modificar el tipo de corte, pasa el nuevo tipo de corte, del resto pasa un string vacío</param>
-        /// <returns></returns>
+        /// <returns>Retorna True si se modificó y False si no</returns>
         public static bool ModificarProducto(int indexProducto, List<Producto> listaProductos, int? nuevoStock = null, double? nuevoPrecio = null, string nuevoCorte = "")
         {
             bool seModifico = false;

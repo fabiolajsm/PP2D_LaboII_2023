@@ -15,7 +15,7 @@ namespace Suarez_Fabiola_2D_2023
             CargarItemsProductos();
         }
         /// <summary>
-        /// No permite ingresarle al usuario caracteres especiales, sólo perimte números y una coma
+        /// No permite ingresarle al usuario caracteres especiales, sólo permite números y una coma
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

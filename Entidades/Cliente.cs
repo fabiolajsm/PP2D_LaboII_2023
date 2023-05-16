@@ -28,9 +28,9 @@ namespace Entidades
         /// <summary>
         /// Si el monto máximo de compra es válido, lo modifica
         /// </summary>
-        /// <param name="cliente"></param>
-        /// <param name="listaClientes"></param>
-        /// <param name="monto"></param>
+        /// <param name="cliente">Cliente a modificarle el monto máximo de compra</param>
+        /// <param name="listaClientes">Lista de clientes</param>
+        /// <param name="monto">Monto a designar</param>
         /// <returns></returns>
         public static bool ModificarMontoMaximoDeCompra(Cliente cliente, List<Cliente> listaClientes, float monto)
         {
@@ -51,7 +51,7 @@ namespace Entidades
         /// </summary>
         /// <param name="nombreCompleto">Nombre del cliente</param>
         /// <param name="listaClientes">Lista de clientes</param>
-        /// <returns></returns>
+        /// <returns>Obtiene Cliente si lo encuentra y null si no</returns>
         public static Cliente? ObtenerClientePorNombre(string nombreCompleto, List<Cliente> listaClientes)
         {
             if (string.IsNullOrEmpty(nombreCompleto) || listaClientes.Count < 0) return null;
