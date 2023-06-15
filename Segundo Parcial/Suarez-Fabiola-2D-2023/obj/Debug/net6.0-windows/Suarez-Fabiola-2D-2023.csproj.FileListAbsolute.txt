@@ -1,0 +1,190 @@
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Form1.resources
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\daroj\OneDrive\Documentos\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarCortes.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarPrecios.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormAgregarProducto.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMonto.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ModificarStock.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CopyComplete
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarCortes.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarPrecios.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormAgregarProducto.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMonto.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ModificarStock.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CopyComplete
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarCortes.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarPrecios.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormAgregarProducto.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMonto.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ModificarStock.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CopyComplete
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarCortes.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarPrecios.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormAgregarProducto.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMonto.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ModificarStock.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CopyComplete
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.exe
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.deps.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.runtimeconfig.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\bin\Debug\net6.0-windows\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ElegirCliente.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarCortes.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FijarPrecios.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormAgregarProducto.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormHeladera.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormLogin.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMetodoDePago.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormMonto.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.FormVenta.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.HistorialVentas.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.ModificarStock.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez_Fabiola_2D_2023.Properties.Resources.resources
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.GenerateResource.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.csproj.CopyComplete
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\refint\Suarez-Fabiola-2D-2023.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\Suarez-Fabiola-2D-2023.genruntimeconfig.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Suarez-Fabiola-2D-2023\obj\Debug\net6.0-windows\ref\Suarez-Fabiola-2D-2023.dll

@@ -1,0 +1,60 @@
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.deps.json
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.pdb
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfoInputs.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfo.cs
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\refint\Entidades.dll
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.pdb
+C:\Users\djejer\OneDrive - Proofpoint, Inc\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.deps.json
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.pdb
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfoInputs.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfo.cs
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\refint\Entidades.dll
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.pdb
+C:\Users\suare\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.deps.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\bin\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\refint\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.deps.json
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\refint\Entidades.dll
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\Segundo Parcial\Entidades\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.deps.json
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\bin\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.csproj.AssemblyReference.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfoInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.AssemblyInfo.cs
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\refint\Entidades.dll
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\Entidades.pdb
+C:\Users\suare\OneDrive\Documents\PP2D_LaboII_2023\Segundo Parcial\Entidades\obj\Debug\net6.0\ref\Entidades.dll
