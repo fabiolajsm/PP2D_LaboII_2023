@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Entidades;
 
 namespace Suarez_Fabiola_2D_2023
@@ -36,10 +35,10 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_AutocompletarCliente_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            List<Cliente> listaClientes = UsuariosDAO.ObtenerListaClientes();
+            List<Usuario> listaClientes = UsuariosDAO.ObtenerUsuariosPorTipo(TipoUsuario.Cliente);
             int index = rnd.Next(listaClientes.Count);
 
-            Cliente usuario = listaClientes[index];
+            Cliente usuario = (Cliente)listaClientes[index];
 
             Tb_Email.Text = usuario.Email;
             Tb_Contrasena.Text = usuario.Contrasena;
@@ -52,10 +51,10 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_AutocompletarVendedor_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            List<Vendedor> listaVendedores = UsuariosDAO.ObtenerListaVendedores();
+            List<Usuario> listaVendedores = UsuariosDAO.ObtenerUsuariosPorTipo(TipoUsuario.Vendedor);
             int index = rnd.Next(listaVendedores.Count);
 
-            Vendedor usuario = listaVendedores[index];
+            Vendedor usuario = (Vendedor)listaVendedores[index];
 
             Tb_Email.Text = usuario.Email;
             Tb_Contrasena.Text = usuario.Contrasena;
@@ -80,29 +79,38 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_Login_Click(object sender, EventArgs e)
         {
-            string email = Tb_Email.Text.Trim();
-            string contrasena = Tb_Contrasena.Text.Trim();
-
-            if (!ValidarFormatoEmailYContraseña(email, contrasena)) return;
-
-            Usuario? usuarioIngresado = UsuariosDAO.ObtenerUsuarioPorEmailYContraseña(email, contrasena);
-            if (usuarioIngresado == null)
+            try
             {
-                MessageBox.Show("Usuario y/o contraseña inválidos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // agregar exception personalizada
-                return;
+                string email = Tb_Email.Text.Trim();
+                string contrasena = Tb_Contrasena.Text.Trim();
+                if (!ValidarFormatoEmailYContraseña(email, contrasena)) return;
+
+                Usuario? usuarioIngresado = UsuariosDAO.ObtenerUsuarioPorEmailYContraseña(email, contrasena);
+                if (usuarioIngresado == null)
+                {
+                    throw new CredencialesInvalidasException();
+                }
+
+                this.Hide();
+                // Si es Vendedor va al formHeladera y si es Cliente va al formMonto
+                if (usuarioIngresado is Vendedor)
+                {
+                    FormHeladera formHeladera = new FormHeladera(usuarioIngresado as Vendedor, true);
+                    formHeladera.Show();
+                }
+                else
+                {
+                    FormMonto formMonto = new FormMonto(usuarioIngresado as Cliente);
+                    formMonto.Show();
+                }
             }
-
-            this.Hide();
-            // Si es Vendedor va al formHeladera y si es Cliente va al formMonto
-            if (usuarioIngresado is Vendedor)
+            catch (CredencialesInvalidasException ex)
             {
-                FormHeladera formHeladera = new FormHeladera(usuarioIngresado as Vendedor, true);
-                formHeladera.Show();
+                MessageBox.Show(ex.Message, "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            catch (Exception ex)
             {
-                FormMonto formMonto = new FormMonto(usuarioIngresado as Cliente);
-                formMonto.Show();
+                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

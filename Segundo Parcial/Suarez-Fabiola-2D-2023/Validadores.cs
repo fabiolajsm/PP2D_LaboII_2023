@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Entidades;
 
@@ -18,17 +17,15 @@ namespace Suarez_Fabiola_2D_2023
         /// <returns>Retorna True si es válido y False si no</returns>
         public static bool ValidarFormatoEmail(string email, System.Windows.Forms.Label error_email)
         {
-            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            Regex regex = new Regex(emailPattern);
             if (string.IsNullOrWhiteSpace(email))
             {
                 error_email.Text = "⚠ Debe ingresar Email";
                 error_email.Visible = true;
                 return false;
             }
-            else if (!regex.IsMatch(email))
+            else if (!email.EsFormatoEmail())
             {
-                error_email.Text = $"⚠ Email no existente. Por favor ingresar un Email válido (Ej: lola@gmail.com)";
+                error_email.Text = $"⚠ Por favor ingresar un Email válido (Ej: lola@gmail.com)";
                 error_email.Visible = true;
                 return false;
             }

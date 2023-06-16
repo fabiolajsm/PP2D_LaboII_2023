@@ -82,21 +82,33 @@ namespace Entidades
                 }
             }
         }
-
         /// <summary>
-        /// Retorna una lista de los usuarios registrados en la base de datos que son clientes
+        /// Obtiene un usuario por TipoUsuario
         /// </summary>
-        /// <returns>Retorna una lista de clientes</returns>
-        /// <exception cref="Exception">Si ocurre un error, lanza una exception</exception>
-        public static List<Cliente> ObtenerListaClientes()
+        /// <param name="tipoUsuario">TipoUsuario del usuario a obtener</param>
+        /// <returns>Retorna una lista de usuarios según su tipo</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="Exception"></exception>
+        public static List<Usuario> ObtenerUsuariosPorTipo(TipoUsuario tipoUsuario)
         {
-            List<Cliente> clientes = new List<Cliente>();
+            List<Usuario> usuarios = new List<Usuario>();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT USUARIOS.*, CLIENTES.MontoMaximoDeCompra FROM USUARIOS INNER JOIN CLIENTES ON USUARIOS.Id = CLIENTES.IdUsuario;";
+                    string query = "";
+                    switch (tipoUsuario)
+                    {
+                        case TipoUsuario.Cliente:
+                            query = "SELECT USUARIOS.*, CLIENTES.MontoMaximoDeCompra FROM USUARIOS INNER JOIN CLIENTES ON USUARIOS.Id = CLIENTES.IdUsuario;";
+                            break;
+                        case TipoUsuario.Vendedor:
+                            query = "SELECT USUARIOS.*, VENDEDORES.VentasRealizadas FROM USUARIOS INNER JOIN VENDEDORES ON USUARIOS.Id = VENDEDORES.IdUsuario;";
+                            break;
+                        default:
+                            throw new ArgumentException("Tipo de usuario inválido.");
+                    }
 
                     SqlCommand command = new SqlCommand(query, connection);
                     connection.Open();
@@ -109,31 +121,49 @@ namespace Entidades
                         string apellido = reader["Apellido"].ToString();
                         string email = reader["Email"].ToString();
                         string contrasena = reader["Contraseña"].ToString();
-                        float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
 
-                        Cliente cliente = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
-                        clientes.Add(cliente);
+                        Usuario usuario = null;
+
+                        if (tipoUsuario == TipoUsuario.Cliente)
+                        {
+                            float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
+                            usuario = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
+                        }
+                        else if (tipoUsuario == TipoUsuario.Vendedor)
+                        {
+                            int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
+                            usuario = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
+                        }
+
+                        usuarios.Add(usuario);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ocurrió un error al obtener los clientes: " + ex.Message);
-                throw new Exception("Error obteniendo los clientes");
+                Console.WriteLine("Ocurrió un error al obtener los usuarios: " + ex.Message);
+                throw new Exception("Error obteniendo los usuarios");
             }
 
-            return clientes;
+            return usuarios;
         }
-
-        public static Cliente ObtenerClientePorId(int id)
+        /// <summary>
+        /// Obtiene un usuario por su id
+        /// </summary>
+        /// <param name="id">Id del usuario a obtener</param>
+        /// <returns>Retorna Usuario si lo encuentra y Null si no</returns>
+        /// <exception cref="Exception">Si ocurre un error en la conexión con la base de datos, lanza una exception</exception>
+        public static Usuario? ObtenerUsuarioPorId(int id)
         {
-            Cliente cliente = null;
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT USUARIOS.*, CLIENTES.MontoMaximoDeCompra FROM USUARIOS INNER JOIN CLIENTES ON USUARIOS.Id = CLIENTES.IdUsuario WHERE USUARIOS.Id = @Id";
+                    string query = "SELECT USUARIOS.*, CLIENTES.MontoMaximoDeCompra, VENDEDORES.VentasRealizadas " +
+                                   "FROM USUARIOS " +
+                                   "LEFT JOIN CLIENTES ON USUARIOS.Id = CLIENTES.IdUsuario " +
+                                   "LEFT JOIN VENDEDORES ON USUARIOS.Id = VENDEDORES.IdUsuario " +
+                                   "WHERE USUARIOS.Id = @Id";
 
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Id", id);
@@ -147,100 +177,32 @@ namespace Entidades
                         string apellido = reader["Apellido"].ToString();
                         string email = reader["Email"].ToString();
                         string contrasena = reader["Contraseña"].ToString();
-                        float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
 
-                        cliente = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
+                        Usuario? usuario = null;
+
+                        if (reader["MontoMaximoDeCompra"] != DBNull.Value)
+                        {
+                            float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
+                            usuario = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
+                        }
+                        else if (reader["VentasRealizadas"] != DBNull.Value)
+                        {
+                            int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
+                            usuario = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
+                        }
+
+                        return usuario;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ocurrió un error al obtener el cliente: " + ex.Message);
-                throw new Exception("Error obteniendo el cliente");
+                Console.WriteLine("Ocurrió un error al obtener el usuario: " + ex.Message);
+                throw new Exception("Error obteniendo el usuario desde la base de datos");
             }
 
-            return cliente;
+            return null;
         }
-        public static Vendedor ObtenerVendedorPorId(int id)
-        {
-            Vendedor vendedor = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT USUARIOS.*, VENDEDORES.VentasRealizadas FROM USUARIOS INNER JOIN VENDEDORES ON USUARIOS.Id = VENDEDORES.IdUsuario WHERE USUARIOS.Id = @Id";
-
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Id", id);
-
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        string nombre = reader["Nombre"].ToString();
-                        string apellido = reader["Apellido"].ToString();
-                        string email = reader["Email"].ToString();
-                        string contrasena = reader["Contraseña"].ToString();
-                        int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
-
-                        vendedor = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Ocurrió un error al obtener el vendedor: " + ex.Message);
-                throw new Exception("Error obteniendo el vendedor");
-            }
-
-            return vendedor;
-        }
-
-
-        /// <summary>
-        /// Retorna una lista de los usuarios registrados en la base de datos que son vendedores
-        /// </summary>
-        /// <returns>Retorna una lista de vendedores</returns>
-        /// <exception cref="Exception">Si ocurre un error, lanza una exception</exception>
-        public static List<Vendedor> ObtenerListaVendedores()
-        {
-            List<Vendedor> vendedores = new List<Vendedor>();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT USUARIOS.*, VENDEDORES.VentasRealizadas FROM USUARIOS INNER JOIN VENDEDORES ON USUARIOS.Id = VENDEDORES.IdUsuario;";
-
-                    SqlCommand command = new SqlCommand(query, connection);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        int id = Convert.ToInt32(reader["Id"]);
-                        string nombre = reader["Nombre"].ToString();
-                        string apellido = reader["Apellido"].ToString();
-                        string email = reader["Email"].ToString();
-                        string contrasena = reader["Contraseña"].ToString();
-                        int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
-
-                        Vendedor vendedor = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
-                        vendedores.Add(vendedor);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Ocurrió un error al obtener los vendedores: " + ex.Message);
-                throw new Exception("Error obteniendo los vendedores");
-            }
-
-            return vendedores;
-        }
-
         /// <summary>
         /// Retorna la lista de usuarios registrados en la base de datos
         /// </summary>
@@ -267,22 +229,11 @@ namespace Entidades
                         string email = reader["Email"].ToString();
                         string contrasena = reader["Contraseña"].ToString();
 
-                        // Verificar el tipo de usuario por medio de algún indicador, como una columna en la base de datos
-                        int tipoDeUsuario = Convert.ToInt32(reader["TipoDeUsuario"]);
-                        Usuario usuario;
-                        /*Usuario usuario = tipoDeUsuario == 1
-                            ? new Vendedor(nombre, apellido, email, contrasena, 0)
-                            : new Cliente(nombre, apellido, email, contrasena, 0);*/
-                        if (tipoDeUsuario == 1)
-                        {
-                            usuario = ObtenerVendedorPorId(id);
+                        Usuario? usuario = ObtenerUsuarioPorId(id);
+                        if(usuario != null)
+                        {                        
+                            usuarios.Add(usuario);
                         }
-                        else
-                        {
-                            usuario = ObtenerClientePorId(id);
-                        }
-
-                        usuarios.Add(usuario);
                     }
                 }
             }
