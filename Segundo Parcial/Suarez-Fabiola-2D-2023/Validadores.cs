@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entidades;
+﻿using Entidades;
+using System.Reflection;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -35,8 +31,9 @@ namespace Suarez_Fabiola_2D_2023
                 return true;
             }
         }
+
         /// <summary>
-        /// Valida el formato de una Contraseña 
+        /// Valida el formato de una Contraseña
         /// </summary>
         /// <param name="contraseña">Contraseña a validar</param>
         /// <param name="error_contraseña">Control de error de contraseña</param>
@@ -54,24 +51,26 @@ namespace Suarez_Fabiola_2D_2023
                 return true;
             }
         }
+
         /// <summary>
         /// Valida los campos ListBox y TextBox del Gb_ListaDeProductos y devuelve un mensaje de error de no ser válidos
         /// </summary>
-        /// <param name="indexProducto">Index del producto a buscar en la lista</param>
+        /// <param name="id">Id del producto a seleccionado</param>
         /// <param name="cantidadIngresada">Cantidad de producto ingresado</param>
         /// <param name="esAgregarAlCarrito">Indica si es para agregar al carrito en vez de para eliminar del carrito</param>
         /// <returns>Retorna True si son válidos y False de lo contrario</returns>
-        public static bool ValidarCamposParaModificarCarrito(int indexProducto, int cantidadIngresada, bool esAgregarAlCarrito, List<Producto> productos, List<Producto> productosCarrito)
+        public static bool ValidarCamposParaModificarCarrito(int id, int cantidadIngresada, bool esAgregarAlCarrito, List<Producto> productos, List<Producto> productosCarrito)
         {
             if (productos.Count == 0) return false;
-            double stockDisponible = Producto.ObtenerPropiedadProducto<double>(indexProducto, p => p.StockDisponible, productos);
+            Producto? producto = Producto.ObtenerProductoPorId(id, productos);
+            double stockDisponible = producto.StockDisponible;
 
-            if (indexProducto < 0 && cantidadIngresada < 1)
+            if (id < 1 && cantidadIngresada < 1)
             {
                 MessageBox.Show("Debe seleccionar un producto e ingresar cantidad.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (indexProducto < 0)
+            if (id < 1)
             {
                 MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -86,12 +85,12 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show($"Lo sentimos, sólo nos quedan {stockDisponible} gr, del producto seleccionado", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(productos[indexProducto].Nombre, productos, productosCarrito) == false)
+            if (!esAgregarAlCarrito & Producto.ExisteProductoEnELCarrito(producto.Id, productosCarrito) == false)
             {
                 MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (!esAgregarAlCarrito && Producto.ObtenerCantidadProductoDelCarrito(productos[indexProducto], productosCarrito) < cantidadIngresada)
+            if (!esAgregarAlCarrito && Producto.ObtenerCantidadProductoDelCarrito(producto, productosCarrito) < cantidadIngresada)
             {
                 MessageBox.Show($"No se puede eliminar más de la cantidad del producto agregado al carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -100,109 +99,68 @@ namespace Suarez_Fabiola_2D_2023
             return true;
         }
         /// <summary>
-        /// Valida el tipo de corte y muestra un mensaje de error si no es válido
+        /// Valida si el campo que se va a modificar tiene un valor ingresado válido
         /// </summary>
-        /// <param name="indexProducto">Index del producto a buscar en la lista</param>
-        /// <param name="corteIngresado">Tipo de corte ingresado a validar</param>
-        /// <param name="productos">Lista de productos</param>
-        /// <returns>Retorna True si es válidos y False si no</returns>
-        public static bool ValidarCampoTipoDeCorte(int indexProducto, string corteIngresado, List<Producto> productos)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="nombreAtributo">Nombre del atributo que se va a validar</param>
+        /// <param name="valorIngresado">Valor a validar</param>
+        /// <param name="productoSeleccionado">Producto seleccionado a modificar</param>
+        /// <returns>Retorna True si se ingresó un valor válido y False si no</returns>
+        public static bool ValidarCampoAModificar<T>(string nombreAtributo, T valorIngresado, Producto productoSeleccionado)
         {
-            if (productos.Count == 0) return false;
-            string tipoCorteProducto = Producto.ObtenerPropiedadProducto<string>(indexProducto, p => p.TipoCorte, productos);
+            if (string.IsNullOrEmpty(nombreAtributo) || valorIngresado == null || productoSeleccionado == null)
+                return false;
 
-            if (indexProducto < 0 && string.IsNullOrEmpty(corteIngresado))
+            switch (nombreAtributo.ToLower())
             {
-                MessageBox.Show("Debe seleccionar un producto e ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (string.IsNullOrEmpty(corteIngresado))
-            {
-                MessageBox.Show("Debe ingresar un tipo de corte.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (corteIngresado == tipoCorteProducto)
-            {
-                MessageBox.Show($"No hay cambios en el tipo de corte. El corte ingresado es igual al corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
-        /// <summary>
-        /// Valida el precio y muestra un mensaje de error si no es válido
-        /// </summary>
-        /// <param name="indexProducto">Index del producto a buscar en la lista</param>
-        /// <param name="precio">Precio ingresado a validar</param>
-        /// <param name="productos">Lista de productos</param>
-        /// <returns>Retorna True si es válidos y False si no</returns>
-        public static bool ValidarCampoPrecio(int indexProducto, double precio, List<Producto> productos)
-        {
-            if (productos.Count == 0) return false;
-            double precioProducto = Producto.ObtenerPropiedadProducto<double>(indexProducto, p => p.PrecioPorKilo, productos, precio);
+                case "precio":
+                    double nuevoPrecio;
+                    if (!double.TryParse(valorIngresado.ToString(), out nuevoPrecio) || nuevoPrecio < 0)
+                    {
+                        MessageBox.Show("Debe ingresar un precio válido mayor o igual a 0.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    else if (nuevoPrecio == productoSeleccionado.PrecioPorKilo)
+                    {
+                        MessageBox.Show("El nuevo precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    break;
 
+                case "stock":
+                    double nuevoStock;
+                    if (!double.TryParse(valorIngresado.ToString(), out nuevoStock) || nuevoStock < 0)
+                    {
+                        MessageBox.Show("Debe ingresar un stock válido mayor o igual a 0.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    else if (nuevoStock == productoSeleccionado.StockDisponible)
+                    {
+                        MessageBox.Show("El nuevo stock ingresado es igual al stock actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    break;
 
-            if (indexProducto < 0 & precio < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista e ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (precio < 0)
-            {
-                MessageBox.Show("Debe ingresar un precio mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (precioProducto == precio)
-            {
-                MessageBox.Show($"No hay cambios en el precio. El precio ingresado es igual al precio actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                case "tipo de corte":
+                    string nuevoTipoCorte = valorIngresado.ToString().Trim();
+                    if (string.IsNullOrEmpty(nuevoTipoCorte))
+                    {
+                        MessageBox.Show("Debe ingresar un tipo de corte válido.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    else if (nuevoTipoCorte.ToLower() == productoSeleccionado.TipoCorte.ToLower())
+                    {
+                        MessageBox.Show("El nuevo tipo de corte ingresado es igual al tipo de corte actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
             }
 
             return true;
         }
-        /// <summary>
-        /// Valida el stock ingresado y muestra un mensaje de error si no es válido
-        /// </summary>
-        /// <param name="indexProducto">Index del producto a buscar en la lista</param>
-        /// <param name="corteIngresado">Stock ingresado a validar</param>
-        /// <param name="productos">Lista de productos</param>
-        /// <returns>Retorna True si es válidos y False si no</returns>
-        public static bool ValidarCampoStock(int indexProducto, int cantidadIngresada, List<Producto> productos)
-        {
-            if (productos.Count == 0) return false;
-            double stockDisponible = Producto.ObtenerPropiedadProducto<double>(indexProducto, p => p.StockDisponible, productos);
 
-            if (indexProducto < 0 && cantidadIngresada < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto e ingresar una cantidad mayor o igual a cero.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (indexProducto < 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (cantidadIngresada < 0)
-            {
-                MessageBox.Show($"Debe ingresar una cantidad mayor a cero gramos y sin decimales.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else if (stockDisponible == cantidadIngresada)
-            {
-                MessageBox.Show($"No hay cambios en el stock. La cantidad ingresada es igual al stock disponible actual.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
         /// <summary>
         /// Valida todos los campos de un prodcuto antes de agregarlo a la lista
         /// </summary>

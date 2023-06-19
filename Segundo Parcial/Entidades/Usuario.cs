@@ -1,6 +1,7 @@
 ﻿namespace Entidades;
 public abstract class Usuario
 {
+    public int Id { get; }
     public string Nombre { get; }
     public string Apellido { get; }
     public string NombreCompleto { get; }
@@ -10,6 +11,7 @@ public abstract class Usuario
 
     public Usuario()
     {
+        Id = -1;
         this.Nombre = string.Empty;
         this.Apellido = string.Empty;
         this.NombreCompleto = string.Empty;
@@ -17,11 +19,12 @@ public abstract class Usuario
         this.Contrasena = string.Empty;
         this.TipoDeUsuario = TipoUsuario.Cliente;
     }
-    public Usuario(string nombre, string apellido, string email, string contrasena, TipoUsuario tipoDeUsuario) : this()
+    public Usuario(int id, string nombre, string apellido, string email, string contrasena, TipoUsuario tipoDeUsuario) : this()
     {
+        this.Id = id;
         this.Nombre = nombre;
         this.Apellido = apellido;
-        this.NombreCompleto = $"{Utilidades.Capitalize(this.Nombre)} {Utilidades.Capitalize(this.Apellido)}";
+        this.NombreCompleto = $"{this.Nombre.Capitalize()} {this.Apellido.Capitalize()}";
         this.Email = email;
         this.Contrasena = contrasena;
         this.TipoDeUsuario = tipoDeUsuario;

@@ -27,17 +27,6 @@ namespace Suarez_Fabiola_2D_2023
             this.Close();
         }
         /// <summary>
-        /// Regresa a la página ModificarStock
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormAgregarProducto_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            ModificarStock modificarStock = (ModificarStock)Application.OpenForms["ModificarStock"];
-            modificarStock.CargarItemsProductos();
-            modificarStock.Enabled = true;
-        }
-        /// <summary>
         /// Si los datos del producto a agregar son válidos agrega el producto a la lista de productos
         /// </summary>
         /// <param name="sender"></param>
@@ -46,8 +35,8 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (Validadores.ValidarCamposAgregarProducto(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Tb_Precio.Text, Tb_Stock.Text))
             {
-                Producto nuevoProducto = new Producto(0, Utilidades.Capitalize(Tb_Nombre.Text), Tb_Descripcion.Text.Trim(), Tb_TipoCorte.Text.Trim(), Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text));
-                if (Producto.AgregarProducto(nuevoProducto))
+                Producto nuevoProducto = new Producto(0, Tb_Nombre.Text.Capitalize(), Tb_Descripcion.Text.Trim(), Tb_TipoCorte.Text.Trim(), Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text));
+                if (ProductosDAO.GuardarProducto(nuevoProducto))
                 {
                     MessageBox.Show("Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Tb_Nombre.Text = string.Empty;
@@ -126,6 +115,19 @@ namespace Suarez_Fabiola_2D_2023
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+            }
+        }
+        /// <summary>
+        /// Cuando se cierra el form carga de nuevo la lista de productos del form heladera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormAgregarProducto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHeladera formHeladera = (FormHeladera)Application.OpenForms["FormHeladera"];
+            if (formHeladera != null)
+            {
+                formHeladera.CargarListaProductos();
             }
         }
     }

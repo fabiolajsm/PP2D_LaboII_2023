@@ -7,58 +7,63 @@ namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormHeladera : Form
     {
-        public DataGridView dataGridName;
-        private Vendedor vendedor;
+        private List<Producto> listaProductos;
         private bool mostrarModalBienvenida;
+        private Vendedor vendedor;
         public FormHeladera(Vendedor vendedor, bool mostrarBienvenida)
         {
+            this.listaProductos = new List<Producto>();
             this.vendedor = vendedor;
             this.mostrarModalBienvenida = mostrarBienvenida;
             this.Enabled = true;
             InitializeComponent();
-            this.dataGridName = dataGridView;
-            CargarListaProductos(dataGridView, ProductosDAO.LeerProductos());
             CargarOpcionesDelComboBox();
+            CargarListaProductos();
+        }
+
+        /// <summary>
+        /// Se cargan en el ComboBox las opciones del vendedor
+        /// </summary>
+        private void CargarOpcionesDelComboBox()
+        {
+            Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes", "Agregar producto" ,"Ver historial de ventas" });
+            Cb_Opciones.SelectedIndex = 0;
         }
         /// <summary>
         /// Carga la lista de productos para que se visualice en el DataGridView
         /// </summary>
         /// <param name="dataGridView"></param>
         /// <param name="listaProductos"></param>
-        public void CargarListaProductos(DataGridView dataGridView, List<Producto> listaProductos)
+        public void CargarListaProductos()
         {
+            this.listaProductos = ProductosDAO.LeerProductos();
+            // Limpiar las columnas y filas existentes en el DataGridView
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
 
             // Agrega las columnas al control
+            dataGridView.Columns.Add("Id", "");
             dataGridView.Columns.Add("Nombre", "Nombre");
             dataGridView.Columns.Add("Kilos en stock", "Kilos en stock");
             dataGridView.Columns.Add("Precio por kilo", "Precio por kilo");
             dataGridView.Columns.Add(new DataGridViewButtonColumn() { Name = "Ver detalle", Text = "Ver detalle" });
-
+            dataGridView.Columns["Id"].Visible = false;
             // Agrega las filas al control
             foreach (Producto producto in listaProductos)
             {
-                int rowIndex = dataGridView.Rows.Add();
-                DataGridViewRow row = dataGridView.Rows[rowIndex];
+                int indexFila = dataGridView.Rows.Add();
+                DataGridViewRow fila = dataGridView.Rows[indexFila];
 
-                row.Cells["Nombre"].Value = producto.Nombre;
-                row.Cells["Kilos en stock"].Value = $"{producto.StockDisponible / 1000}";
-                row.Cells["Precio por kilo"].Value = $"${producto.PrecioPorKilo.ToString("#0.00")}";
+                fila.Cells["Id"].Value = producto.Id;
+                fila.Cells["Nombre"].Value = producto.Nombre;
+                fila.Cells["Kilos en stock"].Value = $"{producto.StockDisponible / 1000}";
+                fila.Cells["Precio por kilo"].Value = $"${producto.PrecioPorKilo.ToString("#0.00")}";
 
                 // Agrega el botón a la celda correspondiente
-                DataGridViewButtonCell botonDetalle = (DataGridViewButtonCell)row.Cells["Ver detalle"];
+                DataGridViewButtonCell botonDetalle = (DataGridViewButtonCell)fila.Cells["Ver detalle"];
                 botonDetalle.Value = "Ver detalle";
                 botonDetalle.UseColumnTextForButtonValue = true;
             }
-        }
-        /// <summary>
-        /// Se cargan en el ComboBox las opciones del vendedor
-        /// </summary>
-        private void CargarOpcionesDelComboBox()
-        {
-            Cb_Opciones.Items.AddRange(new string[] { "Vender productos", "Modificar stock de los productos", "Fijar precios por kilo", "Fijar tipos de cortes", "Ver historial de ventas" });
-            Cb_Opciones.SelectedIndex = 0;
         }
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
@@ -89,20 +94,24 @@ namespace Suarez_Fabiola_2D_2023
                         elegirCliente.ShowDialog();
                         break;
                     case "Modificar stock de los productos":
-                        ModificarStock modificarStock = new ModificarStock();
-                        modificarStock.ShowDialog();
+                        FormModificarProducto formStock = new FormModificarProducto("stock");
+                        formStock.ShowDialog();
                         break;
                     case "Fijar precios por kilo":
-                        FijarPrecios fijarPrecios = new FijarPrecios();
-                        fijarPrecios.ShowDialog();
+                        FormModificarProducto formPrecio = new FormModificarProducto("precio");
+                        formPrecio.ShowDialog();
                         break;
                     case "Fijar tipos de cortes":
-                        FijarCortes fijarCortes = new FijarCortes();
-                        fijarCortes.ShowDialog();
+                        FormModificarProducto formCorte = new FormModificarProducto("tipo de corte");
+                        formCorte.ShowDialog();
                         break;
                     case "Ver historial de ventas":
                         HistorialVentas historialVentas = new HistorialVentas();
                         historialVentas.ShowDialog();
+                        break;
+                    case "Agregar producto":
+                        FormAgregarProducto formAgregar = new FormAgregarProducto();
+                        formAgregar.ShowDialog();
                         break;
                 }
             }
@@ -125,8 +134,9 @@ namespace Suarez_Fabiola_2D_2023
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView.Columns["Ver detalle"].Index)
             {
-                string nombre = dataGridView.Rows[e.RowIndex].Cells["Nombre"].Value.ToString();
-                Producto? producto = new Producto().ObtenerProductoPorNombre(nombre, ProductosDAO.LeerProductos());
+                string id = dataGridView.Rows[e.RowIndex].Cells["Id"].Value.ToString();
+                int idInt = int.Parse(id);
+                Producto? producto = Entidades.Producto.ObtenerProductoPorId(idInt, listaProductos);
                 if (producto != null)
                 {
                     MessageBox.Show($"Detalle del producto:\n\nNombre: {producto.Nombre}\nDescripción: {producto.Descripcion}\nTipo de corte: {producto.TipoCorte}\nPrecio por kilo: ${producto.PrecioPorKilo}\nStock disponible: {producto.StockDisponible} gramos");

@@ -4,12 +4,6 @@
     <Compile Update="ElegirCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FijarCortes.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="FijarPrecios.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FormAgregarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -22,6 +16,9 @@
     <Compile Update="FormMetodoDePago.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormModificarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormMonto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -29,9 +26,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="HistorialVentas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ModificarStock.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -9,18 +9,22 @@ namespace Entidades
     public class Factura
     {
         public string TipoDeCompra { get; set; }
-        public string NombreCliente { get; set; }
+        public int IdProducto { get; set; }
         public string NombreProducto { get; set; }
+        public int IdCliente { get; set; }
+        public string NombreCliente { get; set; }
         public int CantidadComprada { get; set; }
         public double Precio { get; set; }
         public double Recargo { get; set; }
         public double PrecioFinal { get; set; }
 
-        public Factura(string tipoDeCompra, string nombreCliente, string nombreProducto, int cantidadComprada, double precio, double recargo)
+        public Factura(string tipoDeCompra, int idProducto, string nombreProducto, int idCliente, string nombreCliente, int cantidadComprada, double precio, double recargo)
         {
             TipoDeCompra = tipoDeCompra;
-            NombreCliente = nombreCliente;
+            IdProducto = idProducto;
             NombreProducto = nombreProducto;
+            IdCliente = idCliente;
+            NombreCliente = nombreCliente;
             CantidadComprada = cantidadComprada;
             Precio = precio;
             Recargo = recargo;
@@ -30,19 +34,11 @@ namespace Entidades
         /// Agrega facturas a la lista de historial de facturas
         /// </summary>
         /// <param name="listaHistorialDeFacturas">Lista de facturas a agregar a historial</param>
-        /// <param name="listaHistorialVentas">Lista de en donde se van a agregar las facturas</param>
         /// <returns>Retorna True si se agregaron y False si no</returns>
-        public static bool AgregarFacturasAlHistorial(List<Factura> listaFacturas, List<Factura> listaHistorialVentas)
+        public static bool AgregarFacturasAlHistorial(List<Factura> listaFacturas)
         {
             if (listaFacturas.Count == 0) return false;
-            foreach (Factura factura in listaFacturas)
-            {
-                if (factura != null)
-                {
-                    DatosEnMemoria.AgregarFacturaAHistorial(factura);
-                }
-            }
-            return true;
+            return ArchivoHistorialVentas.EscribirHistorialVentas(listaFacturas);
         }
     }
 }

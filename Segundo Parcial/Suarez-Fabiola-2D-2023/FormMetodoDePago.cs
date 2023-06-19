@@ -28,14 +28,9 @@ namespace Suarez_Fabiola_2D_2023
             this.cliente = cliente;
             this.recargo = 0;
             this.esVendedor = esVendedor;
-            if (Lb_MontoMaximo != null)
-            {
-                Lb_MontoMaximo.Text = $"Monto máximo de compra: ${maximoDeCompra}";
-            }
-            else
-            {
-                Lb_MontoMaximo.Text = "Monto máximo de compra: $0";
-            }
+
+            float montoDeCompra = maximoDeCompra > 0 ? maximoDeCompra : 0;
+            Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";
         }
         /// <summary>
         /// Cambia los colores del form según el tipo de usuario
@@ -163,57 +158,81 @@ namespace Suarez_Fabiola_2D_2023
             }
             else
             {
-                StringBuilder mensajeBuilder = new StringBuilder();
-                string tipoDeVenta = esVendedor ? "En el local" : "Online";
-
-                if (esVendedor)
-                {
-                    mensajeBuilder.AppendLine("Resumen de la venta");
+                // Actualizamos la lista de productos en la base de datos
+                if (ActualizarProductosEnBaseDeDatos() && ActualizarMontoMaximoDeCompra(total))
+                {                
+                    MostrarMensajeDeExitoYCrearFacturas(total);
+                    FormVenta.LimpiarListaProductosCarrito();
                 }
                 else
                 {
-                    mensajeBuilder.AppendLine("¡Gracias por su compra!");
-                    mensajeBuilder.AppendLine("Productos:");
+                    MessageBox.Show("Lo sentimos, en este momento no se puede realizar la compra", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                List<Factura> listaDeFacturas = new List<Factura>(); 
-
-                foreach (Producto producto in FormVenta.listaProductosDelCarrito)
-                {
-                    mensajeBuilder.AppendFormat("{0} x {1} Gramos = ${2:#0.00}\n",
-                        producto.Nombre,
-                        producto.CantidadDeseada,
-                        Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
-
-                    // Creamos una instancia de Factura para cada producto
-                    Factura factura = new Factura(
-                        tipoDeVenta,
-                        cliente.NombreCompleto,
-                        producto.Nombre,
-                        producto.CantidadDeseada,
-                        Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo),
-                        recargo
-                    );
-                    listaDeFacturas.Add(factura); // agregamos la factura a la lista de facturas
-                }
-
-                mensajeBuilder.AppendFormat("Recargo: ${0:#0.00}\n", recargo);
-                mensajeBuilder.AppendFormat("Precio final: ${0:#0.00}", total);
-
-                MessageBox.Show(mensajeBuilder.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Agregamos la factura al historial de ventas
-                List<Factura> historialVentas = DatosEnMemoria.ObtenerHistorialVentas();
-                Factura.AgregarFacturasAlHistorial(listaDeFacturas, historialVentas);
-                // Actualizamos el monto maximo de compra del cliente
-                cliente.MontoMaximoDeCompra -= (float)total;
-                Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), cliente.MontoMaximoDeCompra);
-                // Por último limpiamos la listaProductosDelCarrito y regresamos al FormVenta
-                FormVenta.LimpiarListaProductosCarrito();
-                this.Hide();
-                FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor, false);
-                agregarAlCarrito.Show();
+                VolverAlFormVenta();
             }
+        }
+        private void MostrarMensajeDeExitoYCrearFacturas(double total)
+        {
+            StringBuilder mensajeBuilder = new StringBuilder();
+            string tipoDeVenta = esVendedor ? "En el local" : "Online";
+
+            if (esVendedor)
+            {
+                mensajeBuilder.AppendLine("Resumen de la venta");
+            }
+            else
+            {
+                mensajeBuilder.AppendLine("¡Gracias por su compra!");
+                mensajeBuilder.AppendLine("Productos:");
+            }
+
+            List<Factura> listaDeFacturas = new List<Factura>();
+
+            foreach (Producto producto in FormVenta.listaProductosDelCarrito)
+            {
+                mensajeBuilder.AppendFormat("{0} x {1} Gramos = ${2:#0.00}\n",
+                    producto.Nombre,
+                    producto.CantidadDeseada,
+                    Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+
+                // Creamos una instancia de Factura para cada producto
+                Factura factura = new Factura(
+                    tipoDeVenta,
+                    producto.Id,
+                    producto.Nombre,
+                    cliente.Id,
+                    cliente.NombreCompleto,
+                    producto.CantidadDeseada,
+                    Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo),
+                    recargo
+                );
+                listaDeFacturas.Add(factura); // agregamos la factura a la lista de facturas
+            }
+
+            mensajeBuilder.AppendFormat("Recargo: ${0:#0.00}\n", recargo);
+            mensajeBuilder.AppendFormat("Precio final: ${0:#0.00}", total);
+
+            MessageBox.Show(mensajeBuilder.ToString(), "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Agregamos la factura al historial de ventas
+            Factura.AgregarFacturasAlHistorial(listaDeFacturas);
+        }
+        private bool ActualizarMontoMaximoDeCompra(double total)
+        {
+            cliente.MontoMaximoDeCompra -= (float)total;
+            return UsuariosDAO.ModificarMontoMaximoDeCompra(cliente, cliente.MontoMaximoDeCompra);
+        }
+
+        private bool ActualizarProductosEnBaseDeDatos()
+        {
+            List<Producto> listaCarrito = FormVenta.listaProductosDelCarrito;
+            return ProductosDAO.ModificarLista(listaCarrito);
+        }
+        private void VolverAlFormVenta()
+        {
+            this.Hide();
+            FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor, false);
+            agregarAlCarrito.Show();
         }
     }
 }

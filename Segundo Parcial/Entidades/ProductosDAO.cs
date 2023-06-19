@@ -48,6 +48,7 @@ namespace Entidades
         /// <returns>Retorna True si se agregó y False si no</returns>
         public static bool GuardarProducto(Producto producto)
         {
+            if (producto == null) return false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string query = "INSERT INTO Productos (Nombre, Descripcion, TipoDeCorte, PrecioPorKilo, StockDisponible, CantidadDeseada) " +
@@ -151,41 +152,91 @@ namespace Entidades
             return productos;
         }
         /// <summary>
-        /// Modifica un producto a partir de su Id.
+        /// Modifica un atributo del producto ingresado a partir de su Id.
         /// </summary>
         /// <param name="producto">Producto a modificar</param>
+        /// <param name="nombreAtributo">Nombre del atributo a modificar</param>
+        /// <param name="nuevoValor">Nuevo valor a asignarle al atributo</param>
         /// <returns>True si se modificó correctamente, False si ocurrió un error</returns>
-        public static bool Modificar(Producto producto)
+        public static bool ModificarAtributo<T>(Producto producto, string nombreAtributo, T nuevoValor)
         {
+            if (producto == null || string.IsNullOrEmpty(nombreAtributo) || nuevoValor == null) return false;
+            string atributo;
+            dynamic valor = null;
+            switch (nombreAtributo)
+            {
+                case "precio":
+                    atributo = "PrecioPorKilo";
+                    if (!double.TryParse(nuevoValor.ToString(), out double parsedDouble))
+                    {
+                        return false;
+                    }
+                    valor = parsedDouble;
+                    break;
+                case "stock":
+                    atributo = "StockDisponible";
+                    if (!double.TryParse(nuevoValor.ToString(), out parsedDouble))
+                    {
+                        return false;
+                    }
+                    valor = parsedDouble;
+                    break;
+                case "tipo de corte":
+                    atributo = "TipoDeCorte";
+                    valor = nuevoValor.ToString().Trim().Capitalize();
+                    break;
+                default: return false;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE PRODUCTOS
-                         SET Nombre = @Nombre,
-                             Descripcion = @Descripcion,
-                             TipoDeCorte = @TipoDeCorte,
-                             PrecioPorKilo = @PrecioPorKilo,
-                             StockDisponible = @StockDisponible,
-                             CantidadDeseada = @CantidadDeseada
-                         WHERE Id = @Id";
+                connection.Open();
+                string query = $"UPDATE PRODUCTOS SET {atributo} = @valor WHERE Id = @id;";
 
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Nombre", producto.Nombre);
-                command.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
-                command.Parameters.AddWithValue("@TipoDeCorte", producto.TipoCorte);
-                command.Parameters.AddWithValue("@PrecioPorKilo", producto.PrecioPorKilo);
-                command.Parameters.AddWithValue("@StockDisponible", producto.StockDisponible);
-                command.Parameters.AddWithValue("@CantidadDeseada", producto.CantidadDeseada);
-                command.Parameters.AddWithValue("@Id", producto.Id);
+                using (var comando = new SqlCommand(query, connection))
+                {
+                    comando.Parameters.AddWithValue("@valor", valor);
+                    comando.Parameters.AddWithValue("@id", producto.Id);
 
+                    int filasAfectadas = comando.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0) return true;
+                }
+            }
+
+            return false;
+        }
+        public static bool ModificarLista(List<Producto> listaProductos)
+        {
+            if(listaProductos.Count == 0) return false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
                 try
                 {
                     connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    return rowsAffected > 0;
+
+                    foreach (Producto producto in listaProductos)
+                    {
+                        string query = @"UPDATE PRODUCTOS SET StockDisponible = @StockDisponible WHERE Id = @Id";
+
+                        SqlCommand command = new SqlCommand(query, connection);
+                        command.Parameters.AddWithValue("@StockDisponible", producto.StockDisponible);
+                        command.Parameters.AddWithValue("@Id", producto.Id);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected <= 0)
+                        {
+                            Console.WriteLine("No se pudo actualizar el producto con ID: " + producto.Id);
+                            return false;
+                        }
+                    }
+
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Ocurrió un error al modificar el producto: " + ex.Message);
+                    Console.WriteLine("Ocurrió un error al modificar la lista de productos: " + ex.Message);
                     return false;
                 }
             }

@@ -5,10 +5,10 @@ using Entidades;
 namespace Suarez_Fabiola_2D_2023
 {
     public partial class FormLogin : Form
-    {
+    {             
         public FormLogin()
         {
-            InitializeComponent();
+            InitializeComponent();       
         }
 
         /// <summary>

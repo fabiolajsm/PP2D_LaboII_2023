@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entidades
+﻿namespace Entidades
 {
     public class Producto
     {
@@ -19,13 +13,14 @@ namespace Entidades
         public Producto()
         {
             Id = 0;
-            Nombre = "";
-            Descripcion = "";
-            TipoCorte = "";
+            Nombre = string.Empty;
+            Descripcion = string.Empty;
+            TipoCorte = string.Empty;
             PrecioPorKilo = 0;
             StockDisponible = 0;
             CantidadDeseada = 0;
         }
+
         public Producto(int id, string nombre, string descripcion, string tipoCorte, double precioPorKilo, double stockDisponible)
         {
             Id = id;
@@ -44,75 +39,39 @@ namespace Entidades
         }
 
         /// <summary>
-        /// Agrega un producto a la base de datos
+        /// Obtiene un producto buscándolo por Id en la lista de productos
         /// </summary>
-        /// <param name="nuevoProducto">Producto a agregar</param>
-        /// <returns>Retorna True si se agregó y False si no</returns>
-        public static bool AgregarProducto(Producto nuevoProducto)
-        {
-            if (nuevoProducto == null) return false;
-
-            return ProductosDAO.GuardarProducto(nuevoProducto);
-        }
-        /// <summary>
-        /// Retorna la lista de productos registrados en la base de datos
-        /// </summary>
-        /// <returns>Retorna la lista de productos</returns>
-        public static List<Producto> ObtenerProductos()
-        {
-            return ProductosDAO.LeerProductos();
-        }
-        /// <summary>
-        /// Obtiene un producto buscándolo por nombre en la lista de productos !!!!!!cambiarlo a buscar por id
-        /// </summary>
-        /// <param name="nombreDelProducto">Nombre del producto a buscar</param>
+        /// <param name="id">Id del producto a buscar</param>
         /// <param name="listaProductos">Lista productos</param>
         /// <returns>Retorna el producto segun el nombre ingresado</returns>
-        public Producto? ObtenerProductoPorNombre(string nombreDelProducto, List<Producto> listaProductos)
+        public static Producto? ObtenerProductoPorId(int id, List<Producto> listaProductos)
         {
-            if (string.IsNullOrEmpty(nombreDelProducto) || listaProductos.Count < 0) return null;
+            if (id < 1 || listaProductos.Count < 0) return null;
             foreach (Producto producto in listaProductos)
             {
-                if (producto.Nombre == nombreDelProducto)
+                if (producto.Id == id)
                 {
                     return producto;
                 }
             }
             return null;
         }
-        // MEJORAR FUNCION PQ NO LE GUSTO CREO?
-        /// <summary>
-        /// Obtiene el atributo indicado del producto seleccionado
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="indexProducto"></param>
-        /// <param name="propiedad"></param> puedo usarlo como indexador
-        /// <param name="listaProductos"></param>
-        /// <param name="valorPorDefecto"></param>
-        /// <returns>Retorna la propiedad del producto segun su valor por defecto</returns>
-        public static T ObtenerPropiedadProducto<T>(int indexProducto, Func<Producto, T> propiedad, List<Producto> listaProductos, T valorPorDefecto = default(T))
-        {
-            if (indexProducto >= 0 && listaProductos != null && listaProductos.Count > indexProducto) // como sobrecarga mejor de ultimo
-            {
-                Producto productoSeleccionado = listaProductos[indexProducto];
-                return propiedad(productoSeleccionado);
-            }
-            return valorPorDefecto;
-        }
+
         /// <summary>
         /// Busca si existe un producto en la lista de productos del carrito
         /// </summary>
         /// <param name="producto"></param>
         /// <returns>Retorna True si existe y False si no</returns>
-        public static bool ExisteProductoEnELCarrito(string nombreProducto, List<Producto> listaProductos, List<Producto> listaProductosDelCarrito)
+        public static bool ExisteProductoEnELCarrito(int id, List<Producto> listaProductosDelCarrito)
         {
-            if (string.IsNullOrEmpty(nombreProducto) || listaProductos.Count == 0 || listaProductosDelCarrito.Count == 0)
+            if (id < 1 || listaProductosDelCarrito.Count == 0)
             {
                 return false;
             }
 
-            return listaProductosDelCarrito.Any(prod => prod.Nombre == nombreProducto);
+            return listaProductosDelCarrito.Any(prod => prod.Id == id);
         }
+
         /// <summary>
         /// Obtiene la cantidad deseada de un producto de a lista de productos del carrito
         /// </summary>
@@ -121,16 +80,10 @@ namespace Entidades
         public static int ObtenerCantidadProductoDelCarrito(Producto producto, List<Producto> listaProductosCarrito)
         {
             if (producto == null || listaProductosCarrito.Count == 0) return 0;
-
-            foreach (Producto item in listaProductosCarrito)
-            {
-                if (item.Nombre == producto.Nombre)
-                {
-                    return item.CantidadDeseada;
-                }
-            }
-            return 0;
+            Producto? productoSeleccionado = ObtenerProductoPorId(producto.Id, listaProductosCarrito);
+            return productoSeleccionado != null ? productoSeleccionado.CantidadDeseada : 0;
         }
+
         /// <summary>
         /// Agrega un producto al carrito
         /// </summary>
@@ -138,11 +91,11 @@ namespace Entidades
         /// <param name="cantidadDeseada">Cantidad del producto a agregar</param>
         /// <param name="listaProductosDelCarrito">Lista a la que se le agregará el nuevo producto</param>
         /// <returns>Retorna True si se pudo agregar y False si no</returns>
-        public static bool AgregarProductoAlCarrito(Producto producto, int cantidadDeseada,List<Producto> listaProductosDelCarrito)
+        public static bool AgregarProductoAlCarrito(Producto producto, int cantidadDeseada, List<Producto> listaProductosDelCarrito)
         {
             if (producto != null || cantidadDeseada > 0)
             {
-                Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
+                Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Id == producto.Id);
 
                 if (productoEnCarrito != null)
                 {
@@ -160,6 +113,7 @@ namespace Entidades
             }
             return false;
         }
+
         /// <summary>
         /// Elimina un producto del carrito
         /// </summary>
@@ -189,6 +143,43 @@ namespace Entidades
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Calcula el precio final de un producto segun la cantidad del producto y su precio por kilo
+        /// </summary>
+        /// <param name="cantidadIngresadaEnGramos">Cantidad del producto en gramos</param>
+        /// <param name="precioPorKilo">Precio por kilo del producto</param>
+        /// <returns>Retorna el precio del producto según la cantidad ingresada en gramos</returns>
+        public static double CalcularPrecio(int cantidadIngresadaEnGramos, double precioPorKilo)
+        {
+            double cantidadEnKilos = (double)cantidadIngresadaEnGramos / 1000; // Convertir la cantidad a kilos
+            double precioTotal = 0;
+            if (cantidadIngresadaEnGramos > 0 & precioPorKilo > 0)
+            {
+                precioTotal = cantidadEnKilos * precioPorKilo;
+            }
+            return precioTotal;
+        }
+
+        public static T ObtenerPropiedad<T>(Producto producto, string nombrePropiedad)
+        {
+            if (producto == null || string.IsNullOrEmpty(nombrePropiedad)) return default(T);
+
+            switch (nombrePropiedad)
+            {
+                case "stock":
+                    return (T)Convert.ChangeType(producto.StockDisponible, typeof(T));
+
+                case "corte":
+                    return (T)Convert.ChangeType(producto.TipoCorte, typeof(T));
+
+                case "precio":
+                    return (T)Convert.ChangeType(producto.PrecioPorKilo, typeof(T));
+
+                default:
+                    return default(T);
+            }
         }
     }
 }

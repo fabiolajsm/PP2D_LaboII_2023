@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Entidades;
 using System.Data;
-using Entidades;
+using System.Globalization;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -8,28 +8,29 @@ namespace Suarez_Fabiola_2D_2023
     {
         private Cliente cliente;
         private bool esVendedor;
-        private List<Producto> listaProductos = Producto.ObtenerProductos();
-        public static List<Producto> listaProductosDelCarrito = new List<Producto>();
         private bool mostrarModalBienvenida;
+        public static List<Producto> listaProductos;
+        public static List<Producto> listaProductosDelCarrito;
 
         public FormVenta(Cliente cliente, bool esVendedor, bool mostrarBienvenida)
         {
             this.cliente = cliente;
             this.esVendedor = esVendedor;
             this.mostrarModalBienvenida = mostrarBienvenida;
-            
-            InitializeComponent();
-            Lb_Productos.DrawMode = DrawMode.OwnerDrawFixed;
-            InicializarItemsComboBox();
-            CargarItemsProductos();
-            CalcularPrecioTotal();
-            CargarDatosDelCarrito(dataGridView);
 
-            if (this.cliente.MontoMaximoDeCompra != 0)
-            {
-                Lb_MontoMaximo.Text = $"Su monto máximo de compra es de ${this.cliente.MontoMaximoDeCompra.ToString("#0.00")}";
-            }
+            listaProductos = new List<Producto>();
+            listaProductosDelCarrito = new List<Producto>();
+
+            InitializeComponent();
+            CargarItemsProductos();
+            InicializarItemsComboBox();
+            CalcularPrecioTotal();
+            CargarDatosDelCarrito();
+            float montoDeCompra = cliente != null ? cliente.MontoMaximoDeCompra : 0;
+            Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";          
         }
+        // Eventos del formulario
+
         /// <summary>
         /// Cuando carga el form se le asignan estilos diferentes si es un Cliente o un Vendedor
         /// </summary>
@@ -55,139 +56,36 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
         /// <summary>
-        /// Se cargan los diferentes cortes para el ComboBox Filtrar por corte
-        /// </summary>
-        private void InicializarItemsComboBox()
-        {
-            Cb_FiltrarPorCorte.Items.Clear();
-            Cb_FiltrarPorCorte.Items.Add("Ver todos los tipos de corte");
-            Cb_FiltrarPorCorte.SelectedIndex = 0;
-
-            List<string> nombresCorte = listaProductos
-                .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
-                .Select(p => p.TipoCorte)
-                .Distinct()
-                .ToList();
-
-            nombresCorte.ForEach(corte => Cb_FiltrarPorCorte.Items.Add(corte));
-        }
-        /// <summary>
-        /// Se agregan los productos al ListBox para que se muestren
-        /// </summary>
-        private void CargarItemsProductos()
-        {
-            string corteSeleccionado = Cb_FiltrarPorCorte.SelectedItem?.ToString();
-            Lb_Productos.Items.Clear();
-
-            if (string.IsNullOrEmpty(corteSeleccionado) || corteSeleccionado == "Ver todos los tipos de corte")
-            {
-                foreach (Producto producto in listaProductos)
-                {
-                    if (producto.StockDisponible > 0 || (producto.StockDisponible <= 0 && producto.CantidadDeseada > 0))
-                    {
-                        Lb_Productos.Items.Add(producto);
-                    }
-                }
-            }
-            else
-            {
-                if (corteSeleccionado != "Ver todos los tipos de corte")
-                {
-                    Lb_Productos.Items.Clear();
-                    List<Producto> productosFiltrados = listaProductos.Where(p => p.TipoCorte == corteSeleccionado).ToList();
-                    foreach (Producto productoFiltrado in productosFiltrados)
-                    {
-                        Lb_Productos.Items.Add(productoFiltrado);
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// Calcula el precio total de la lista listaProductosDelCarrito y lo muestra
-        /// </summary>
-        private void CalcularPrecioTotal()
-        {
-            var precioTotal = listaProductosDelCarrito.Sum(producto => Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
-            Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
-        }
-        /// <summary>
-        /// Actualiza la lista de productos a mostrar en el dataGridView (lista donde se muestra el detalle del carrito de compra)
-        /// </summary>
-        /// <param name="dataGridView"></param>
-        private void CargarDatosDelCarrito(DataGridView dataGridView)
-        {
-            dataGridView.Rows.Clear();
-            foreach (Producto producto in listaProductosDelCarrito)
-            {
-                double precioProducto = Utilidades.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
-                if (precioProducto > 0 & producto.CantidadDeseada > 0)
-                {
-                    int rowIndex = dataGridView.Rows.Add();
-                    DataGridViewRow row = dataGridView.Rows[rowIndex];
-                    row.Cells["Nombre"].Value = producto.Nombre;
-                    row.Cells["Precio"].Value = $"${precioProducto.ToString("#0.00")}";
-                    row.Cells["Cantidad"].Value = $"{producto.CantidadDeseada} gr";
-                }
-            }
-        }
-        /// <summary>
         /// Filtra los productos según el tipo de corte seleccionado
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Cb_FiltrarPorCorte_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string corteSeleccionado = Cb_FiltrarPorCorte.SelectedItem?.ToString();
-            List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
+            dataGridViewProductos.Columns.Clear();
+            dataGridViewProductos.Columns.Add("Id", "");
+            dataGridViewProductos.Columns.Add("Producto", "Producto");
+            dataGridViewProductos.Columns.Add("StockDisponible", "Gramos disponibles");
+            dataGridViewProductos.Columns.Add("PrecioPorKilo", "Precio por kilo");
+            dataGridViewProductos.Columns["Id"].Visible = false;
 
-            if (productos.Count > 0 && !string.IsNullOrEmpty(corteSeleccionado))
+            string corteSeleccionado = Cb_FiltrarPorCorte.SelectedItem?.ToString();
+            if (listaProductos != null && listaProductos.Count > 0 && !string.IsNullOrEmpty(corteSeleccionado))
             {
+                dataGridViewProductos.Rows.Clear();
                 List<Producto> productosFiltrados = listaProductos
                     .Where(p => corteSeleccionado == "Ver todos los tipos de corte" || p.TipoCorte == corteSeleccionado)
                     .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
                     .ToList();
 
-                Lb_Productos.Items.Clear();
-                foreach (Producto productoFiltrado in productosFiltrados)
+                foreach (Producto producto in productosFiltrados)
                 {
-                    Lb_Productos.Items.Add(productoFiltrado);
+                    if (producto.StockDisponible > 0 || producto.StockDisponible == 0 && producto.CantidadDeseada > 0)
+                    {
+                        dataGridViewProductos.Rows.Add(producto.Id, producto.Nombre, producto.StockDisponible, $"${producto.PrecioPorKilo.ToString("#0.00")}");
+                    }
                 }
             }
-        }
-        /// <summary>
-        /// Dibuja los productos en el ListBox, mostrando el Nombre y el Precio por kilo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Lb_Productos_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            string nombreProducto = ((Producto)Lb_Productos.Items[e.Index]).Nombre;
-            double precioPorKiloProducto = ((Producto)Lb_Productos.Items[e.Index]).PrecioPorKilo;
-
-            Brush brush = SystemBrushes.WindowText;
-
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-            {
-                brush = SystemBrushes.GradientInactiveCaption;
-            }
-
-            // Calcular la posición y tamaño de las dos columnas
-            int width = e.Bounds.Width;
-            int col1Width = (int)(width * 0.6);
-            int col2Width = width - col1Width;
-            Rectangle col1Rect = new Rectangle(e.Bounds.X, e.Bounds.Y, col1Width, e.Bounds.Height);
-            Rectangle col2Rect = new Rectangle(e.Bounds.X + col1Width, e.Bounds.Y, col2Width, e.Bounds.Height);
-
-            // Dibujar el nombre del producto en la primera columna
-            e.Graphics.DrawString(nombreProducto, e.Font, brush, col1Rect);
-
-            // Dibujar el precio por kilo en la segunda columna
-            string precioPorKiloTexto = String.Format("${0:N2}", precioPorKiloProducto);
-            e.Graphics.DrawString(precioPorKiloTexto, e.Font, brush, col2Rect,
-                new StringFormat() { Alignment = StringAlignment.Far });
-
-            e.DrawFocusRectangle();
         }
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
@@ -208,28 +106,28 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_AgregarAlCarrito_Click(object sender, EventArgs e)
         {
-            int indexProducto = Lb_Productos.SelectedIndex;
             int cantidadIngresada;
-
             if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
             {
                 MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
-
-            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, true, Lb_Productos.Items.Cast<Producto>().ToList(), listaProductosDelCarrito))
+            if (dataGridViewProductos.SelectedRows.Count > 0)
             {
-                Producto productoSeleccionado = productos[indexProducto];
+                int indiceFilaSeleccionada = dataGridViewProductos.SelectedRows[0].Index;
+                int idSeleccionado = Convert.ToInt32(dataGridViewProductos.Rows[indiceFilaSeleccionada].Cells["Id"].Value);
+                Producto? productoSeleccionado = Entidades.Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
 
-                if (Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                if (Validadores.ValidarCamposParaModificarCarrito(idSeleccionado, cantidadIngresada, true, listaProductos, listaProductosDelCarrito))
                 {
-                    // Recargamos la lista de productos segun el stock disponible:
-                    CargarItemsProductos();
-                    MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CalcularPrecioTotal();
-                    CargarDatosDelCarrito(dataGridView);
+                    if (Entidades.Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                    {
+                        // Recargamos la lista de productos según el stock disponible:
+                        CalcularPrecioTotal();
+                        CargarItemsProductos();
+                        CargarDatosDelCarrito();
+                        MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -240,33 +138,32 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void Btn_EliminarDelCarrito_Click(object sender, EventArgs e)
         {
-            int indexProducto = Lb_Productos.SelectedIndex;
             int cantidadIngresada;
-
             if (!int.TryParse(Tb_Cantidad.Text, out cantidadIngresada))
             {
                 MessageBox.Show("Debe ingresar una cantidad válida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            if (Validadores.ValidarCamposParaModificarCarrito(indexProducto, cantidadIngresada, false, Lb_Productos.Items.Cast<Producto>().ToList(), listaProductosDelCarrito))
+            if (dataGridViewProductos.SelectedRows.Count > 0)
             {
-                List<Producto> productos = Lb_Productos.Items.Cast<Producto>().ToList();
-                Producto productoSeleccionado = productos[indexProducto];
+                int indiceFilaSeleccionada = dataGridViewProductos.SelectedRows[0].Index;
+                int idSeleccionado = Convert.ToInt32(dataGridViewProductos.Rows[indiceFilaSeleccionada].Cells["Id"].Value);
+                Producto? productoSeleccionado = Entidades.Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
 
-                // borramos el producto del carrito
-                if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                if (Validadores.ValidarCamposParaModificarCarrito(productoSeleccionado.Id, cantidadIngresada, false, listaProductos, listaProductosDelCarrito))
                 {
-                    // recargamos la lista de productos segun el stock disponible:
-                    CargarItemsProductos();
-                    MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CalcularPrecioTotal();
-                    // Actualizar el detalle del carrito
-                    CargarDatosDelCarrito(dataGridView);
-                }
-                else
-                {
-                    MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (Entidades.Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                    {
+                        // Recargamos la lista de productos según el stock disponible:
+                        CargarItemsProductos();
+                        MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CalcularPrecioTotal();
+                        CargarDatosDelCarrito();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No se encontró producto en el carrito", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -288,9 +185,9 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show("El precio supera el monto máximo de compra.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (precioFinal < 1)
+            else if (precioFinal < 10)
             {
-                MessageBox.Show("Para comprar necesita añadir productos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Para comprar necesita añadir productos y el monto tiene que ser mayor a 10 pesos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -348,13 +245,6 @@ namespace Suarez_Fabiola_2D_2023
             }
         }
         /// <summary>
-        /// Elimina todos los productos de la lista de productos del carrito
-        /// </summary>
-        public static void LimpiarListaProductosCarrito()
-        {
-            listaProductosDelCarrito.Clear();
-        }
-        /// <summary>
         /// Muestra mensaje de bienvenida apenas se entra a la pagina
         /// </summary>
         /// <param name="sender"></param>
@@ -365,6 +255,86 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show(cliente.ObtenerMensajeBienvenida());
             }
+        }
+
+        // Métodos de inicialización y carga de datos
+
+        /// <summary>
+        /// Se cargan los diferentes cortes para el ComboBox Filtrar por corte
+        /// </summary>
+        private void InicializarItemsComboBox()
+        {
+            Cb_FiltrarPorCorte.Items.Clear();
+            Cb_FiltrarPorCorte.Items.Add("Ver todos los tipos de corte");
+            Cb_FiltrarPorCorte.SelectedIndex = 0;
+
+            List<string> nombresCorte = listaProductos
+                .Where(p => p.StockDisponible > 0 || (p.StockDisponible <= 0 && p.CantidadDeseada > 0))
+                .Select(p => p.TipoCorte)
+                .Distinct()
+                .ToList();
+
+            nombresCorte.ForEach(corte => Cb_FiltrarPorCorte.Items.Add(corte));
+        }
+        /// <summary>
+        /// Carga los productos a mostrar en el dataGridView de productos
+        /// </summary>
+        private void CargarItemsProductos()
+        {
+            listaProductos = ProductosDAO.LeerProductos();
+            dataGridViewProductos.AutoGenerateColumns = false;
+            // Limpiar las columnas y filas existentes en el DataGridView
+            dataGridViewProductos.Columns.Clear();
+            dataGridViewProductos.Rows.Clear();
+
+            dataGridViewProductos.Columns.Add("Id", "");
+            dataGridViewProductos.Columns.Add("Producto", "Producto");
+            dataGridViewProductos.Columns.Add("StockDisponible", "Gramos disponibles");
+            dataGridViewProductos.Columns.Add("PrecioPorKilo", "Precio por kilo");
+            dataGridViewProductos.Columns["Id"].Visible = false;
+
+            foreach (Producto producto in listaProductos)
+            {
+                if (producto.StockDisponible > 0 || producto.StockDisponible == 0 && producto.CantidadDeseada > 0)
+                {
+                    dataGridViewProductos.Rows.Add(producto.Id, producto.Nombre, producto.StockDisponible, $"${producto.PrecioPorKilo.ToString("#0.00")}");
+                }
+            }
+        }
+        /// <summary>
+        /// Calcula el precio total de la lista listaProductosDelCarrito y lo muestra
+        /// </summary>
+        private void CalcularPrecioTotal()
+        {
+            var precioTotal = listaProductosDelCarrito.Sum(producto => Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
+            Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
+        }
+        /// <summary>
+        /// Actualiza la lista de productos a mostrar en el dataGridView (lista donde se muestra el detalle del carrito de compra)
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        private void CargarDatosDelCarrito()
+        {
+            dataGridViewCarrito.Rows.Clear();
+            foreach (Producto producto in listaProductosDelCarrito)
+            {
+                double precioProducto = Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo);
+                if (precioProducto > 0 & producto.CantidadDeseada > 0)
+                {
+                    int rowIndex = dataGridViewCarrito.Rows.Add();
+                    DataGridViewRow row = dataGridViewCarrito.Rows[rowIndex];
+                    row.Cells["Nombre"].Value = producto.Nombre;
+                    row.Cells["Precio"].Value = $"${precioProducto.ToString("#0.00")}";
+                    row.Cells["Cantidad"].Value = $"{producto.CantidadDeseada} gr";
+                }
+            }
+        }
+        /// <summary>
+        /// Elimina todos los productos de la lista de productos del carrito
+        /// </summary>
+        public static void LimpiarListaProductosCarrito()
+        {
+            listaProductosDelCarrito.Clear();
         }
     }
 }

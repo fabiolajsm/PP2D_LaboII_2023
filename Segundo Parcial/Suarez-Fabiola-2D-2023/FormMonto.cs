@@ -15,7 +15,7 @@ namespace Suarez_Fabiola_2D_2023
         {
             InitializeComponent();
 
-            this.cliente = cliente; // Si el cliente es null, se crea una nueva instancia de Cliente
+            this.cliente = cliente;
             this.mostrarBienvenida = string.IsNullOrEmpty(descripcion);
             Lb_BienvenidaCliente.Text = $"¡Hola {this.cliente.NombreCompleto}!";
 
@@ -55,13 +55,13 @@ namespace Suarez_Fabiola_2D_2023
                 MessageBox.Show("Debe ingresar un monto máximo de compra mayor a 0 y sin decimales", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            cliente.MontoMaximoDeCompra = maximoDeCompra;
+            UsuariosDAO.ModificarMontoMaximoDeCompra(cliente, maximoDeCompra);
 
-            Cliente.ModificarMontoMaximoDeCompra(cliente, DatosEnMemoria.ObtenerListaClientes(), maximoDeCompra);
             this.Hide();
             var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false, mostrarBienvenida);
             form.Show();
         }
-
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
         /// </summary>

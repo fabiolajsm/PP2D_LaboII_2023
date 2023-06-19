@@ -10,8 +10,8 @@ namespace Entidades
     {
         public int VentasRealizadas { get; set; }
 
-        public Vendedor(string nombre, string apellido, string email, string contrasena, int ventasRealizadas)
-            : base(nombre, apellido, email, contrasena, TipoUsuario.Vendedor)
+        public Vendedor(int id, string nombre, string apellido, string email, string contrasena, int ventasRealizadas)
+            : base(id, nombre, apellido, email, contrasena, TipoUsuario.Vendedor)
         {
             this.VentasRealizadas = ventasRealizadas;
         }
@@ -51,7 +51,7 @@ namespace Entidades
                 }
                 if (!string.IsNullOrEmpty(nuevoCorte))
                 {
-                    productoSeleccionado.TipoCorte = Utilidades.Capitalize(nuevoCorte);
+                    productoSeleccionado.TipoCorte = nuevoCorte.Capitalize();
                     seModifico = true;
                 }
             }

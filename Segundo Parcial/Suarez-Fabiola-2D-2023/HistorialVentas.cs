@@ -15,7 +15,7 @@ namespace Suarez_Fabiola_2D_2023
     {
         public HistorialVentas()
         {
-            List<Factura> historialDeVentas = DatosEnMemoria.ObtenerHistorialVentas();
+            List<Factura> historialDeVentas =  ArchivoHistorialVentas.LeerHistorialVentas();
             InitializeComponent();
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();

@@ -116,7 +116,7 @@ namespace Entidades
 
                     while (reader.Read())
                     {
-                        int id = Convert.ToInt32(reader["Id"]);
+                        int idUsuario = Convert.ToInt32(reader["Id"]);
                         string nombre = reader["Nombre"].ToString();
                         string apellido = reader["Apellido"].ToString();
                         string email = reader["Email"].ToString();
@@ -127,15 +127,17 @@ namespace Entidades
                         if (tipoUsuario == TipoUsuario.Cliente)
                         {
                             float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
-                            usuario = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
+                            usuario = new Cliente(idUsuario, nombre, apellido, email, contrasena, montoMaximo);
                         }
                         else if (tipoUsuario == TipoUsuario.Vendedor)
                         {
                             int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
-                            usuario = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
+                            usuario = new Vendedor(idUsuario, nombre, apellido, email, contrasena, ventasRealizadas);
                         }
-
-                        usuarios.Add(usuario);
+                        if(usuario != null)
+                        {                        
+                            usuarios.Add(usuario);
+                        }
                     }
                 }
             }
@@ -173,6 +175,7 @@ namespace Entidades
 
                     if (reader.Read())
                     {
+                        int idUsuario = Convert.ToInt32(reader["Id"]);
                         string nombre = reader["Nombre"].ToString();
                         string apellido = reader["Apellido"].ToString();
                         string email = reader["Email"].ToString();
@@ -183,12 +186,12 @@ namespace Entidades
                         if (reader["MontoMaximoDeCompra"] != DBNull.Value)
                         {
                             float montoMaximo = Convert.ToSingle(reader["MontoMaximoDeCompra"]);
-                            usuario = new Cliente(nombre, apellido, email, contrasena, montoMaximo);
+                            usuario = new Cliente(idUsuario, nombre, apellido, email, contrasena, montoMaximo);
                         }
                         else if (reader["VentasRealizadas"] != DBNull.Value)
                         {
                             int ventasRealizadas = Convert.ToInt32(reader["VentasRealizadas"]);
-                            usuario = new Vendedor(nombre, apellido, email, contrasena, ventasRealizadas);
+                            usuario = new Vendedor(idUsuario, nombre, apellido, email, contrasena, ventasRealizadas);
                         }
 
                         return usuario;
@@ -267,6 +270,34 @@ namespace Entidades
                 }
             }
             return null;
+        }
+        /// <summary>
+        /// Modifica en la base de datos el monto máximo de compra del cliente
+        /// </summary>
+        /// <param name="cliente">Cliente a modificar</param>
+        /// <param name="monto">Nuevo monto a asignar</param>
+        /// <returns>Retorna True si se modificó y False si no</returns>
+        public static bool ModificarMontoMaximoDeCompra(Cliente cliente, float monto)
+        {
+            if (cliente == null || monto < 1) return false;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE CLIENTES SET MontoMaximoDeCompra = @monto WHERE IdUsuario = @id;";
+
+                using (var comando = new SqlCommand(query, connection))
+                {
+                    comando.Parameters.AddWithValue("@monto", monto);
+                    comando.Parameters.AddWithValue("@id", cliente.Id);
+
+                    int filasAfectadas = comando.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0) return true;
+                }
+            }
+
+            return false;
         }
     }
 }
