@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Entidades;
+using Entidades.DAO;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -36,7 +37,9 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="listaProductos"></param>
         public void CargarListaProductos()
         {
-            this.listaProductos = ProductosDAO.LeerProductos();
+            IDAO<Producto> productoDAO = new ProductosDAO();
+
+            this.listaProductos = productoDAO.ObtenerLista();
             // Limpiar las columnas y filas existentes en el DataGridView
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();

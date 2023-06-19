@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Entidades;
+using Entidades.DAO;
 
 namespace Suarez_Fabiola_2D_2023
 {

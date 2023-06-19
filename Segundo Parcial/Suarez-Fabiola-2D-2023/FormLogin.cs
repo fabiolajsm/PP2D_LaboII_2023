@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using Entidades;
+using Entidades.DAO;
 
 namespace Suarez_Fabiola_2D_2023
 {

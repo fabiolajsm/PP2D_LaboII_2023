@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Entidades.DAO;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -36,7 +37,9 @@ namespace Suarez_Fabiola_2D_2023
             if (Validadores.ValidarCamposAgregarProducto(Tb_Nombre.Text, Tb_Descripcion.Text, Tb_TipoCorte.Text, Tb_Precio.Text, Tb_Stock.Text))
             {
                 Producto nuevoProducto = new Producto(0, Tb_Nombre.Text.Capitalize(), Tb_Descripcion.Text.Trim(), Tb_TipoCorte.Text.Trim(), Convert.ToDouble(Tb_Precio.Text), Convert.ToDouble(Tb_Stock.Text));
-                if (ProductosDAO.GuardarProducto(nuevoProducto))
+                IDAO<Producto> productosDAO = new ProductosDAO();
+
+                if (productosDAO.Insertar(nuevoProducto))
                 {
                     MessageBox.Show("Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Tb_Nombre.Text = string.Empty;

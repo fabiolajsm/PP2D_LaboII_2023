@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
+using Entidades.DAO;
 
 namespace Suarez_Fabiola_2D_2023
 {
@@ -226,7 +227,7 @@ namespace Suarez_Fabiola_2D_2023
         private bool ActualizarProductosEnBaseDeDatos()
         {
             List<Producto> listaCarrito = FormVenta.listaProductosDelCarrito;
-            return ProductosDAO.ModificarLista(listaCarrito);
+            return ProductosDAO.ModificarStockListaProductos(listaCarrito);
         }
         private void VolverAlFormVenta()
         {

@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Entidades.DAO;
 using System.Data;
 using System.Globalization;
 
@@ -281,7 +282,8 @@ namespace Suarez_Fabiola_2D_2023
         /// </summary>
         private void CargarItemsProductos()
         {
-            listaProductos = ProductosDAO.LeerProductos();
+            IDAO<Producto> productoDAO = new ProductosDAO();
+            listaProductos = productoDAO.ObtenerLista();
             dataGridViewProductos.AutoGenerateColumns = false;
             // Limpiar las columnas y filas existentes en el DataGridView
             dataGridViewProductos.Columns.Clear();
