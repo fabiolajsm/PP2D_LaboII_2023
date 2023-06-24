@@ -1,10 +1,10 @@
 ﻿using Entidades;
 using Entidades.DAO;
 using System.Data;
-using System.Globalization;
 
 namespace Suarez_Fabiola_2D_2023
 {
+    public delegate void PaginaActualizadaEventHandler();
     public partial class FormVenta : Form
     {
         private Cliente cliente;
@@ -13,24 +13,38 @@ namespace Suarez_Fabiola_2D_2023
         public static List<Producto> listaProductos;
         public static List<Producto> listaProductosDelCarrito;
 
+        public static event PaginaActualizadaEventHandler OnPaginaActualizada;
+
         public FormVenta(Cliente cliente, bool esVendedor, bool mostrarBienvenida)
         {
             this.cliente = cliente;
             this.esVendedor = esVendedor;
             this.mostrarModalBienvenida = mostrarBienvenida;
 
-            IDAO <Producto> productoDAO = new ProductosDAO();
-            listaProductos = productoDAO.ObtenerLista(); ;
+            IDAO<Producto> productoDAO = new ProductosDAO();
+            listaProductos = productoDAO.ObtenerLista();
             listaProductosDelCarrito = new List<Producto>();
 
             InitializeComponent();
-            CargarItemsProductos();
-            InicializarItemsComboBox();
-            CalcularPrecioTotal();
-            CargarDatosDelCarrito();
-            float montoDeCompra = cliente != null ? cliente.MontoMaximoDeCompra : 0;
-            Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";          
+            ActualizarPagina();
+            Task tarea = Task.Run(ActualizarMontoMaximoDeCompra);
+            OnPaginaActualizada += ActualizarPagina;
         }
+
+        /// <summary>
+        /// Actualiza la información de la página
+        /// </summary>
+        private void ActualizarPagina()
+        {
+            Task cargaInicialTask = Task.Run(() =>
+            {
+                CargarItemsProductos();
+                InicializarItemsComboBox();
+                CalcularPrecioTotal();
+                CargarDatosDelCarrito();
+            });
+        }
+
         // Eventos del formulario
 
         /// <summary>
@@ -57,6 +71,7 @@ namespace Suarez_Fabiola_2D_2023
                 Btn_ModificarMonto.Visible = true;
             }
         }
+
         /// <summary>
         /// Filtra los productos según el tipo de corte seleccionado
         /// </summary>
@@ -89,6 +104,7 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
         /// </summary>
@@ -101,6 +117,7 @@ namespace Suarez_Fabiola_2D_2023
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
         }
+
         /// <summary>
         /// Agrega un producto a la lista listaProductosDelCarrito
         /// </summary>
@@ -125,14 +142,13 @@ namespace Suarez_Fabiola_2D_2023
                     if (Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                     {
                         // Recargamos la lista de productos según el stock disponible:
-                        CalcularPrecioTotal();
-                        CargarItemsProductos();
-                        CargarDatosDelCarrito();
+                        OnPaginaActualizada?.Invoke();
                         MessageBox.Show($"Producto agregado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
         }
+
         /// <summary>
         /// Elimina un producto de la lista listaProductosDelCarrito
         /// </summary>
@@ -157,10 +173,8 @@ namespace Suarez_Fabiola_2D_2023
                     if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                     {
                         // Recargamos la lista de productos según el stock disponible:
-                        CargarItemsProductos();
+                        OnPaginaActualizada?.Invoke();
                         MessageBox.Show($"Producto eliminado exitosamente!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        CalcularPrecioTotal();
-                        CargarDatosDelCarrito();
                     }
                     else
                     {
@@ -169,6 +183,7 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+
         /// <summary>
         /// Si el monto máximo de compra alcanza para comprar redirecciona al Metodo de pago
         /// </summary>
@@ -199,6 +214,7 @@ namespace Suarez_Fabiola_2D_2023
                 metodoDePago.Show();
             }
         }
+
         /// <summary>
         /// Cierra el FormVenta y en el evento FormClosed abre/regresa a la página anterior
         /// </summary>
@@ -209,6 +225,7 @@ namespace Suarez_Fabiola_2D_2023
             LimpiarListaProductosCarrito();
             this.Close();
         }
+
         /// <summary>
         /// Al momento de cerrar el FormVenta, abre la página abierta anteriormente
         /// </summary>
@@ -223,6 +240,7 @@ namespace Suarez_Fabiola_2D_2023
                 LimpiarListaProductosCarrito();
             }
         }
+
         /// <summary>
         /// Cierra el FormVenta y redirecciona al FormMonto para modificar el monto máximo de compra
         /// </summary>
@@ -234,6 +252,7 @@ namespace Suarez_Fabiola_2D_2023
             FormMonto formMonto = new FormMonto(cliente, $"Su monto actual es de ${cliente.MontoMaximoDeCompra}. Ingrese el nuevo monto máximo de compra:");
             formMonto.Show();
         }
+
         /// <summary>
         /// No permite ingresarle al usuario caracteres especiales, sólo permite numeros sin decimales
         /// </summary>
@@ -246,6 +265,7 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
+
         /// <summary>
         /// Muestra mensaje de bienvenida apenas se entra a la pagina
         /// </summary>
@@ -260,6 +280,14 @@ namespace Suarez_Fabiola_2D_2023
         }
 
         // Métodos de inicialización y carga de datos
+        /// <summary>
+        /// Actualiza el Label de MontoMaximo con el monto máximo del cliente
+        /// </summary>
+        private void ActualizarMontoMaximoDeCompra()
+        {
+            float montoDeCompra = cliente != null ? cliente.MontoMaximoDeCompra : 0;
+            Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";
+        }
 
         /// <summary>
         /// Se cargan los diferentes cortes para el ComboBox Filtrar por corte
@@ -278,11 +306,12 @@ namespace Suarez_Fabiola_2D_2023
 
             nombresCorte.ForEach(corte => Cb_FiltrarPorCorte.Items.Add(corte));
         }
+
         /// <summary>
         /// Carga los productos a mostrar en el dataGridView de productos
         /// </summary>
         private void CargarItemsProductos()
-        {           
+        {
             dataGridViewProductos.AutoGenerateColumns = false;
             // Limpiar las columnas y filas existentes en el DataGridView
             dataGridViewProductos.Columns.Clear();
@@ -302,6 +331,7 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+
         /// <summary>
         /// Calcula el precio total de la lista listaProductosDelCarrito y lo muestra
         /// </summary>
@@ -310,6 +340,7 @@ namespace Suarez_Fabiola_2D_2023
             var precioTotal = listaProductosDelCarrito.Sum(producto => Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
             Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
         }
+
         /// <summary>
         /// Actualiza la lista de productos a mostrar en el dataGridView (lista donde se muestra el detalle del carrito de compra)
         /// </summary>
@@ -330,6 +361,7 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
+
         /// <summary>
         /// Elimina todos los productos de la lista de productos del carrito
         /// </summary>
