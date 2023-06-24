@@ -19,7 +19,8 @@ namespace Suarez_Fabiola_2D_2023
             this.esVendedor = esVendedor;
             this.mostrarModalBienvenida = mostrarBienvenida;
 
-            listaProductos = new List<Producto>();
+            IDAO <Producto> productoDAO = new ProductosDAO();
+            listaProductos = productoDAO.ObtenerLista(); ;
             listaProductosDelCarrito = new List<Producto>();
 
             InitializeComponent();
@@ -281,9 +282,7 @@ namespace Suarez_Fabiola_2D_2023
         /// Carga los productos a mostrar en el dataGridView de productos
         /// </summary>
         private void CargarItemsProductos()
-        {
-            IDAO<Producto> productoDAO = new ProductosDAO();
-            listaProductos = productoDAO.ObtenerLista();
+        {           
             dataGridViewProductos.AutoGenerateColumns = false;
             // Limpiar las columnas y filas existentes en el DataGridView
             dataGridViewProductos.Columns.Clear();
