@@ -93,8 +93,8 @@
         /// <returns>Retorna True si se pudo agregar y False si no</returns>
         public static bool AgregarProductoAlCarrito(Producto producto, int cantidadDeseada, List<Producto> listaProductosDelCarrito)
         {
-            if (producto != null || cantidadDeseada > 0)
-            {
+            if (producto == null || cantidadDeseada <= 0 || listaProductosDelCarrito == null) return false;
+            else {
                 Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Id == producto.Id);
 
                 if (productoEnCarrito != null)
@@ -110,8 +110,7 @@
                 }
 
                 return true;
-            }
-            return false;
+            }            
         }
 
         /// <summary>
@@ -123,8 +122,8 @@
         /// <returns>Retorna True si se pudo eliminar y False si no</returns>
         public static bool EliminarProductoDelCarrito(Producto producto, int cantidad, List<Producto> listaProductosDelCarrito)
         {
-            if (producto == null || cantidad <= 0 || listaProductosDelCarrito.Count < 1) return false;
-            Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Nombre == producto.Nombre);
+            if (producto == null || cantidad <= 0 || listaProductosDelCarrito == null|| listaProductosDelCarrito.Count < 1) return false;
+            Producto productoEnCarrito = listaProductosDelCarrito.Find(p => p.Id == producto.Id);
 
             if (productoEnCarrito != null)
             {

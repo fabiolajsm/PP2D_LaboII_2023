@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Suarez-Fabiola-2D-2023", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "..\Entidades\Entidades.csproj", "{E26142E1-B95C-4A46-B98E-6F1538FAEF08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pruebas", "..\Pruebas\Pruebas.csproj", "{1DF1C713-E483-4F4F-804F-F514D645829E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_CarritoDeCompra", "..\Pruebas\Test_CarritoDeCompra.csproj", "{1DF1C713-E483-4F4F-804F-F514D645829E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

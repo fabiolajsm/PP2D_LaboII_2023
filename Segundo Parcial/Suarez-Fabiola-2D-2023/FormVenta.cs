@@ -117,11 +117,11 @@ namespace Suarez_Fabiola_2D_2023
             {
                 int indiceFilaSeleccionada = dataGridViewProductos.SelectedRows[0].Index;
                 int idSeleccionado = Convert.ToInt32(dataGridViewProductos.Rows[indiceFilaSeleccionada].Cells["Id"].Value);
-                Producto? productoSeleccionado = Entidades.Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
+                Producto? productoSeleccionado = Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
 
                 if (Validadores.ValidarCamposParaModificarCarrito(idSeleccionado, cantidadIngresada, true, listaProductos, listaProductosDelCarrito))
                 {
-                    if (Entidades.Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                    if (Producto.AgregarProductoAlCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                     {
                         // Recargamos la lista de productos según el stock disponible:
                         CalcularPrecioTotal();
@@ -149,11 +149,11 @@ namespace Suarez_Fabiola_2D_2023
             {
                 int indiceFilaSeleccionada = dataGridViewProductos.SelectedRows[0].Index;
                 int idSeleccionado = Convert.ToInt32(dataGridViewProductos.Rows[indiceFilaSeleccionada].Cells["Id"].Value);
-                Producto? productoSeleccionado = Entidades.Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
+                Producto? productoSeleccionado = Producto.ObtenerProductoPorId(idSeleccionado, listaProductos);
 
                 if (Validadores.ValidarCamposParaModificarCarrito(productoSeleccionado.Id, cantidadIngresada, false, listaProductos, listaProductosDelCarrito))
                 {
-                    if (Entidades.Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
+                    if (Producto.EliminarProductoDelCarrito(productoSeleccionado, cantidadIngresada, listaProductosDelCarrito))
                     {
                         // Recargamos la lista de productos según el stock disponible:
                         CargarItemsProductos();
