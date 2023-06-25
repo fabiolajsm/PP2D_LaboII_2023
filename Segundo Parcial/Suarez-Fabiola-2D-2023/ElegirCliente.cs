@@ -9,9 +9,11 @@ namespace Suarez_Fabiola_2D_2023
     public partial class ElegirCliente : Form
     {
         List<Usuario> listaClientes;
+        private Vendedor vendedor;
 
-        public ElegirCliente()
+        public ElegirCliente(Vendedor vendedor)
         {
+            this.vendedor = vendedor;
             listaClientes = UsuariosDAO.ObtenerUsuariosPorTipo(TipoUsuario.Cliente);
             InitializeComponent();
             CargarClientes();
@@ -59,7 +61,7 @@ namespace Suarez_Fabiola_2D_2023
                 if (cliente != null)
                 {
                     this.Enabled = false;
-                    FormVenta formVenta = new FormVenta(cliente, true, false);
+                    FormVenta formVenta = new FormVenta(cliente, vendedor, false);
                     formVenta.Show();
                 }
                 else {

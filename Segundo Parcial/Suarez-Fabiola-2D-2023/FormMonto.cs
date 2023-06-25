@@ -60,7 +60,7 @@ namespace Suarez_Fabiola_2D_2023
             UsuariosDAO.ModificarMontoMaximoDeCompra(cliente, maximoDeCompra);
 
             this.Hide();
-            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false, mostrarBienvenida);
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, null) : new FormVenta(cliente, null, mostrarBienvenida);
             form.Show();
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormMonto_FormClosed(object sender, FormClosedEventArgs e)
         {
-            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, false) : new FormVenta(cliente, false, false);
+            var form = modificarMetodoDePago ? (Form)new FormMetodoDePago(precioFinal, cliente, null) : new FormVenta(cliente, null, false);
             form.Show();
         }
     }

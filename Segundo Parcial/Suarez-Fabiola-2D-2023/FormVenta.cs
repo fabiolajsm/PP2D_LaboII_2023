@@ -8,17 +8,17 @@ namespace Suarez_Fabiola_2D_2023
     public partial class FormVenta : Form
     {
         private Cliente cliente;
-        private bool esVendedor;
+        private Vendedor vendedor;
         private bool mostrarModalBienvenida;
         public static List<Producto> listaProductos;
         public static List<Producto> listaProductosDelCarrito;
 
         public static event PaginaActualizadaEventHandler OnPaginaActualizada;
 
-        public FormVenta(Cliente cliente, bool esVendedor, bool mostrarBienvenida)
+        public FormVenta(Cliente cliente, Vendedor vendedor, bool mostrarBienvenida)
         {
             this.cliente = cliente;
-            this.esVendedor = esVendedor;
+            this.vendedor = vendedor;
             this.mostrarModalBienvenida = mostrarBienvenida;
 
             IDAO<Producto> productoDAO = new ProductosDAO();
@@ -54,7 +54,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormVenta_Load(object sender, EventArgs e)
         {
-            if (esVendedor)
+            if (vendedor != null)
             {
                 this.BackColor = Color.FromArgb(138, 121, 104);
                 Gb_ListaDeProductos.BackColor = Color.FromArgb(211, 200, 187);
@@ -210,7 +210,7 @@ namespace Suarez_Fabiola_2D_2023
             else
             {
                 this.Hide();
-                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, esVendedor);
+                FormMetodoDePago metodoDePago = new FormMetodoDePago(precioFinal, cliente, vendedor);
                 metodoDePago.Show();
             }
         }
@@ -233,7 +233,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormVenta_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (esVendedor)
+            if (vendedor != null)
             {
                 ElegirCliente elegirCliente = (ElegirCliente)Application.OpenForms["ElegirCliente"];
                 elegirCliente.Enabled = true;
@@ -273,7 +273,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormVenta_Shown(object sender, EventArgs e)
         {
-            if (!esVendedor && mostrarModalBienvenida)
+            if (vendedor != null && mostrarModalBienvenida)
             {
                 MessageBox.Show(cliente.ObtenerMensajeBienvenida());
             }

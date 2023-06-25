@@ -1,1 +1,3 @@
 En el local|2|Filete|1|Julia Lopez|1000|710|0
+Online|5|Carne de lentejas|2|Pepe Rana|100|200|0
+En el local|5|Carne de lentejas|2|Pepe Rana|100|200|0

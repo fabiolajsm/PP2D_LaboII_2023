@@ -336,5 +336,35 @@ namespace Entidades.DAO
 
             return false;
         }
+        /// <summary>
+        /// Actualiza la cantidad de Ventas realizadas por un vendedor
+        /// </summary>
+        /// <param name="vendedor">Vendedor a actualizar</param>
+        /// <param name="cantidadDeVentas">Cantidad de ventas nuevas</param>
+        /// <returns>Retorna True si se actualizó y False si no</returns>
+        public static bool ModificarVentasRealizadas(Vendedor vendedor, int cantidadDeVentas)
+        {
+            if (vendedor == null || cantidadDeVentas < 1) return false;
+
+            int cantidadFinal = vendedor.VentasRealizadas + cantidadDeVentas;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE VENDEDORES SET VentasRealizadas = @cantidad WHERE IdUsuario = @id;";
+
+                using (var comando = new SqlCommand(query, connection))
+                {
+                    comando.Parameters.AddWithValue("@cantidad", cantidadFinal);
+                    comando.Parameters.AddWithValue("@id", vendedor.Id);
+
+                    int filasAfectadas = comando.ExecuteNonQuery();
+
+                    if (filasAfectadas > 0) return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

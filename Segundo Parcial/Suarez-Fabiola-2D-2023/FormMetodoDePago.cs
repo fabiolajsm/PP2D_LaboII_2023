@@ -18,9 +18,9 @@ namespace Suarez_Fabiola_2D_2023
         private double precioFinal;
         private double recargo;
         private Cliente cliente;
-        private bool esVendedor;
+        private Vendedor vendedor;
 
-        public FormMetodoDePago(double precioFinal, Cliente cliente, bool esVendedor)
+        public FormMetodoDePago(double precioFinal, Cliente cliente, Vendedor? vendedor)
         {
             InitializeComponent();
 
@@ -28,7 +28,7 @@ namespace Suarez_Fabiola_2D_2023
             this.precioFinal = precioFinal;
             this.cliente = cliente;
             this.recargo = 0;
-            this.esVendedor = esVendedor;
+            this.vendedor = vendedor;
 
             float montoDeCompra = maximoDeCompra > 0 ? maximoDeCompra : 0;
             Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";
@@ -40,7 +40,7 @@ namespace Suarez_Fabiola_2D_2023
         /// <param name="e"></param>
         private void FormMetodoDePago_Load(object sender, EventArgs e)
         {
-            if (esVendedor)
+            if (vendedor != null)
             {
                 this.BackColor = Color.FromArgb(138, 121, 104);
                 Gb_MetodoDePago.BackColor = Color.FromArgb(211, 200, 187);
@@ -59,7 +59,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormVenta formVenta = new FormVenta(cliente, esVendedor, false);
+            FormVenta formVenta = new FormVenta(cliente, vendedor, false);
             formVenta.Show();
         }
         /// <summary>
@@ -124,7 +124,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 MessageBox.Show("Venta cancelada", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 this.Hide();
-                FormVenta formVenta = new FormVenta(cliente, esVendedor, false);
+                FormVenta formVenta = new FormVenta(cliente, vendedor, false);
                 formVenta.Show();
             }
         }
@@ -149,6 +149,7 @@ namespace Suarez_Fabiola_2D_2023
         private void Btn_Comprar_Click(object sender, EventArgs e)
         {
             double total = Rb_Credito.Checked ? precioFinal + recargo : precioFinal;
+            bool esVendedor = vendedor != null;
             if (total > maximoDeCompra && !esVendedor)
             {
                 MostrarMensajeDeModificarMontoMaximo();
@@ -161,7 +162,11 @@ namespace Suarez_Fabiola_2D_2023
             {
                 // Actualizamos la lista de productos en la base de datos
                 if (ActualizarProductosEnBaseDeDatos() && ActualizarMontoMaximoDeCompra(total))
-                {                
+                {   
+                    if (esVendedor)
+                    {
+                        UsuariosDAO.ModificarVentasRealizadas(vendedor, 1);
+                    }
                     MostrarMensajeDeExitoYCrearFacturas(total);
                     FormVenta.LimpiarListaProductosCarrito();
                 }
@@ -175,6 +180,8 @@ namespace Suarez_Fabiola_2D_2023
         private void MostrarMensajeDeExitoYCrearFacturas(double total)
         {
             StringBuilder mensajeBuilder = new StringBuilder();
+            bool esVendedor = vendedor != null;
+
             string tipoDeVenta = esVendedor ? "En el local" : "Online";
 
             if (esVendedor)
@@ -232,7 +239,7 @@ namespace Suarez_Fabiola_2D_2023
         private void VolverAlFormVenta()
         {
             this.Hide();
-            FormVenta agregarAlCarrito = new FormVenta(cliente, esVendedor, false);
+            FormVenta agregarAlCarrito = new FormVenta(cliente, vendedor, false);
             agregarAlCarrito.Show();
         }
     }

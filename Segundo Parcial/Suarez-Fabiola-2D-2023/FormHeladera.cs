@@ -93,7 +93,7 @@ namespace Suarez_Fabiola_2D_2023
                 switch (opcionSeleccionada)
                 {
                     case "Vender productos":
-                        ElegirCliente elegirCliente = new ElegirCliente();
+                        ElegirCliente elegirCliente = new ElegirCliente(vendedor);
                         elegirCliente.ShowDialog();
                         break;
                     case "Modificar stock de los productos":
