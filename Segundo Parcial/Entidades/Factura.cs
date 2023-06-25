@@ -14,11 +14,12 @@ namespace Entidades
         public int IdCliente { get; set; }
         public string NombreCliente { get; set; }
         public int CantidadComprada { get; set; }
+        public string MetodoDePago { get; set; }
         public double Precio { get; set; }
         public double Recargo { get; set; }
         public double PrecioFinal { get; set; }
 
-        public Factura(string tipoDeCompra, int idProducto, string nombreProducto, int idCliente, string nombreCliente, int cantidadComprada, double precio, double recargo)
+        public Factura(string tipoDeCompra, int idProducto, string nombreProducto, int idCliente, string nombreCliente, int cantidadComprada, string metodoDePago, double precio, double recargo)
         {
             TipoDeCompra = tipoDeCompra;
             IdProducto = idProducto;
@@ -26,6 +27,7 @@ namespace Entidades
             IdCliente = idCliente;
             NombreCliente = nombreCliente;
             CantidadComprada = cantidadComprada;
+            MetodoDePago = metodoDePago;
             Precio = precio;
             Recargo = recargo;
             PrecioFinal = Precio + Recargo;

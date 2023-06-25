@@ -33,23 +33,22 @@ namespace Entidades
                     string[] elementos = linea.Split('|');
 
                     string tipoDeCompra = elementos[0];
+                    string nombreProducto = elementos[2];
+                    string nombreCliente = elementos[4];
+                    string metodoDePago = elementos[6]; 
+
                     int idProducto, idCliente, cantidadComprada;
-                    string nombreProducto, nombreCliente;
                     double precio, recargo;
 
                     if (!int.TryParse(elementos[1], out idProducto) ||
                         !int.TryParse(elementos[3], out idCliente) ||
                         !int.TryParse(elementos[5], out cantidadComprada) ||
-                        !double.TryParse(elementos[6], out precio) ||
-                        !double.TryParse(elementos[7], out recargo))
+                        !double.TryParse(elementos[7], out precio) ||
+                        !double.TryParse(elementos[8], out recargo))
                     {
                         throw new Exception("Error al leer los valores.");
                     }
-
-                    nombreProducto = elementos[2];
-                    nombreCliente = elementos[4];
-
-                    Factura factura = new Factura(tipoDeCompra, idProducto, nombreProducto, idCliente, nombreCliente, cantidadComprada, precio, recargo);
+                    Factura factura = new Factura(tipoDeCompra, idProducto, nombreProducto, idCliente, nombreCliente, cantidadComprada, metodoDePago, precio, recargo);
                     historialVentas.Add(factura);
                 }
             }
@@ -79,7 +78,7 @@ namespace Entidades
 
                 foreach (Factura factura in historialVentas)
                 {
-                    string linea = $"{factura.TipoDeCompra}|{factura.IdProducto}|{factura.NombreProducto}|{factura.IdCliente}|{factura.NombreCliente}|{factura.CantidadComprada}|{factura.Precio}|{factura.Recargo}";
+                    string linea = $"{factura.TipoDeCompra}|{factura.IdProducto}|{factura.NombreProducto}|{factura.IdCliente}|{factura.NombreCliente}|{factura.CantidadComprada}|{factura.MetodoDePago}|{factura.Precio}|{factura.Recargo}";
                     streamWriter.WriteLine(linea);
                 }
 

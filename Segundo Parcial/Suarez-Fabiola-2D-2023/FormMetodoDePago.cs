@@ -19,6 +19,7 @@ namespace Suarez_Fabiola_2D_2023
         private double recargo;
         private Cliente cliente;
         private Vendedor vendedor;
+        private string metodoDePago;
 
         public FormMetodoDePago(double precioFinal, Cliente cliente, Vendedor? vendedor)
         {
@@ -29,6 +30,7 @@ namespace Suarez_Fabiola_2D_2023
             this.cliente = cliente;
             this.recargo = 0;
             this.vendedor = vendedor;
+            this.metodoDePago = string.Empty;
 
             float montoDeCompra = maximoDeCompra > 0 ? maximoDeCompra : 0;
             Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";
@@ -77,6 +79,7 @@ namespace Suarez_Fabiola_2D_2023
             {
                 recargo = 0;
             }
+            metodoDePago = "Tarjeta de crédito";
             ActualizarPrecioFinal();
         }
         /// <summary>
@@ -91,6 +94,7 @@ namespace Suarez_Fabiola_2D_2023
                 recargo = 0;
                 ActualizarPrecioFinal();
             }
+            metodoDePago = "Tarjeta de débito";
         }
         /// <summary>
         /// Actualiza el precio si la opción Mercado pago está seleccionada
@@ -104,6 +108,7 @@ namespace Suarez_Fabiola_2D_2023
                 recargo = 0;
                 ActualizarPrecioFinal();
             }
+            metodoDePago = "Mercado Pago";
         }
         /// <summary>
         /// Actualiza el precio de la compra a mostrar
@@ -211,6 +216,7 @@ namespace Suarez_Fabiola_2D_2023
                     cliente.Id,
                     cliente.NombreCompleto,
                     producto.CantidadDeseada,
+                    metodoDePago,
                     Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo),
                     recargo
                 );

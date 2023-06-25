@@ -15,7 +15,7 @@ namespace Suarez_Fabiola_2D_2023
     {
         public HistorialVentas()
         {
-            List<Factura> historialDeVentas =  ArchivoHistorialVentas.LeerHistorialVentas();
+            List<Factura> historialDeVentas = ArchivoHistorialVentas.LeerHistorialVentas();
             InitializeComponent();
             dataGridView.Columns.Clear();
             dataGridView.Rows.Clear();
@@ -31,6 +31,7 @@ namespace Suarez_Fabiola_2D_2023
                 dataGridView.Columns.Add("NombreCliente", "Nombre Cliente");
                 dataGridView.Columns.Add("NombreProducto", "Nombre Producto");
                 dataGridView.Columns.Add("CantidadComprada", "Cantidad Comprada");
+                dataGridView.Columns.Add("MetodoDePago", "Método de pago");
                 dataGridView.Columns.Add("Precio", "Precio");
                 dataGridView.Columns.Add("Recargo", "Recargo");
                 dataGridView.Columns.Add("PrecioFinal", "Precio Final");
@@ -45,6 +46,7 @@ namespace Suarez_Fabiola_2D_2023
                     row.Cells["NombreCliente"].Value = factura.NombreCliente;
                     row.Cells["NombreProducto"].Value = factura.NombreProducto;
                     row.Cells["CantidadComprada"].Value = $"{factura.CantidadComprada} gr.";
+                    row.Cells["MetodoDePago"].Value = $"{factura.MetodoDePago}";
                     row.Cells["Precio"].Value = $"${factura.Precio.ToString("#0.00")}";
                     row.Cells["Recargo"].Value = $"${factura.Recargo.ToString("#0.00")}";
                     row.Cells["PrecioFinal"].Value = $"${factura.PrecioFinal.ToString("#0.00")}";
