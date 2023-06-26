@@ -165,50 +165,56 @@ namespace Entidades.DAO
         public static bool ModificarAtributo<T>(Producto producto, string nombreAtributo, T nuevoValor)
         {
             if (producto == null || string.IsNullOrEmpty(nombreAtributo) || nuevoValor == null) return false;
-            string atributo;
-            dynamic valor = null;
-            switch (nombreAtributo)
-            {
-                case "precio":
-                    atributo = "PrecioPorKilo";
-                    if (!double.TryParse(nuevoValor.ToString(), out double parsedDouble))
-                    {
-                        return false;
-                    }
-                    valor = parsedDouble;
-                    break;
-                case "stock":
-                    atributo = "StockDisponible";
-                    if (!double.TryParse(nuevoValor.ToString(), out parsedDouble))
-                    {
-                        return false;
-                    }
-                    valor = parsedDouble;
-                    break;
-                case "tipo de corte":
-                    atributo = "TipoDeCorte";
-                    valor = nuevoValor.ToString().Trim().Capitalize();
-                    break;
-                default: return false;
-            }
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = $"UPDATE PRODUCTOS SET {atributo} = @valor WHERE Id = @id;";
-
-                using (var comando = new SqlCommand(query, connection))
+            try
+            {               
+                string atributo;
+                dynamic valor = null;
+                switch (nombreAtributo)
                 {
-                    comando.Parameters.AddWithValue("@valor", valor);
-                    comando.Parameters.AddWithValue("@id", producto.Id);
-
-                    int filasAfectadas = comando.ExecuteNonQuery();
-
-                    if (filasAfectadas > 0) return true;
+                    case "precio":
+                        atributo = "PrecioPorKilo";
+                        if (!double.TryParse(nuevoValor.ToString(), out double parsedDouble))
+                        {
+                            return false;
+                        }
+                        valor = parsedDouble;
+                        break;
+                    case "stock":
+                        atributo = "StockDisponible";
+                        if (!double.TryParse(nuevoValor.ToString(), out parsedDouble))
+                        {
+                            return false;
+                        }
+                        valor = parsedDouble;
+                        break;
+                    case "tipo de corte":
+                        atributo = "TipoDeCorte";
+                        valor = nuevoValor.ToString().Trim().Capitalize();
+                        break;
+                    default: return false;
                 }
-            }
 
-            return false;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = $"UPDATE PRODUCTOS SET {atributo} = @valor WHERE Id = @id;";
+
+                    using (var comando = new SqlCommand(query, connection))
+                    {
+                        comando.Parameters.AddWithValue("@valor", valor);
+                        comando.Parameters.AddWithValue("@id", producto.Id);
+
+                        int filasAfectadas = comando.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0) return true;
+                    }
+                }
+                return false;
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Error al modificar atributo del producto." + ex.Message);
+                return false;
+            }            
         }
         /// <summary>
         /// Modifica el stock disponible de la lista de productos en la base datos

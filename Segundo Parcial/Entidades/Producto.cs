@@ -43,7 +43,7 @@
         /// </summary>
         /// <param name="id">Id del producto a buscar</param>
         /// <param name="listaProductos">Lista productos</param>
-        /// <returns>Retorna el producto segun el nombre ingresado</returns>
+        /// <returns>Retorna el producto según el nombre ingresado</returns>
         public static Producto? ObtenerProductoPorId(int id, List<Producto> listaProductos)
         {
             if (id < 1 || listaProductos.Count < 0) return null;
@@ -160,7 +160,13 @@
             }
             return precioTotal;
         }
-
+        /// <summary>
+        /// Obtiene la propiedad stockDisponible o PrecioPorKilo o TipoDeCorte según el nombre de propiedad indicado
+        /// </summary>
+        /// <typeparam name="T">Puede ser int o string</typeparam>
+        /// <param name="producto">Producto que contiene las propiedades</param>
+        /// <param name="nombrePropiedad">Nombre de la propiedad a retornar del producto</param>
+        /// <returns>Retorna la propiedad stockDisponible o PrecioPorKilo o TipoDeCorte según el nombre de propiedad indicado</returns>
         public static T ObtenerPropiedad<T>(Producto producto, string nombrePropiedad)
         {
             if (producto == null || string.IsNullOrEmpty(nombrePropiedad)) return default(T);

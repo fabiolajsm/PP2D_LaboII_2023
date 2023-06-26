@@ -1,3 +1,4 @@
 Online|5|Carne de lentejas|2|Pepe Rana|100|Tarjeta de débito|200|0
 En el local|5|Carne de lentejas|1|Julia Lopez|200|Tarjeta de crédito|400|20
 Online|3|Filete de tempeh|2|Pepe Rana|100|Mercado Pago|50,099000000000004|0
+Online|3|Filete de tempeh|1|Julia Lopez|1000|Tarjeta de débito|500,99|0

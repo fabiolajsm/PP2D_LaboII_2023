@@ -14,7 +14,10 @@ namespace Entidades
         {
             ruta = "HistorialDeVentas.txt";
         }
-
+        /// <summary>
+        /// Lee el historial de ventas que está en el archivo  "HistorialDeVentas.txt"
+        /// </summary>
+        /// <returns>Retorna la lista de facturas que existen en el historial y de no haber una lista vacía de facturas</returns>
         public static List<Factura> LeerHistorialVentas()
         {
             List<Factura> historialVentas = new List<Factura>();
@@ -65,8 +68,11 @@ namespace Entidades
 
             return historialVentas;
         }
-
-
+        /// <summary>
+        /// Escribe en el archivo del historial de ventas las facturas pasadas por parámetro
+        /// </summary>
+        /// <param name="historialVentas">Lista de facturas a escribir en el archivo</param>
+        /// <returns>Retorna True si se escribió en el historial y False si no</returns>
         public static bool EscribirHistorialVentas(List<Factura> historialVentas)
         {
             bool exito = false;

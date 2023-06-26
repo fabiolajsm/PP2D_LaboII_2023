@@ -33,7 +33,7 @@ namespace Entidades
             PrecioFinal = Precio + Recargo;
         }
         /// <summary>
-        /// Agrega facturas a la lista de historial de facturas
+        /// Agrega facturas a la lista de historial de facturas en el archivo  "HistorialDeVentas.txt"
         /// </summary>
         /// <param name="listaHistorialDeFacturas">Lista de facturas a agregar a historial</param>
         /// <returns>Retorna True si se agregaron y False si no</returns>

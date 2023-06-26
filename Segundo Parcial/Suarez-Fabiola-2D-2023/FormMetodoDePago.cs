@@ -182,6 +182,10 @@ namespace Suarez_Fabiola_2D_2023
                 VolverAlFormVenta();
             }
         }
+        /// <summary>
+        /// Muestra el mensaje de exito al finalizar las compras y agrega las facturas al historial de ventas
+        /// </summary>
+        /// <param name="total">Total a pagar</param>
         private void MostrarMensajeDeExitoYCrearFacturas(double total)
         {
             StringBuilder mensajeBuilder = new StringBuilder();
@@ -231,17 +235,28 @@ namespace Suarez_Fabiola_2D_2023
             // Agregamos la factura al historial de ventas
             Factura.AgregarFacturasAlHistorial(listaDeFacturas);
         }
+        /// <summary>
+        /// Actualiza el monto máximo de compra del cliente
+        /// </summary>
+        /// <param name="total">Total a pagar de la compra</param>
+        /// <returns>Retorna True si se actualizó bien el montoMaximoDeCompra y False si no</returns>
         private bool ActualizarMontoMaximoDeCompra(double total)
         {
             cliente.MontoMaximoDeCompra -= (float)total;
             return UsuariosDAO.ModificarMontoMaximoDeCompra(cliente, cliente.MontoMaximoDeCompra);
         }
-
+        /// <summary>
+        /// Actualiza los productos en la base de datos (le resta lo recien comprado)
+        /// </summary>
+        /// <returns>Retorna True si se actualizó y False si no</returns>
         private bool ActualizarProductosEnBaseDeDatos()
         {
             List<Producto> listaCarrito = FormVenta.listaProductosDelCarrito;
             return ProductosDAO.ModificarStockListaProductos(listaCarrito);
         }
+        /// <summary>
+        /// Vuelve a FormVenta
+        /// </summary>
         private void VolverAlFormVenta()
         {
             this.Hide();

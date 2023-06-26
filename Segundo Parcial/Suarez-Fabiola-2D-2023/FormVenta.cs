@@ -71,7 +71,6 @@ namespace Suarez_Fabiola_2D_2023
                 Btn_ModificarMonto.Visible = true;
             }
         }
-
         /// <summary>
         /// Filtra los productos según el tipo de corte seleccionado
         /// </summary>
@@ -104,7 +103,6 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
         /// <summary>
         /// Cierra la sesión del usuario y redirecciona al Login
         /// </summary>
@@ -117,7 +115,6 @@ namespace Suarez_Fabiola_2D_2023
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
         }
-
         /// <summary>
         /// Agrega un producto a la lista listaProductosDelCarrito
         /// </summary>
@@ -148,7 +145,6 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
         /// <summary>
         /// Elimina un producto de la lista listaProductosDelCarrito
         /// </summary>
@@ -183,7 +179,6 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
         /// <summary>
         /// Si el monto máximo de compra alcanza para comprar redirecciona al Metodo de pago
         /// </summary>
@@ -214,7 +209,6 @@ namespace Suarez_Fabiola_2D_2023
                 metodoDePago.Show();
             }
         }
-
         /// <summary>
         /// Cierra el FormVenta y en el evento FormClosed abre/regresa a la página anterior
         /// </summary>
@@ -225,7 +219,6 @@ namespace Suarez_Fabiola_2D_2023
             LimpiarListaProductosCarrito();
             this.Close();
         }
-
         /// <summary>
         /// Al momento de cerrar el FormVenta, abre la página abierta anteriormente
         /// </summary>
@@ -240,7 +233,6 @@ namespace Suarez_Fabiola_2D_2023
                 LimpiarListaProductosCarrito();
             }
         }
-
         /// <summary>
         /// Cierra el FormVenta y redirecciona al FormMonto para modificar el monto máximo de compra
         /// </summary>
@@ -252,7 +244,6 @@ namespace Suarez_Fabiola_2D_2023
             FormMonto formMonto = new FormMonto(cliente, $"Su monto actual es de ${cliente.MontoMaximoDeCompra}. Ingrese el nuevo monto máximo de compra:");
             formMonto.Show();
         }
-
         /// <summary>
         /// No permite ingresarle al usuario caracteres especiales, sólo permite numeros sin decimales
         /// </summary>
@@ -265,7 +256,6 @@ namespace Suarez_Fabiola_2D_2023
                 e.Handled = true;
             }
         }
-
         /// <summary>
         /// Muestra mensaje de bienvenida apenas se entra a la pagina
         /// </summary>
@@ -288,7 +278,6 @@ namespace Suarez_Fabiola_2D_2023
             float montoDeCompra = cliente != null ? cliente.MontoMaximoDeCompra : 0;
             Lb_MontoMaximo.Text = $"Monto máximo de compra: ${montoDeCompra}";
         }
-
         /// <summary>
         /// Se cargan los diferentes cortes para el ComboBox Filtrar por corte
         /// </summary>
@@ -306,7 +295,6 @@ namespace Suarez_Fabiola_2D_2023
 
             nombresCorte.ForEach(corte => Cb_FiltrarPorCorte.Items.Add(corte));
         }
-
         /// <summary>
         /// Carga los productos a mostrar en el dataGridView de productos
         /// </summary>
@@ -331,7 +319,6 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
         /// <summary>
         /// Calcula el precio total de la lista listaProductosDelCarrito y lo muestra
         /// </summary>
@@ -340,7 +327,6 @@ namespace Suarez_Fabiola_2D_2023
             var precioTotal = listaProductosDelCarrito.Sum(producto => Producto.CalcularPrecio(producto.CantidadDeseada, producto.PrecioPorKilo));
             Lb_Total.Text = $"Total: ${precioTotal:#0.00}";
         }
-
         /// <summary>
         /// Actualiza la lista de productos a mostrar en el dataGridView (lista donde se muestra el detalle del carrito de compra)
         /// </summary>
@@ -361,7 +347,6 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
         /// <summary>
         /// Elimina todos los productos de la lista de productos del carrito
         /// </summary>

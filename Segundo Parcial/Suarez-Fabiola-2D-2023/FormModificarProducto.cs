@@ -25,7 +25,9 @@ namespace Suarez_Fabiola_2D_2023
             Lb_Ingresar.Text = $"Ingresar {nombreAtributoAModificar} a modificar: ";
             CargarListaProductos();
         }
-
+        /// <summary>
+        /// Carga la lista de productos a mostrar en el dataGridView
+        /// </summary>
         public void CargarListaProductos()
         {
             IDAO<Producto> productoDAO = new ProductosDAO();
@@ -98,7 +100,11 @@ namespace Suarez_Fabiola_2D_2023
                 }
             }
         }
-
+        /// <summary>
+        /// Si lo ingresado es correcto modifica el producto en la base de datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_ModificarProducto_Click(object sender, EventArgs e)
         {
             var nuevoValor = Tb_Atributo.Text;
